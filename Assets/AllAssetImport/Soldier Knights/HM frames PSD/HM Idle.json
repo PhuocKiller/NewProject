@@ -1,0 +1,109 @@
+{ "skeleton": { "images": "D:/Lập Trình Game/Unity/Game Folder/Project/Assets/Soldier Knights/HM frames PSD/images/" },
+"PhotoshopToSpine": { "scale": 1, "padding": 1, "trim": true },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "RightHand", "bone": "root", "attachment": "RightHand" },
+	{ "name": "RightBicep", "bone": "root", "attachment": "RightBicep" },
+	{ "name": "RightArm", "bone": "root", "attachment": "RightArm" },
+	{ "name": "Sword", "bone": "root", "attachment": "Sword" },
+	{ "name": "Torso", "bone": "root", "attachment": "Torso" },
+	{ "name": "RightShoe", "bone": "root", "attachment": "RightShoe" },
+	{ "name": "RightThigh", "bone": "root", "attachment": "RightThigh" },
+	{ "name": "RightLeg", "bone": "root", "attachment": "RightLeg" },
+	{ "name": "RightKnee", "bone": "root", "attachment": "RightKnee" },
+	{ "name": "RightSkin", "bone": "root", "attachment": "RightSkin" },
+	{ "name": "LeftShoe", "bone": "root", "attachment": "LeftShoe" },
+	{ "name": "LeftLeg", "bone": "root", "attachment": "LeftLeg" },
+	{ "name": "LeftThigh", "bone": "root", "attachment": "LeftThigh" },
+	{ "name": "LeftSkin", "bone": "root", "attachment": "LeftSkin" },
+	{ "name": "LeftKnee", "bone": "root", "attachment": "LeftKnee" },
+	{ "name": "Belt", "bone": "root", "attachment": "Belt" },
+	{ "name": "Head", "bone": "root", "attachment": "Head" },
+	{ "name": "Head_Skin_Blue", "bone": "root", "attachment": "Head_Skin_Blue" },
+	{ "name": "LeftHand_Skin", "bone": "root", "attachment": "LeftHand_Skin" },
+	{ "name": "LeftHand", "bone": "root", "attachment": "LeftHand" },
+	{ "name": "Forearm", "bone": "root", "attachment": "Forearm" },
+	{ "name": "Bicep", "bone": "root", "attachment": "Bicep" },
+	{ "name": "Shoulder", "bone": "root", "attachment": "Shoulder" },
+	{ "name": "Shoulder_Blue", "bone": "root", "attachment": "Shoulder_Blue" }
+],
+"skins": {
+	"default": {
+		"RightHand": {
+			"RightHand": { "x": 803, "y": -644.5, "width": 96, "height": 113 }
+		},
+		"RightBicep": {
+			"RightBicep": { "x": 932, "y": -410, "width": 126, "height": 228 }
+		},
+		"RightArm": {
+			"RightArm": { "x": 864, "y": -562.5, "width": 162, "height": 153 }
+		},
+		"Sword": {
+			"Sword": { "x": 529, "y": -726, "width": 712, "height": 236 }
+		},
+		"Torso": {
+			"Torso": { "x": 1051, "y": -501.5, "width": 306, "height": 493 }
+		},
+		"RightShoe": {
+			"RightShoe": { "x": 889.5, "y": -1266, "width": 211, "height": 180 }
+		},
+		"RightThigh": {
+			"RightThigh": { "x": 958, "y": -824.5, "width": 164, "height": 355 }
+		},
+		"RightLeg": {
+			"RightLeg": { "x": 959.5, "y": -1096.5, "width": 137, "height": 269 }
+		},
+		"RightKnee": {
+			"RightKnee": { "x": 938.5, "y": -980, "width": 117, "height": 134 }
+		},
+		"RightSkin": {
+			"RightSkin": { "x": 903.5, "y": -695, "width": 93, "height": 176 }
+		},
+		"LeftShoe": {
+			"LeftShoe": { "x": 1279.5, "y": -1298, "width": 115, "height": 246 }
+		},
+		"LeftLeg": {
+			"LeftLeg": { "x": 1231, "y": -1106, "width": 164, "height": 278 }
+		},
+		"LeftThigh": {
+			"LeftThigh": { "x": 1115.5, "y": -826, "width": 217, "height": 332 }
+		},
+		"LeftSkin": {
+			"LeftSkin": { "x": 1132, "y": -695, "width": 164, "height": 180 }
+		},
+		"LeftKnee": {
+			"LeftKnee": { "x": 1182, "y": -961, "width": 134, "height": 158 }
+		},
+		"Belt": {
+			"Belt": { "x": 1027, "y": -636.5, "width": 296, "height": 173 }
+		},
+		"Head": {
+			"Head": { "x": 1045, "y": -189, "width": 178, "height": 238 }
+		},
+		"Head_Skin_Blue": {
+			"Head_Skin_Blue": { "x": 1042, "y": -187.5, "width": 162, "height": 215 }
+		},
+		"LeftHand_Skin": {
+			"LeftHand_Skin": { "x": 1172.5, "y": -707, "width": 95, "height": 100 }
+		},
+		"LeftHand": {
+			"LeftHand": { "x": 1158, "y": -694, "width": 156, "height": 138 }
+		},
+		"Forearm": {
+			"Forearm": { "x": 1231.5, "y": -587.5, "width": 151, "height": 227 }
+		},
+		"Bicep": {
+			"Bicep": { "x": 1176, "y": -398, "width": 166, "height": 226 }
+		},
+		"Shoulder": {
+			"Shoulder": { "x": 1174, "y": -359, "width": 168, "height": 174 }
+		},
+		"Shoulder_Blue": {
+			"Shoulder_Blue": { "x": 1174, "y": -359, "width": 166, "height": 172 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
