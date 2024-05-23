@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public bool doJump, doAttack; //cho phép dc attack hoặc jump liên tiếp
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal; //Player có bất tử ko?
+    public bool isDie; //Player die chưa?
     public int p_maxHealth, p_currentHealth, p_currentMana, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend;
     public Bars healthBar, manaBar, XPBar;
     public TextMeshProUGUI levelPlayerTMP;
@@ -54,11 +55,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Run();
-        healthBar.UpdateBar(p_currentHealth, p_maxHealth);
-        manaBar.UpdateBar(p_currentMana, p_MaxMana);
-        UpdateXP();
-        
+      if(!isDie)
+        {
+            Run();
+            healthBar.UpdateBar(p_currentHealth, p_maxHealth);
+            manaBar.UpdateBar(p_currentMana, p_MaxMana);
+            UpdateXP();
+
+        }
     }
   
     void OnMove(InputValue value)
@@ -80,6 +84,11 @@ public class PlayerController : MonoBehaviour
             Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
         }
     }
+    void OnSkill(InputValue value)
+    {
+        Animation.instance.state = State.MainSkill;
+    }
+
     
     void AttackExactly (Collision2D colliderMon)
     {
@@ -109,7 +118,10 @@ public class PlayerController : MonoBehaviour
         
         else
         {
-            if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump))
+            if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
+                && !(Animation.instance.state == State.MainSkill) && !(Animation.instance.state == State.ChargeSkill)
+                && !(Animation.instance.state == State.LevelUp) && !(Animation.instance.state == State.MainSkill)
+                && !(Animation.instance.state == State.Injured))
                 Animation.instance.state = State.Idle;
             
         }
@@ -141,6 +153,7 @@ public class PlayerController : MonoBehaviour
             p_CurrentXP=p_CurrentXP-p_MaxXP;
             p_MaxXP += 10;
             p_Level++;
+            Animation.instance.state = State.LevelUp;
         }
         XPBar.UpdateBar(p_CurrentXP, p_MaxXP);
         levelPlayerTMP.text = p_Level.ToString();

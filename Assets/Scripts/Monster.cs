@@ -120,8 +120,13 @@ public class Monster : MonoBehaviour
             if (PlayerController.instance.p_currentHealth < 0)
             {
                 PlayerController.instance.p_currentHealth = 0;
+                Animation.instance.state = State.Die;
+                PlayerController.instance.isDie = true;
+                return;
+
             }
             PlayerController.instance.DelayDeactiveImmortal();
+            Animation.instance.state = State.Injured;
         }
     }
 

@@ -6,16 +6,39 @@ using UnityEngine.InputSystem;
 
 public enum State
 {
+    Attack,
+    ChargeSkill,
+    Die,
     Idle,
-    Walk,
-    Run,
+    Injured,
     Jump,
-    Attack
+    LevelUp,
+    MainSkill,
+    Run,
+    Walk
 }
     public class Animation : MonoBehaviour
 {
     #region Inspector
     // [SpineAnimation] attribute allows an Inspector dropdown of Spine animation names coming form SkeletonAnimation.
+    [SpineAnimation]
+    public string attackAnimationName;
+
+    [SpineAnimation]
+    public string chargeSkillAnimationName;
+
+    [SpineAnimation]
+    public string dieAnimationName;
+
+    [SpineAnimation]
+    public string injuredAnimationName;
+
+    [SpineAnimation]
+    public string levelUpAnimationName;
+
+    [SpineAnimation]
+    public string mainSkillAnimationName;
+
     [SpineAnimation]
     public string runAnimationName;
 
@@ -25,8 +48,7 @@ public enum State
     [SpineAnimation]
     public string walkAnimationName;
 
-    [SpineAnimation]
-    public string attackAnimationName;
+    
 
     [SpineAnimation]
     public string jumpAnimationName;
@@ -84,9 +106,14 @@ public enum State
         {
             return "Idle";
         }
+        else if (state == State.ChargeSkill) { return "ChargeSkill"; }
+        else if (state == State.Die) { return "Die"; }
+        else if (state == State.Injured) { return "Injured"; }
+        else if (state == State.Jump) { return "Jump"; }
+        else if (state == State.LevelUp) { return "LevelUp"; }
+        else if (state == State.MainSkill) { return "MainSkill"; }
         else if (state == State.Walk) { return "Walk"; }
         else if (state == State.Run) { return "Run"; }
-        else if (state == State.Jump) { return "Jump"; }
         else  { return "Attack"; }
 
     }
@@ -95,47 +122,47 @@ public enum State
         if (a == "Idle")
         {
             spineAnimationState.SetAnimation(0, idleAnimationName, true);
-            //state = State.Idle;
+        }
+        if (a == "ChargeSkill")
+        {
+            spineAnimationState.SetAnimation(0, chargeSkillAnimationName, false);
+        }
+        if (a == "Die")
+        {
+            spineAnimationState.SetAnimation(0, dieAnimationName, false);
+        }
+        if (a == "Injured")
+        {
+            spineAnimationState.SetAnimation(0, injuredAnimationName, false);
+        }
+        if (a == "LevelUp")
+        {
+            spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
+        }
+        if (a == "MainSkill")
+        {
+            spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
         }
         if (a == "Walk")
         {
             spineAnimationState.SetAnimation(0, walkAnimationName, true);
-           // state = State.Walk;
         }
         if (a == "Run")
         {
             spineAnimationState.SetAnimation(0, runAnimationName, true);
-           // state = State.Run;
+           // spineAnimationState.AddAnimation(0, idleAnimationName, true,0);
         }
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
-           // state = State.Jump;
         }
         if (a == "Attack")
         {
             spineAnimationState.SetAnimation(0, attackAnimationName, false);
-           // state = State.Attack;
         }
 
     }
-    public void Attack()
-    {
-        spineAnimationState.SetAnimation(0, attackAnimationName, false);
-        state = State.Attack;
-    }
-    public void Run()
-    {
-            spineAnimationState.SetAnimation(0, runAnimationName, true);
-        state = State.Run;
 
-
-    }
-    public void Idle()
-    {
-        spineAnimationState.SetAnimation(0, idleAnimationName, true);
-        state = State.Idle;
-    }
     public float GetTimeOfAttackAnimation()
     {
         return skeleton.Data.FindAnimation(attackAnimationName).Duration;
