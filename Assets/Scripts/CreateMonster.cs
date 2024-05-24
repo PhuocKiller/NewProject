@@ -6,24 +6,36 @@ public class CreateMonster : MonoBehaviour
 {
     public Monster[] monsters;
     public Monster[] monstersInstance;
+    Monster mon;
     // Start is called before the first frame update
 
    
     void Start()
     {
-       
-        CreateNewMonster();
+        if (mon == null)
+        {
+            CreateNewMonster();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (mon == null)
+        {
+            CreateNewMonster();
+            mon.gameObject.SetActive(false);
+            Invoke("ActiveMonsterAgain", 2f);
+        }
     }
     void CreateNewMonster()
     {
         int monIndex= Random.Range(0, monsters.Length);
-        Instantiate(monsters[monIndex], transform.position, Quaternion.identity,transform.parent);
-        
+        mon=Instantiate(monsters[monIndex], transform.position, Quaternion.identity,transform.parent);
+    }
+    void ActiveMonsterAgain()
+    {
+        mon.gameObject.SetActive(true); 
+
     }
 }

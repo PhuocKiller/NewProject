@@ -66,6 +66,7 @@ public enum State
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
     State previousState;
+    float chargedTime, skillTime;
     private void Awake()
     {
         if (instance == null)
@@ -99,6 +100,31 @@ public enum State
         }
 
         previousState = currentModelState;
+        if (Input.GetMouseButton(1))
+        {
+            chargedTime += Time.deltaTime;
+            Debug.Log(chargedTime);
+            if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
+            {
+               if(state!=State.MainSkill)
+                {
+                    state=State.MainSkill; 
+                }
+                chargedTime = 0;
+            }
+            if (state==State.MainSkill)
+            {
+                skillTime += Time.deltaTime;
+                PlayerController.instance.p_currentManaFloat = (float)PlayerController.instance.p_currentManaInt - 0.01f;
+                PlayerController.instance.p_currentManaInt = (int)PlayerController.instance.p_currentManaFloat;
+
+                if (skillTime > skeleton.Data.FindAnimation(mainSkillAnimationName).Duration)
+                {
+                    state = State.Idle;
+                }
+            }
+        }
+        else chargedTime = 0;
     }
     public string GetStringState ()
     {
@@ -121,11 +147,16 @@ public enum State
     {
         if (a == "Idle")
         {
-            spineAnimationState.SetAnimation(0, idleAnimationName, true);
+            spineAnimationState.SetAnimation(0, idleAnimationName, true); 
         }
         if (a == "ChargeSkill")
         {
+            chargedTime = 0;
             spineAnimationState.SetAnimation(0, chargeSkillAnimationName, false);
+            //spineAnimationState.AddAnimation(0, mainSkillAnimationName, false,0);
+
+            //Invoke("DelaySetStateMainSkill", skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration);
+
         }
         if (a == "Die")
         {
@@ -134,10 +165,13 @@ public enum State
         if (a == "Injured")
         {
             spineAnimationState.SetAnimation(0, injuredAnimationName, false);
+            Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(injuredAnimationName).Duration);
+            
         }
         if (a == "LevelUp")
         {
             spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
+            Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
         }
         if (a == "MainSkill")
         {
@@ -149,8 +183,7 @@ public enum State
         }
         if (a == "Run")
         {
-            spineAnimationState.SetAnimation(0, runAnimationName, true);
-           // spineAnimationState.AddAnimation(0, idleAnimationName, true,0);
+            spineAnimationState.SetAnimation(0, runAnimationName, false);
         }
         if (a == "Jump")
         {
@@ -160,9 +193,12 @@ public enum State
         {
             spineAnimationState.SetAnimation(0, attackAnimationName, false);
         }
-
+        
     }
-
+    void DelaySetStateIdle()
+    {
+        state=State.Idle;
+    }
     public float GetTimeOfAttackAnimation()
     {
         return skeleton.Data.FindAnimation(attackAnimationName).Duration;

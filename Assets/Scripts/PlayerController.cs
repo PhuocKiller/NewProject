@@ -3,6 +3,7 @@ using Spine.Unity;
 using Spine.Unity.Examples;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +24,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_currentHealth, p_currentMana, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend;
+    public int p_maxHealth, p_currentHealth, p_currentManaInt, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend;
+    public float p_currentManaFloat;
     public Bars healthBar, manaBar, XPBar;
     public TextMeshProUGUI levelPlayerTMP;
     public static PlayerController instanceNew;
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         doJump = true; doAttack = true;
         p_maxHealth = 100; p_currentHealth = p_maxHealth;
-        p_MaxMana = 100; p_currentMana = p_MaxMana;
+        p_MaxMana = 100; p_currentManaInt = p_MaxMana;
         p_CurrentXP = 0; p_MaxXP = 100; p_Level = 1;
         p_Attack = Random.Range(50, 60); p_Defend = Random.Range(10, 20);
 
@@ -55,55 +57,58 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-      if(!isDie)
+        healthBar.UpdateBar(p_currentHealth, p_maxHealth);
+        if (!isDie)
         {
             Run();
-            healthBar.UpdateBar(p_currentHealth, p_maxHealth);
-            manaBar.UpdateBar(p_currentMana, p_MaxMana);
-            UpdateXP();
-
+            manaBar.UpdateBar(p_currentManaInt, p_MaxMana);
+            GetLevel();
         }
     }
   
     void OnMove(InputValue value)
     {
+      if (!isDie)
+        {
             moveInput = value.Get<Vector2>();
+        }
     }
     void OnAttack(InputValue value)
     {
-        if (!doAttack)
+        if (!isDie)
         {
-            return;
-        }
-        
-       if (value.isPressed)
-        { sword.SetActive(true);
-            isAttackExactly = true;
-            Animation.instance.state = State.Attack;
-            doAttack = false;
-            Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
+            if (!doAttack)
+            {
+                return;
+            }
+
+                sword.SetActive(true);
+                isAttackExactly = true;
+                Animation.instance.state = State.Attack;
+                doAttack = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
+            
         }
     }
     void OnSkill(InputValue value)
     {
-        Animation.instance.state = State.MainSkill;
-    }
-
-    
-    void AttackExactly (Collision2D colliderMon)
-    {
-        if (colliderMon.collider.TryGetComponent(out Monster monBeHit)) 
+        if (!isDie)
         {
+            Animation.instance.state = State.ChargeSkill;
         }
     }
+
     void OnJump(InputValue value)
-    {   if (!doJump) { return; }
-        if (value.isPressed) 
-        { 
-            rigid.velocity = new Vector2(0, jumpSpeed);
-            Animation.instance.state = State.Jump;
-            doJump = false;
-            Invoke("SetIdleState", Animation.instance.GetTimeOfJumpAnimation());
+    {  if (!isDie)
+        {
+            if (!doJump) { return; }
+            if (value.isPressed)
+            {
+                rigid.velocity = new Vector2(0, jumpSpeed);
+                Animation.instance.state = State.Jump;
+                doJump = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfJumpAnimation());
+            }
         }
     }
     void Run()
@@ -115,15 +120,17 @@ public class PlayerController : MonoBehaviour
         {
                 Animation.instance.state = State.Run;
         }
-        
+
         else
         {
             if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
-                && !(Animation.instance.state == State.MainSkill) && !(Animation.instance.state == State.ChargeSkill)
-                && !(Animation.instance.state == State.LevelUp) && !(Animation.instance.state == State.MainSkill)
+                && !Input.GetMouseButton(1)
+                && !(Animation.instance.state == State.LevelUp) 
                 && !(Animation.instance.state == State.Injured))
+            {
                 Animation.instance.state = State.Idle;
-            
+            }
+
         }
         if (playerHasHorizontalSpeed)
         {
@@ -146,7 +153,13 @@ public class PlayerController : MonoBehaviour
     {
         Invoke("DeactiveImmortal", 3);
     }
-    void UpdateXP()
+    void AttackExactly(Collision2D colliderMon)
+    {
+        if (colliderMon.collider.TryGetComponent(out Monster monBeHit))
+        {
+        }
+    }
+    void GetLevel()  // Điều chỉnh XP và tăng LV
     {
         if(p_CurrentXP>p_MaxXP)
         {
@@ -154,9 +167,28 @@ public class PlayerController : MonoBehaviour
             p_MaxXP += 10;
             p_Level++;
             Animation.instance.state = State.LevelUp;
+            p_maxHealth +=10;  p_MaxMana+= 10;
+            p_currentHealth = p_maxHealth; p_currentManaInt = p_MaxMana;
+            p_Attack += 5; p_Defend += 5;
         }
         XPBar.UpdateBar(p_CurrentXP, p_MaxXP);
         levelPlayerTMP.text = p_Level.ToString();
     }
-   
+    public void PlayerBeingAttacked(int damage) //Player bị tấn công
+    {
+            if (PlayerController.instance.beImmortal) { return; }
+            PlayerController.instance.beImmortal = true;
+            PlayerController.instance.p_currentHealth = PlayerController.instance.p_currentHealth - damage;
+            if (PlayerController.instance.p_currentHealth < 0)
+            {
+                PlayerController.instance.p_currentHealth = 0;
+                Animation.instance.state = State.Die;
+                PlayerController.instance.isDie = true;
+                return;
+
+            }
+            PlayerController.instance.DelayDeactiveImmortal();
+            Animation.instance.state = State.Injured;
+        
+    }
 }

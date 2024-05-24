@@ -1,4 +1,4 @@
-using Spine;
+﻿using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +25,7 @@ public class Monster : MonoBehaviour
     public int m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
     public Bars healthBarMonster;
     bool isLive ;
+    public GameObject UIMonster;
     private void Awake()
     {
         capsule = GetComponent<CapsuleCollider2D>();
@@ -49,30 +50,26 @@ public class Monster : MonoBehaviour
             rigid.velocity = new Vector2(-moveSpeed, 0);
         }
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
-        //healthBarMonster.transform.position = new Vector2(transform.position.x,transform.position.y+2f);
+        UIMonster.transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision) //xoay chiều di chuyển Monster
     {
        if (collision.gameObject.tag=="Ground")
         {
             moveSpeed = -moveSpeed;
-            FlipEnemy();
+            transform.localScale = new Vector2(0.1f * Mathf.Sign(rigid.velocity.x), 0.1f);
         }
     }
-    void FlipEnemy()
-    {
-        transform.localScale = new Vector2(0.1f*Mathf.Sign(rigid.velocity.x), 0.1f);
-    }
-
+   
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Sword" && PlayerController.instance.isAttackExactly)
+        if (collision.gameObject.tag == "Sword" && PlayerController.instance.isAttackExactly) //Monster bị tấn công
         { 
             MonsterBeingAttacked();
         }
-        if (collision.gameObject.tag =="Player")
+        if (collision.gameObject.tag =="Player")            //Player bị tấn công
         {
-            PlayerBeingAttacked();
+            PlayerBeingAttacked(m_attack - PlayerController.instance.p_Defend);
         }
 
     }
@@ -93,40 +90,27 @@ public class Monster : MonoBehaviour
         m_currentHealth = 0;
         animator.SetBool("die", true);
         isLive = false;
-        Invoke("DeactiveMonster", 2f);
+        Invoke("DestroyMonster", 2f);
+        
+    }
+    void DestroyMonster()
+    {
+        Destroy(gameObject);
         PlayerController.instance.p_CurrentXP += m_XP;
     }
-    void DeactiveMonster()
-    {
-        gameObject.SetActive(false);
-        Invoke("ActiveMonster", 3f);
-    }
-    void ActiveMonster()
+   /* void ActiveMonster()
     {
         gameObject.SetActive(true);
         isLive = true;
         animator.SetBool("die", false);
         m_currentHealth = m_maxHealth;
-    }
+    }*/
 
-    void PlayerBeingAttacked()
+    void PlayerBeingAttacked(int damage)
     {
         if(isLive)
         {
-            if (PlayerController.instance.beImmortal) { return; }
-            PlayerController.instance.beImmortal = true;
-            damageofMonster = m_attack - PlayerController.instance.p_Defend;
-            PlayerController.instance.p_currentHealth = PlayerController.instance.p_currentHealth - damageofMonster;
-            if (PlayerController.instance.p_currentHealth < 0)
-            {
-                PlayerController.instance.p_currentHealth = 0;
-                Animation.instance.state = State.Die;
-                PlayerController.instance.isDie = true;
-                return;
-
-            }
-            PlayerController.instance.DelayDeactiveImmortal();
-            Animation.instance.state = State.Injured;
+            PlayerController.instance.PlayerBeingAttacked(damage);
         }
     }
 
