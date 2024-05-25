@@ -24,8 +24,9 @@ public class Monster : MonoBehaviour
     Animator animator;
     public int m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
     public Bars healthBarMonster;
-    bool isLive ;
+    bool isLive, isStun;
     public UIMonster UIMonster;
+    float timeStun;
     
     private void Awake()
     {
@@ -48,10 +49,23 @@ public class Monster : MonoBehaviour
     {
         if (isLive)
         {
-            rigid.velocity = new Vector2(-moveSpeed, 0);
+
+            if (!isStun)
+            {
+                rigid.velocity = new Vector2(-moveSpeed, 0);
+            }
+            else
+            {
+                timeStun += Time.deltaTime;
+                rigid.velocity = -rigid.velocity;
+                if (timeStun >= 2)
+                {
+                    timeStun = 0; isStun = false;
+                }
+            }
         }
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
-        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
+       UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
     private void OnTriggerExit2D(Collider2D collision) //xoay chiều di chuyển Monster
     {
@@ -77,19 +91,23 @@ public class Monster : MonoBehaviour
         if (collision.CompareTag("Skill")&& PlayerController.instance.isIntervalSkill)
         {
             damageofPlayer = PlayerController.instance.p_Attack - m_defend;
-            MonsterBeingAttacked((int)(0.1f* (damageofPlayer + UnityEngine.Random.Range(-20,20))));
+            isStun = true;
+            MonsterBeingAttacked((int)(0.1f* ((damageofPlayer ) + UnityEngine.Random.Range(-10,10))));
             PlayerController.instance.isIntervalSkill = false;
         }
 
     }
     void MonsterBeingAttacked(int damage)
     {
-        animator.SetTrigger("hit");
-        UIMonster.ShowDamage(damage);
-        m_currentHealth =m_currentHealth-damage;
-        if (m_currentHealth <= 0) 
+        if (isLive)
         {
-            MonsterDie();
+            animator.SetTrigger("hit");
+            UIMonster.ShowDamage(damage);
+            m_currentHealth = m_currentHealth - damage;
+            if (m_currentHealth <= 0)
+            {
+                MonsterDie();
+            }
         }
     }
     

@@ -24,18 +24,27 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_currentHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, manaOfSkill;
-    public float p_currentManaFloat;
+    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, manaOfSkill;
+    public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
-    public TextMeshProUGUI levelPlayerTMP;
-    public static PlayerController instanceNew;
+    
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+
         }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);  //xóa cái mới sinh ra
+            }
+
+        }
+        DontDestroyOnLoad(gameObject);
         rigid = GetComponent<Rigidbody2D>();
         capSword=swordGameObject.GetComponent<CapsuleCollider2D>();
         capSkill=skillGameObject.GetComponent<CapsuleCollider2D>();
@@ -48,8 +57,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         doJump = true; doAttack = true;
-        p_maxHealth = 100; p_currentHealth = p_maxHealth;
-        p_MaxMana = 100; p_currentManaFloat = p_MaxMana;
+        p_maxHealth = 100; p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
+        p_MaxMana = 100; p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
         manaOfSkill = 40;
         p_CurrentXP = 0; p_MaxXP = 100; p_Level = 1;
         p_Attack = Random.Range(50, 60); p_Defend = Random.Range(10, 20);
@@ -114,7 +123,7 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = new Vector2(moveInput.x*runSpeed, rigid.velocity.y);
         bool playerHasHorizontalSpeed= Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack) 
-            && bodyPlayer.IsTouchingLayers(LayerMask.GetMask("Ground")))
+           && bodyPlayer.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
                 Animation.instance.state = State.Run;
         }
@@ -166,27 +175,29 @@ public class PlayerController : MonoBehaviour
             p_Level++;
             Animation.instance.state = State.LevelUp;
             p_maxHealth +=10;  p_MaxMana+= 10;
-            p_currentHealth = p_maxHealth; p_currentManaFloat = p_MaxMana;
+            p_currentHealthFloat = p_maxHealth; p_currentManaFloat = p_MaxMana; p_currentHealthFade = p_maxHealth; p_currentManaFade = p_MaxMana;
             p_Attack += 5; p_Defend += 5;
         }
         
-        levelPlayerTMP.text = p_Level.ToString();
+        UIManager.instance.levelPlayerTMP.text = p_Level.ToString();
     }
     public void PlayerBeingAttacked(int damage) //Player bị tấn công
     {
-            if (PlayerController.instance.beImmortal) { return; }
-            PlayerController.instance.beImmortal = true;
-            PlayerController.instance.p_currentHealth = PlayerController.instance.p_currentHealth - damage;
-            if (PlayerController.instance.p_currentHealth < 0)
+            if (beImmortal) { return; }
+            beImmortal = true;
+            p_currentHealthFloat = p_currentHealthFloat - damage;
+        p_currentHealthFade = p_currentHealthFade - damage;
+        if (p_currentHealthFloat < 0)
             {
-                PlayerController.instance.p_currentHealth = 0;
-                Animation.instance.state = State.Die;
-                PlayerController.instance.isDie = true;
+                p_currentHealthFloat = 0; p_currentHealthFade = 0;
+            Animation.instance.state = State.Die;
+                isDie = true;
                 return;
 
             }
-            PlayerController.instance.DelayDeactiveImmortal();
+            DelayDeactiveImmortal();
             Animation.instance.state = State.Injured;
+        UIManager.instance.ShowDamageDealByMonster(damage);
         
     }
 }

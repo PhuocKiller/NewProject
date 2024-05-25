@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Bars : MonoBehaviour
 {
-    public Image fillBar;
+    public Image fillBar, fadeFillBar;
     public TextMeshProUGUI valueText;
    
     // Start is called before the first frame update
@@ -24,5 +24,9 @@ public class Bars : MonoBehaviour
     {
         fillBar.fillAmount=currentValue / maxValue;
         valueText.text= ((int)currentValue).ToString() + "/" + ((int)maxValue).ToString();
+    }
+    public void UpdateFadeBar(float currentValue, float maxValue)
+    {
+        fadeFillBar.fillAmount = currentValue / maxValue;
     }
 }
