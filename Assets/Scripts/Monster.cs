@@ -133,6 +133,10 @@ public class Monster : MonoBehaviour
             PlayerController.instance.PlayerBeingAttacked(damage);
         }
     }
+    private void OnMouseDown()
+    {
+        MonsterInfoPanel.Instance.ShowInfo(this);
+    }
 
 
 

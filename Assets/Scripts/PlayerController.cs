@@ -200,4 +200,8 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.ShowDamageDealByMonster(damage);
         
     }
+    private void OnMouseDown()
+    {
+        PlayerInfoPanel.Instance.ShowInfo(this);
+    }
 }
