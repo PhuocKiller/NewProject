@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D rigid;
     public static PlayerController instance;
-    public GameObject sword;
-    CapsuleCollider2D capSword, bodyPlayer;
+    public GameObject swordGameObject, skillGameObject;
+    CapsuleCollider2D capSword, capSkill, bodyPlayer;
     
     EdgeCollider2D edgePlayer;
     public float runSpeed = 10f;
@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_currentHealth, p_currentManaInt, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend;
+    public int p_maxHealth, p_currentHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, manaOfSkill;
     public float p_currentManaFloat;
-    public Bars healthBar, manaBar, XPBar;
+    public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
     public TextMeshProUGUI levelPlayerTMP;
     public static PlayerController instanceNew;
 
@@ -37,8 +37,9 @@ public class PlayerController : MonoBehaviour
             instance = this;
         }
         rigid = GetComponent<Rigidbody2D>();
-        capSword=sword.GetComponent<CapsuleCollider2D>();
-        bodyPlayer= GetComponent<CapsuleCollider2D>();
+        capSword=swordGameObject.GetComponent<CapsuleCollider2D>();
+        capSkill=skillGameObject.GetComponent<CapsuleCollider2D>();
+        bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer =GetComponent<EdgeCollider2D>();
 
 
@@ -48,7 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         doJump = true; doAttack = true;
         p_maxHealth = 100; p_currentHealth = p_maxHealth;
-        p_MaxMana = 100; p_currentManaInt = p_MaxMana;
+        p_MaxMana = 100; p_currentManaFloat = p_MaxMana;
+        manaOfSkill = 40;
         p_CurrentXP = 0; p_MaxXP = 100; p_Level = 1;
         p_Attack = Random.Range(50, 60); p_Defend = Random.Range(10, 20);
 
@@ -57,15 +59,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        healthBar.UpdateBar(p_currentHealth, p_maxHealth);
         if (!isDie)
         {
             Run();
-            manaBar.UpdateBar(p_currentManaInt, p_MaxMana);
-            GetLevel();
         }
     }
-  
     void OnMove(InputValue value)
     {
       if (!isDie)
@@ -82,7 +80,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-                sword.SetActive(true);
+                swordGameObject.SetActive(true);
                 isAttackExactly = true;
                 Animation.instance.state = State.Attack;
                 doAttack = false;
@@ -92,14 +90,14 @@ public class PlayerController : MonoBehaviour
     }
     void OnSkill(InputValue value)
     {
-        if (!isDie)
+        if (!isDie&&p_currentManaFloat>manaOfSkill)
         {
             Animation.instance.state = State.ChargeSkill;
         }
     }
 
     void OnJump(InputValue value)
-    {  if (!isDie)
+        {  if (!isDie)
         {
             if (!doJump) { return; }
             if (value.isPressed)
@@ -110,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 Invoke("SetIdleState", Animation.instance.GetTimeOfJumpAnimation());
             }
         }
-    }
+         }
     void Run()
     {
         rigid.velocity = new Vector2(moveInput.x*runSpeed, rigid.velocity.y);
@@ -143,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         Animation.instance.state = State.Idle;
         doAttack = true; doJump=true;
-        sword.SetActive(false);
+        swordGameObject.SetActive(false);
     }
     void DeactiveImmortal()
     {
@@ -153,13 +151,13 @@ public class PlayerController : MonoBehaviour
     {
         Invoke("DeactiveImmortal", 3);
     }
-    void AttackExactly(Collision2D colliderMon)
+  /*  void AttackExactly(Collision2D colliderMon)
     {
         if (colliderMon.collider.TryGetComponent(out Monster monBeHit))
         {
         }
-    }
-    void GetLevel()  // Điều chỉnh XP và tăng LV
+    }*/
+    public void GetLevel()  // Điều chỉnh XP và tăng LV
     {
         if(p_CurrentXP>p_MaxXP)
         {
@@ -168,10 +166,10 @@ public class PlayerController : MonoBehaviour
             p_Level++;
             Animation.instance.state = State.LevelUp;
             p_maxHealth +=10;  p_MaxMana+= 10;
-            p_currentHealth = p_maxHealth; p_currentManaInt = p_MaxMana;
+            p_currentHealth = p_maxHealth; p_currentManaFloat = p_MaxMana;
             p_Attack += 5; p_Defend += 5;
         }
-        XPBar.UpdateBar(p_CurrentXP, p_MaxXP);
+        
         levelPlayerTMP.text = p_Level.ToString();
     }
     public void PlayerBeingAttacked(int damage) //Player bị tấn công

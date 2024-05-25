@@ -25,7 +25,8 @@ public class Monster : MonoBehaviour
     public int m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
     public Bars healthBarMonster;
     bool isLive ;
-    public GameObject UIMonster;
+    public UIMonster UIMonster;
+    
     private void Awake()
     {
         capsule = GetComponent<CapsuleCollider2D>();
@@ -50,7 +51,7 @@ public class Monster : MonoBehaviour
             rigid.velocity = new Vector2(-moveSpeed, 0);
         }
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
-        UIMonster.transform.localScale = new Vector2(10*transform.localScale.x, 1);
+        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
     private void OnTriggerExit2D(Collider2D collision) //xoay chiều di chuyển Monster
     {
@@ -63,28 +64,35 @@ public class Monster : MonoBehaviour
    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Sword" && PlayerController.instance.isAttackExactly) //Monster bị tấn công
-        { 
-            MonsterBeingAttacked();
+        if (collision.CompareTag("Sword") && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm
+        {
+            PlayerController.instance.isAttackExactly = false;
+            damageofPlayer = PlayerController.instance.p_Attack - m_defend;
+            MonsterBeingAttacked(damageofPlayer);
         }
-        if (collision.gameObject.tag =="Player")            //Player bị tấn công
+        if (collision.CompareTag("Player"))          //Player bị tấn công
         {
             PlayerBeingAttacked(m_attack - PlayerController.instance.p_Defend);
         }
+        if (collision.CompareTag("Skill")&& PlayerController.instance.isIntervalSkill)
+        {
+            damageofPlayer = PlayerController.instance.p_Attack - m_defend;
+            MonsterBeingAttacked((int)(0.1f* (damageofPlayer + UnityEngine.Random.Range(-20,20))));
+            PlayerController.instance.isIntervalSkill = false;
+        }
 
     }
-    void MonsterBeingAttacked()
+    void MonsterBeingAttacked(int damage)
     {
         animator.SetTrigger("hit");
-        PlayerController.instance.isAttackExactly = false;
-        damageofPlayer = PlayerController.instance.p_Attack - m_defend;
-        m_currentHealth=m_currentHealth-damageofPlayer;
+        UIMonster.ShowDamage(damage);
+        m_currentHealth =m_currentHealth-damage;
         if (m_currentHealth <= 0) 
         {
             MonsterDie();
-            
         }
     }
+    
     void MonsterDie()
     {
         m_currentHealth = 0;
@@ -92,20 +100,14 @@ public class Monster : MonoBehaviour
         isLive = false;
         Invoke("DestroyMonster", 2f);
         
+        
     }
     void DestroyMonster()
     {
         Destroy(gameObject);
         PlayerController.instance.p_CurrentXP += m_XP;
     }
-   /* void ActiveMonster()
-    {
-        gameObject.SetActive(true);
-        isLive = true;
-        animator.SetBool("die", false);
-        m_currentHealth = m_maxHealth;
-    }*/
-
+  
     void PlayerBeingAttacked(int damage)
     {
         if(isLive)

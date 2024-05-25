@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Sword
   - Monster
+  - Skill
   layers:
   - Default
   - TransparentFX

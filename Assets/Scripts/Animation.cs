@@ -1,4 +1,4 @@
-using Spine.Unity;
+﻿using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,7 +66,8 @@ public enum State
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
     State previousState;
-    float chargedTime, skillTime;
+    float chargedTime, skillTime, intervalTime;
+    
     private void Awake()
     {
         if (instance == null)
@@ -83,8 +84,6 @@ public enum State
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
-        Debug.Log(skeleton.Data.FindAnimation(attackAnimationName).Duration);
-
     }
 
     // Update is called once per frame
@@ -100,31 +99,7 @@ public enum State
         }
 
         previousState = currentModelState;
-        if (Input.GetMouseButton(1))
-        {
-            chargedTime += Time.deltaTime;
-            Debug.Log(chargedTime);
-            if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
-            {
-               if(state!=State.MainSkill)
-                {
-                    state=State.MainSkill; 
-                }
-                chargedTime = 0;
-            }
-            if (state==State.MainSkill)
-            {
-                skillTime += Time.deltaTime;
-                PlayerController.instance.p_currentManaFloat = (float)PlayerController.instance.p_currentManaInt - 0.01f;
-                PlayerController.instance.p_currentManaInt = (int)PlayerController.instance.p_currentManaFloat;
-
-                if (skillTime > skeleton.Data.FindAnimation(mainSkillAnimationName).Duration)
-                {
-                    state = State.Idle;
-                }
-            }
-        }
-        else chargedTime = 0;
+        MainSkill();
     }
     public string GetStringState ()
     {
@@ -153,10 +128,7 @@ public enum State
         {
             chargedTime = 0;
             spineAnimationState.SetAnimation(0, chargeSkillAnimationName, false);
-            //spineAnimationState.AddAnimation(0, mainSkillAnimationName, false,0);
-
-            //Invoke("DelaySetStateMainSkill", skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration);
-
+           
         }
         if (a == "Die")
         {
@@ -183,7 +155,7 @@ public enum State
         }
         if (a == "Run")
         {
-            spineAnimationState.SetAnimation(0, runAnimationName, false);
+            spineAnimationState.SetAnimation(0, runAnimationName, true);
         }
         if (a == "Jump")
         {
@@ -208,7 +180,51 @@ public enum State
         return skeleton.Data.FindAnimation(jumpAnimationName).Duration;
     }
 
+    void MainSkill()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            chargedTime += Time.deltaTime;
+            if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
+            {
+                if (state != State.MainSkill)
+                {
+                    state = State.MainSkill;
+                }
+                else
+                {
+                    if (PlayerController.instance.isIntervalSkill) { intervalTime = 0; } //Bật tắt interval
+                    else
+                    {
+                        intervalTime += Time.deltaTime;
+                        if (intervalTime > 0.1f) 
+                        {
+                            PlayerController.instance.isIntervalSkill = true;
+                            intervalTime = 0;
+                        }
+                    }
+                    skillTime += Time.deltaTime;
 
+                    if (skillTime < skeleton.Data.FindAnimation(mainSkillAnimationName).Duration)
+                    {
+                        PlayerController.instance.p_currentManaFloat = PlayerController.instance.p_currentManaFloat -
+                       PlayerController.instance.manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
+
+                    }
+                    else
+                    {
+                        state = State.Idle; skillTime = 0; chargedTime = 0;
+                    }
+                }
+
+            }
+
+        }
+        else
+        {
+            chargedTime = 0; skillTime = 0;
+        }
+    }
 
 
 }

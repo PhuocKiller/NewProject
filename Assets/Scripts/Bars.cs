@@ -20,9 +20,9 @@ public class Bars : MonoBehaviour
     {
         
     }
-    public void UpdateBar(int currentValue, int maxValue)
+    public void UpdateBar(float currentValue, float maxValue)
     {
-        fillBar.fillAmount=(float)currentValue / (float)maxValue;
-        valueText.text= currentValue.ToString() + "/" + maxValue.ToString();
+        fillBar.fillAmount=currentValue / maxValue;
+        valueText.text= ((int)currentValue).ToString() + "/" + ((int)maxValue).ToString();
     }
 }
