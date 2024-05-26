@@ -135,7 +135,8 @@ public class Monster : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        MonsterInfoPanel.Instance.ShowInfo(this);
+        UIManager.instance.ShowInfoMonster(this);
+
     }
 
 

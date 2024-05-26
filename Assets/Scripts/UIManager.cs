@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana;
     public bool isRefillHealth;
     float timeRefillMana, timeRefillHealth;
+    public GameObject panelMonsterInfo, panelPlayerInfo;
+    public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
+        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP;
+    
     private void Awake()
     {
         if (instance == null)
@@ -97,5 +102,33 @@ public class UIManager : MonoBehaviour
           = PlayerController.instance.transform.position;
         Debug.Log("mat mau");Debug.Log(damage);
     }
+    public void ShowInfoMonster(Monster monster)
+    {
+        nameMonsterTMP.text = "Name: " + monster.monsType;
+        healthMonsterTMP.text = "Health: " + monster.m_maxHealth;
+        attackMonsterTMP.text = "Attack: " + monster.m_attack;
+        defMonsterTMP.text = "Def: " + monster.m_defend;
+        xpMonsterHaveTMP.text = "XP: " + monster.m_XP;
 
+        panelMonsterInfo.SetActive(true);
+    }
+    public void ClosePanelMonster()
+    {
+        panelMonsterInfo.SetActive(false);
+    }
+    public void ShowInfoPlayer()
+    {
+        healthPlayerTMP.text = "Halth: " + (int)PlayerController.instance.p_currentHealthFloat +"/"+PlayerController.instance.p_maxHealth;
+        manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat+ "/" +PlayerController.instance.p_MaxMana;
+        attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
+        defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
+        xpPlayerTMP.text = "XP: " +PlayerController.instance.p_CurrentXP +"/" + PlayerController.instance.p_MaxXP;
+        manaOfSkilPlayerTMP.text ="Mana cost: " + PlayerController.instance.p_manaOfSkill;
+        panelPlayerInfo.SetActive(true);
+        Debug.Log("a");
+    }
+    public void ClosePanelPlayer()
+    {
+        panelPlayerInfo.SetActive(false);
+    }
 }
