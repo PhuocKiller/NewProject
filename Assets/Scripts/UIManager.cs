@@ -131,4 +131,12 @@ public class UIManager : MonoBehaviour
     {
         panelPlayerInfo.SetActive(false);
     }
+    public void AttackButton()
+    {
+        PlayerController.instance.PlayerAttack();
+    }
+    public void SkillButton()
+    {
+        PlayerController.instance.PlayerSkill();
+    }
 }

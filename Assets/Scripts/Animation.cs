@@ -182,7 +182,7 @@ public enum State
 
     void MainSkill()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             chargedTime += Time.deltaTime;
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)

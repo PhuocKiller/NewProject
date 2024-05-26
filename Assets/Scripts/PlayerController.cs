@@ -77,10 +77,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie)
         {
-            moveInput = value.Get<Vector2>();
+            if (Animation.instance.state==State.Jump)
+            {
+                moveInput = new Vector2(value.Get<Vector2>().x * 0.2f, value.Get<Vector2>().y * 0.2f);
+            }
+            else { moveInput = value.Get<Vector2>(); }
         }
     }
-    void OnAttack(InputValue value)
+    public void PlayerAttack()
     {
         if (!isDie)
         {
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    void OnSkill(InputValue value)
+    public void PlayerSkill()
     {
         if (!isDie && p_currentManaFloat > p_manaOfSkill)
         {
@@ -132,7 +136,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
-                && !Input.GetMouseButton(1)
+                && !Input.GetMouseButton(0)
                 && !(Animation.instance.state == State.LevelUp)
                 && !(Animation.instance.state == State.Injured))
             {

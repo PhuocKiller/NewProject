@@ -131,6 +131,7 @@ public class Monster : MonoBehaviour
         if(isLive)
         {
             PlayerController.instance.PlayerBeingAttacked(damage);
+
         }
     }
     private void OnMouseDown()
