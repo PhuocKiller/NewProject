@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Sword
   - Monster
+  - Skill
+  - Exit
   layers:
   - Default
   - TransparentFX

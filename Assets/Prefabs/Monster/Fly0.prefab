@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &203382185714393937
+--- !u!1001 &663063993443966409
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -38,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_LocalPosition.x
@@ -97,21 +97,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
---- !u!114 &4122187181308450536 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4316274060119586233, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-  m_PrefabInstance: {fileID: 203382185714393937}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ace12073294baf64b8f0b7113ffdafac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &8043724948529479747 stripped
+--- !u!224 &7223825532796698331 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-  m_PrefabInstance: {fileID: 203382185714393937}
+  m_PrefabInstance: {fileID: 663063993443966409}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1844819347813964805
 PrefabInstance:
@@ -231,11 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.6726804
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.6873386
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -598,7 +587,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8043724948529479747}
+      addedObject: {fileID: 7223825532796698331}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5671247868736374482, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       insertIndex: -1
@@ -775,4 +764,5 @@ MonoBehaviour:
   m_XP: 1
   damageofPlayer: 1
   damageofMonster: 1
-  healthBarMonster: {fileID: 4122187181308450536}
+  healthBarMonster: {fileID: 0}
+  UIMonster: {fileID: 0}
