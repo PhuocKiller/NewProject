@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
     public GameObject panelMonsterInfo, panelPlayerInfo;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP;
-    public Inventory Inventory;
-    
+    Inventory Inventory;
+
 
 
     private void Awake()
@@ -37,11 +37,13 @@ public class UIManager : MonoBehaviour
 
         }
         DontDestroyOnLoad(gameObject);
+        Inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
     // Start is called before the first frame update
     void Start()
     {
         Inventory.ItemAdded += InventoryScript_ItemAdded;
+        Inventory.ItemRemoved += Inventory_ItemRemoved;
     }
 
     // Update is called once per frame
@@ -58,8 +60,8 @@ public class UIManager : MonoBehaviour
         }
         if (isRefillMana)
         {
-            
-            if (PlayerController.instance.p_currentManaFloat>= PlayerController.instance.p_currentManaFade)
+
+            if (PlayerController.instance.p_currentManaFloat >= PlayerController.instance.p_currentManaFade)
             {
                 PlayerController.instance.p_currentManaFloat = PlayerController.instance.p_currentManaFade;
                 isRefillMana = false;
@@ -101,10 +103,10 @@ public class UIManager : MonoBehaviour
     }
     public void ShowDamageDealByMonster(int damage)
     {
-        damageDealByMonster.text = "-"+ damage.ToString();
+        damageDealByMonster.text = "-" + damage.ToString();
         damageDealByMonster.GetComponent<RectTransform>().transform.position  //thay đổi vị trí bị trừ máu
           = PlayerController.instance.transform.position;
-        Debug.Log("mat mau");Debug.Log(damage);
+        
     }
     public void ShowInfoMonster(Monster monster)
     {
@@ -122,12 +124,12 @@ public class UIManager : MonoBehaviour
     }
     public void ShowInfoPlayer()
     {
-        healthPlayerTMP.text = "Halth: " + (int)PlayerController.instance.p_currentHealthFloat +"/"+PlayerController.instance.p_maxHealth;
-        manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat+ "/" +PlayerController.instance.p_MaxMana;
+        healthPlayerTMP.text = "Halth: " + (int)PlayerController.instance.p_currentHealthFloat + "/" + PlayerController.instance.p_maxHealth;
+        manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat + "/" + PlayerController.instance.p_MaxMana;
         attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
         defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
-        xpPlayerTMP.text = "XP: " +PlayerController.instance.p_CurrentXP +"/" + PlayerController.instance.p_MaxXP;
-        manaOfSkilPlayerTMP.text ="Mana cost: " + PlayerController.instance.p_manaOfSkill;
+        xpPlayerTMP.text = "XP: " + PlayerController.instance.p_CurrentXP + "/" + PlayerController.instance.p_MaxXP;
+        manaOfSkilPlayerTMP.text = "Mana cost: " + PlayerController.instance.p_manaOfSkill;
         panelPlayerInfo.SetActive(true);
         Debug.Log("a");
     }
@@ -148,20 +150,38 @@ public class UIManager : MonoBehaviour
         Transform inventoryPanel = transform.Find("InventoryPanel");
         foreach (Transform slot in inventoryPanel)
         {
+            Transform imageTransform = slot.GetChild(0).GetChild(0);
+            UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
+            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
 
-            UnityEngine.UI.Image image =slot.GetChild(0).GetChild(0).GetComponent<Image>();
-            
-                if (!image.enabled)
+
+            if (!image.enabled)
             {
                 image.enabled = true;
                 image.sprite = e.Item.Image;
-                Debug.Log("b");
+                itemDragHandler.Item = e.Item;
                 break;
             }
-            
-            
             //we found the empty slot
-           
         }
     }
+    void Inventory_ItemRemoved(object sender, InventoryEventArgs e)
+    {
+        Transform inventoryPanel = transform.Find("InventoryPanel");
+        foreach (Transform slot in inventoryPanel)
+        {
+            Transform imageTransform = slot.GetChild(0).GetChild(0);
+            UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
+            ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+            if (itemDragHandler.Item.Equals(e.Item))
+            {
+                image.enabled = false;
+                image.sprite = null;
+                itemDragHandler.Item = null;
+                break;
+            }
+
+
+        }
+    } 
 }

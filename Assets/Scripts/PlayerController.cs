@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
-    public Inventory inventory;
+    Inventory inventory;
 
 
     private void Awake()
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         capSkill = skillGameObject.GetComponent<CapsuleCollider2D>();
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
+        inventory=GameObject.Find("Inventory").GetComponent<Inventory>();
 
 
     }
