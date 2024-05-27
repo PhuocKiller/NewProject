@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class UIManager : MonoBehaviour
     public GameObject panelMonsterInfo, panelPlayerInfo;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP;
+    public Inventory Inventory;
     
+
+
     private void Awake()
     {
         if (instance == null)
@@ -37,7 +41,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Inventory.ItemAdded += InventoryScript_ItemAdded;
     }
 
     // Update is called once per frame
@@ -138,5 +142,26 @@ public class UIManager : MonoBehaviour
     public void SkillButton()
     {
         PlayerController.instance.PlayerSkill();
+    }
+    void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
+    {
+        Transform inventoryPanel = transform.Find("InventoryPanel");
+        foreach (Transform slot in inventoryPanel)
+        {
+
+            UnityEngine.UI.Image image =slot.GetChild(0).GetChild(0).GetComponent<Image>();
+            
+                if (!image.enabled)
+            {
+                image.enabled = true;
+                image.sprite = e.Item.Image;
+                Debug.Log("b");
+                break;
+            }
+            
+            
+            //we found the empty slot
+           
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
+    public Inventory inventory;
 
 
     private void Awake()
@@ -77,11 +79,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie)
         {
-            if (Animation.instance.state==State.Jump)
-            {
-                moveInput = new Vector2(value.Get<Vector2>().x * 0.2f, value.Get<Vector2>().y * 0.2f);
-            }
-            else { moveInput = value.Get<Vector2>(); }
+            /* if (Animation.instance.state==State.Jump)
+             {
+                 moveInput = new Vector2(value.Get<Vector2>().x * 0.2f, value.Get<Vector2>().y * 0.2f);
+             }
+             else { moveInput = value.Get<Vector2>(); }*/
+            moveInput = value.Get<Vector2>();
         }
     }
     public void PlayerAttack()
@@ -126,11 +129,18 @@ public class PlayerController : MonoBehaviour
     void Run()
     {
         rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
+
+
         bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack)
-           && bodyPlayer.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
+           
         {
-            Animation.instance.state = State.Run;
+           if(bodyPlayer.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                Animation.instance.state = State.Run;
+                rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
+            }
+           else rigid.velocity = new Vector2(moveInput.x * runSpeed*0.2f, rigid.velocity.y);
         }
 
         else
@@ -205,5 +215,18 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.ShowDamageDealByMonster(damage);
 
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+      
+    }
+    private void OnCollisionEnter2D(Collision2D hit)
+    {
+        IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
+        if (item != null)
+        {
+            inventory.AddItem(item);
+        }
+    }
+
 }
   
