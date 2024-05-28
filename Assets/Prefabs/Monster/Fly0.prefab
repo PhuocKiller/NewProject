@@ -74,11 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -97,11 +97,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+--- !u!114 &3663064030546585712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4316274060119586233, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+  m_PrefabInstance: {fileID: 663063993443966409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace12073294baf64b8f0b7113ffdafac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7223825532796698331 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
   m_PrefabInstance: {fileID: 663063993443966409}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7498671002728744333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6999452249566943300, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+  m_PrefabInstance: {fileID: 663063993443966409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0670dc572c89f41a41b022f578ae1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1844819347813964805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,11 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.6726804
+      value: -4.9826336
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.6873386
+      value: -2.8439488
       objectReference: {fileID: 0}
     - target: {fileID: -6139558961323159480, guid: b43a09f6029fc1a42b446bd5bc915b34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -764,5 +786,5 @@ MonoBehaviour:
   m_XP: 1
   damageofPlayer: 1
   damageofMonster: 1
-  healthBarMonster: {fileID: 0}
-  UIMonster: {fileID: 0}
+  healthBarMonster: {fileID: 3663064030546585712}
+  UIMonster: {fileID: 7498671002728744333}

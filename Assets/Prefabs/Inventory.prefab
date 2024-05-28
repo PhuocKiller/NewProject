@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4879955452050023979
+--- !u!1 &3829512240794463602
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 71534189488576113}
-  - component: {fileID: 7700060236006520306}
+  - component: {fileID: 5631018496645422264}
+  - component: {fileID: 2073239370019288367}
   m_Layer: 0
-  m_Name: EssentialLoader
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &71534189488576113
+--- !u!4 &5631018496645422264
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4879955452050023979}
+  m_GameObject: {fileID: 3829512240794463602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.3884733, y: 7.5919065, z: -0.114585094}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7700060236006520306
+--- !u!114 &2073239370019288367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4879955452050023979}
+  m_GameObject: {fileID: 3829512240794463602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb94ec0e6567da4458ab219ed2d22b98, type: 3}
+  m_Script: {fileID: 11500000, guid: 009f39ae394ae1744a976cd1f5bcfacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4993074614299259893, guid: 905f4ef80f2601b46beada309d31502d, type: 3}
-  UIPlayer: {fileID: 5915280807738768253, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
-  inventory: {fileID: 3829512240794463602, guid: 7161136374b7744469811e40c512f549, type: 3}

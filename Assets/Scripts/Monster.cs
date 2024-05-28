@@ -86,7 +86,7 @@ public class Monster : MonoBehaviour
         }
         if (collision.CompareTag("Player"))          //Player bị tấn công
         {
-            PlayerBeingAttacked(m_attack - PlayerController.instance.p_Defend);
+            PlayerBeingAttacked(GetDamageOfTwoObject(m_attack,PlayerController.instance.p_Defend));
         }
         if (collision.CompareTag("Skill")&& PlayerController.instance.isIntervalSkill)
         {
@@ -96,6 +96,14 @@ public class Monster : MonoBehaviour
             PlayerController.instance.isIntervalSkill = false;
         }
 
+    }
+    int GetDamageOfTwoObject(int a,int b)
+    {
+        if ((a - b) < 0)
+        {
+            return 0;
+        }
+        else return a - b;
     }
     void MonsterBeingAttacked(int damage)
     {

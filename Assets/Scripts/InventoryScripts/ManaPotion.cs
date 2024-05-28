@@ -12,6 +12,7 @@ public class ManaPotion :InventoryItemBase
     public override void OnUse()
     {
         base.OnUse();
+        UIManager.instance.ManaPotionClick();
     }
 
 }

@@ -11,6 +11,7 @@ public class HealPotion :InventoryItemBase
     public override void OnUse()
     {
         base.OnUse();
+        UIManager.instance.HealthPotionClick();
     }
 
 }

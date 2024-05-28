@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour
     public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
-    Inventory inventory;
-
+   
 
     private void Awake()
     {
@@ -52,9 +51,7 @@ public class PlayerController : MonoBehaviour
         capSkill = skillGameObject.GetComponent<CapsuleCollider2D>();
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
-        inventory=GameObject.Find("Inventory").GetComponent<Inventory>();
-
-
+       
     }
     // Start is called before the first frame update
     void Start()
@@ -78,13 +75,8 @@ public class PlayerController : MonoBehaviour
     }
     void OnMove(InputValue value)
     {
-        if (!isDie)
+        if (!isDie&& !(Animation.instance.state==State.Attack))
         {
-            /* if (Animation.instance.state==State.Jump)
-             {
-                 moveInput = new Vector2(value.Get<Vector2>().x * 0.2f, value.Get<Vector2>().y * 0.2f);
-             }
-             else { moveInput = value.Get<Vector2>(); }*/
             moveInput = value.Get<Vector2>();
         }
     }
@@ -225,7 +217,7 @@ public class PlayerController : MonoBehaviour
         IInventoryItem item = hit.collider.GetComponent<IInventoryItem>();
         if (item != null)
         {
-            inventory.AddItem(item);
+            Inventory.instance.AddItem(item);
         }
     }
 

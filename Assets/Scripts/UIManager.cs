@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using TMPro;
@@ -14,10 +15,10 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana;
     public bool isRefillHealth;
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP;
-    Inventory Inventory;
+ 
 
 
 
@@ -37,14 +38,16 @@ public class UIManager : MonoBehaviour
 
         }
         DontDestroyOnLoad(gameObject);
-        Inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        Inventory.ItemAdded += InventoryScript_ItemAdded;
-        Inventory.ItemRemoved += Inventory_ItemRemoved;
+        Inventory.instance.ItemAdded += InventoryScript_ItemAdded;
+        Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
+        Inventory.instance.ItemUsed += Inventory_ItemUsed;
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -103,10 +106,9 @@ public class UIManager : MonoBehaviour
     }
     public void ShowDamageDealByMonster(int damage)
     {
-        damageDealByMonster.text = "-" + damage.ToString();
-        damageDealByMonster.GetComponent<RectTransform>().transform.position  //thay đổi vị trí bị trừ máu
-          = PlayerController.instance.transform.position;
-        
+        Debug.Log("hien damage");
+        damageDealByMonster.text = "-" + damage;
+   
     }
     public void ShowInfoMonster(Monster monster)
     {
@@ -145,6 +147,14 @@ public class UIManager : MonoBehaviour
     {
         PlayerController.instance.PlayerSkill();
     }
+    public void InventoryButton()
+    {
+        panelInventory.SetActive(true);
+    }
+    public void ClosePanelInventory()
+    {
+        panelInventory.SetActive(false);
+    }
     void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
     {
         Transform inventoryPanel = transform.Find("InventoryPanel");
@@ -173,15 +183,20 @@ public class UIManager : MonoBehaviour
             Transform imageTransform = slot.GetChild(0).GetChild(0);
             UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
             ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-            if (itemDragHandler.Item.Equals(e.Item))
+           if (e.Item!=null && itemDragHandler.Item !=null)
             {
-                image.enabled = false;
-                image.sprite = null;
-                itemDragHandler.Item = null;
-                break;
+                if (itemDragHandler.Item.Equals(e.Item))
+                {
+                    image.enabled = false;
+                    image.sprite = null;
+                    itemDragHandler.Item = null;
+                    break;
+                }
             }
-
-
         }
-    } 
+    }
+    private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
+    {
+        IInventoryItem item = e.Item;
+    }
 }
