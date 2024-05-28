@@ -182,14 +182,14 @@ public enum State
 
     void MainSkill()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0) &&( state == State.ChargeSkill|| state == State.MainSkill))
         {
-            chargedTime += Time.deltaTime;
+            chargedTime += Time.deltaTime; 
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
             {
                 if (state != State.MainSkill)
                 {
-                    state = State.MainSkill;
+                    state = State.MainSkill; 
                 }
                 else
                 {
@@ -207,11 +207,12 @@ public enum State
 
                     if (skillTime < skeleton.Data.FindAnimation(mainSkillAnimationName).Duration)
                     {
+                        
                         PlayerController.instance.p_currentManaFloat = PlayerController.instance.p_currentManaFloat -
-                       PlayerController.instance.manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
+                       PlayerController.instance.p_manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
 
                         PlayerController.instance.p_currentManaFade = PlayerController.instance.p_currentManaFade -
-                       PlayerController.instance.manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
+                       PlayerController.instance.p_manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
 
                     }
                     else

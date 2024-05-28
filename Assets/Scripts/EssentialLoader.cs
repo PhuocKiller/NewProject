@@ -6,7 +6,7 @@ public class EssentialLoader : MonoBehaviour
 {
     public GameObject player;
     public GameObject UIPlayer;
-    
+    public GameObject inventory;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,10 @@ public class EssentialLoader : MonoBehaviour
         if (UIManager.instance == null)
         {
             UIManager.instance = Instantiate(UIPlayer).GetComponent<UIManager>();
+        }
+        if (Inventory.instance == null)
+        {
+            Inventory.instance = Instantiate(inventory).GetComponent<Inventory>();  
         }
        
 
