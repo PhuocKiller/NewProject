@@ -54,8 +54,6 @@ public class PlayerController : MonoBehaviour
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
         feetBoxCollider=feet.GetComponent<BoxCollider2D>();
-
-
     }
     // Start is called before the first frame update
     void Start()
@@ -66,7 +64,7 @@ public class PlayerController : MonoBehaviour
         p_manaOfSkill = 40;
         p_CurrentXP = 0; p_MaxXP = 100; p_Level = 1;
         p_Attack = Random.Range(50, 60); p_Defend = Random.Range(10, 20);
-
+        
     }
 
     // Update is called once per frame

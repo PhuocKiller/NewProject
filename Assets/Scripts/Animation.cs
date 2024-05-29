@@ -125,32 +125,37 @@ public enum State
     {
         if (a == "Idle")
         {
-            spineAnimationState.SetAnimation(0, idleAnimationName, true); 
+            spineAnimationState.SetAnimation(0, idleAnimationName, true);
+            AudioManager.instance.StopSound();
         }
         if (a == "ChargeSkill")
         {
             chargedTime = 0;
             spineAnimationState.SetAnimation(0, chargeSkillAnimationName, false);
-           
+            AudioManager.instance.PlaySound(AudioManager.instance.chargeSkill, 1);
         }
         if (a == "Die")
         {
             spineAnimationState.SetAnimation(0, dieAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.die, 1);
         }
         if (a == "Injured")
         {
             spineAnimationState.SetAnimation(0, injuredAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(injuredAnimationName).Duration);
-            
+            AudioManager.instance.PlaySound(AudioManager.instance.injured, 1);
+
         }
         if (a == "LevelUp")
         {
             spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
+            AudioManager.instance.PlaySound(AudioManager.instance.levelUp, 1);
         }
         if (a == "MainSkill")
         {
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.mainSkill, 1,true);
         }
         if (a == "Walk")
         {
@@ -159,10 +164,12 @@ public enum State
         if (a == "Run")
         {
             spineAnimationState.SetAnimation(0, runAnimationName, true);
+            //AudioManager.instance.PlaySound(AudioManager.instance.run, 1);
         }
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.jump, 2);
         }
         if (a == "Fall")
         {
@@ -171,6 +178,7 @@ public enum State
         if (a == "Attack")
         {
             spineAnimationState.SetAnimation(0, attackAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.attack, 1);
         }
         
     }

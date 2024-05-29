@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - Skill
   - Exit
+  - Audio
   layers:
   - Default
   - TransparentFX

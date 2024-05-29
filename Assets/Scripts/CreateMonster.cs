@@ -6,6 +6,7 @@ public class CreateMonster : MonoBehaviour
 {
     public Monster[] monsters;
     public Monster[] monstersInstance;
+    
     Monster mon;
     // Start is called before the first frame update
 

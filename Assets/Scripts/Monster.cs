@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
 {
     public static Action <Monster> beHit;
     public MonsterType monsType;
-    
+    CreateItems newItem;
     public float moveSpeed = 1f;
     CapsuleCollider2D capsule;
     BoxCollider2D box;
@@ -34,6 +34,7 @@ public class Monster : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
         animator= GetComponent<Animator>();
+        newItem = GetComponent<CreateItems>();
     }
     // Start is called before the first frame update
     void Start()
@@ -125,9 +126,9 @@ public class Monster : MonoBehaviour
         animator.SetBool("die", true);
         isLive = false;
         Invoke("DestroyMonster", 2f);
-        
-        
+        newItem.CreateItemsFromDeath(); //rớt vật phẩm khi chết
     }
+    
     void DestroyMonster()
     {
         Destroy(gameObject);
