@@ -67,6 +67,83 @@ CapsuleCollider2D:
   m_Offset: {x: 0.18350744, y: 0.7436876}
   m_Size: {x: 0.982914, y: 2.4873753}
   m_Direction: 0
+--- !u!1 &1099873865610417858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5201962241826024539}
+  - component: {fileID: 5326411218627261055}
+  m_Layer: 3
+  m_Name: Feet
+  m_TagString: Skill
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5201962241826024539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099873865610417858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.015, y: 0.157, z: 0}
+  m_LocalScale: {x: 0.572906, y: 0.572906, z: 0.572906}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5326411218627261055
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099873865610417858}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0039654523, y: 0.019827202}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.62724936, y: 0.27829126}
+  m_EdgeRadius: 0
 --- !u!1 &1534256025028681622
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,13 +224,13 @@ GameObject:
   - component: {fileID: 2847590996385807290}
   - component: {fileID: 5756333886426135786}
   - component: {fileID: 6780178401145391303}
-  - component: {fileID: 7056286772110006741}
   - component: {fileID: 7684123638596049439}
   - component: {fileID: 3918937484666585800}
   - component: {fileID: 1097768047809629731}
   - component: {fileID: 563745939301844033}
+  - component: {fileID: 841320586368722849}
   m_Layer: 3
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,6 +251,7 @@ Transform:
   m_Children:
   - {fileID: 163473356679057379}
   - {fileID: 2086555212930992358}
+  - {fileID: 5201962241826024539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2985178505919917707
@@ -204,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60dd1aeff5f826d4f83f9322d783513b, type: 2}
+  - {fileID: 2100000, guid: 6261c386768492445a05642fa9bdda8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -238,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 1c585c2214765404396b26f9c226c279, type: 2}
-  initialSkinName: 
+  skeletonDataAsset: {fileID: 11400000, guid: 967d5f8fdcb596841a9a643b8f0d28ba, type: 2}
+  initialSkinName: Lv1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -296,32 +374,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7056286772110006741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4993074614299259893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9054e9d93d145e4498f77ceb2d836076, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackAnimationName: Attack
-  chargeSkillAnimationName: ChargeSkill
-  dieAnimationName: Die
-  injuredAnimationName: Injured
-  levelUpAnimationName: LevelUp
-  mainSkillAnimationName: MainSkill
-  runAnimationName: Run
-  idleAnimationName: Idle
-  walkAnimationName: Walk
-  fallAnimationName: 
-  jumpAnimationName: Jump
-  skeletonAnimation: {fileID: 0}
-  state: 3
-  stateString: 
 --- !u!114 &7684123638596049439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordGameObject: {fileID: 577959706955924223}
   skillGameObject: {fileID: 1534256025028681622}
+  feet: {fileID: 1099873865610417858}
   runSpeed: 10
   jumpSpeed: 8
   doJump: 0
@@ -529,6 +582,32 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07474208, y: 1.195352}
-  m_Size: {x: 0.75479555, y: 2.261461}
+  m_Offset: {x: 0.040232122, y: 1.3314332}
+  m_Size: {x: 0.5966091, y: 1.9892986}
   m_Direction: 0
+--- !u!114 &841320586368722849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993074614299259893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9054e9d93d145e4498f77ceb2d836076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackAnimationName: Attack
+  chargeSkillAnimationName: ChargeSkill
+  dieAnimationName: Die
+  injuredAnimationName: Injured
+  levelUpAnimationName: LevelUp
+  mainSkillAnimationName: MainSkill
+  runAnimationName: Run
+  idleAnimationName: Idle
+  walkAnimationName: Walk
+  fallAnimationName: Fall
+  jumpAnimationName: Jump
+  skeletonAnimation: {fileID: 0}
+  state: 3
+  stateString: 

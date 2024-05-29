@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ public class CreateMonster : MonoBehaviour
         if (mon == null)
         {
             CreateNewMonster();
-            mon.gameObject.SetActive(false);
+            mon.gameObject.SetActive(false); //Monster ko xuât hiện liền mà sau 2s
             Invoke("ActiveMonsterAgain", 2f);
         }
     }

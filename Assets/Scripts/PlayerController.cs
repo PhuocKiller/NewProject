@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigid;
     public static PlayerController instance;
     public GameObject swordGameObject, skillGameObject;
+    GameObject feet;
     CapsuleCollider2D capSword, capSkill, bodyPlayer;
-
+    BoxCollider2D feetBoxCollider;
     EdgeCollider2D edgePlayer;
     public float runSpeed = 10f;
     public float jumpSpeed = 5f;
@@ -51,7 +52,10 @@ public class PlayerController : MonoBehaviour
         capSkill = skillGameObject.GetComponent<CapsuleCollider2D>();
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
-       
+        feet = GameObject.Find("Feet");
+        feetBoxCollider=feet.GetComponent<BoxCollider2D>();
+
+
     }
     // Start is called before the first frame update
     void Start()
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
         if (!isDie)
         {
             if (!doJump) { return; }
-            if (value.isPressed)
+            if (value.isPressed&& feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
                 rigid.velocity = new Vector2(0, jumpSpeed);
                 Animation.instance.state = State.Jump;
@@ -125,28 +129,37 @@ public class PlayerController : MonoBehaviour
 
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
-           
-        {
-           if(bodyPlayer.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        
+           if(feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
-                Animation.instance.state = State.Run;
-                rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
+                if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
+                {
+                    Animation.instance.state = State.Run;
+                    rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
+                }
+                else
+                {
+                    if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
+               && !Input.GetMouseButton(0)
+               && !(Animation.instance.state == State.LevelUp)
+               && !(Animation.instance.state == State.Injured))
+                    {
+                        Animation.instance.state = State.Idle;
+                    }
+                }
+                    
             }
-           else rigid.velocity = new Vector2(moveInput.x * runSpeed*0.2f, rigid.velocity.y);
-        }
-
-        else
-        {
-            if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
-                && !Input.GetMouseButton(0)
-                && !(Animation.instance.state == State.LevelUp)
-                && !(Animation.instance.state == State.Injured))
+           else
             {
-                Animation.instance.state = State.Idle;
+                rigid.velocity = new Vector2(moveInput.x * runSpeed * 0.2f, rigid.velocity.y);
+                if(!(Animation.instance.state == State.Jump))
+                {
+                Animation.instance.state = State.Fall;
+                }
             }
+        
 
-        }
+       
         if (playerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(-Mathf.Sign(rigid.velocity.x), 1f);  //mathf.Sign là trả về giá trị -1 hoặc 1 để chọn hướng

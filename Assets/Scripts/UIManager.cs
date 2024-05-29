@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Spine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +19,11 @@ public class UIManager : MonoBehaviour
     float timeRefillMana, timeRefillHealth;
     public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
-        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP;
+        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP,
+        numberHealPotionTMP,numberManaPotionTMP;
+    int numberHealPotionInt,numberManaPotionInt;
+    float displayTimePlayerBeAttacked;
+    public Image imageHealPotion, imageManaPotion;
  
 
 
@@ -38,6 +44,8 @@ public class UIManager : MonoBehaviour
 
         }
         DontDestroyOnLoad(gameObject);
+        imageHealPotion=GameObject.Find("HealPotionButton").GetComponent<Image>();
+        imageManaPotion = GameObject.Find("ManaPotionButton").GetComponent<Image>();
     }
     // Start is called before the first frame update
     void Start()
@@ -45,6 +53,7 @@ public class UIManager : MonoBehaviour
         Inventory.instance.ItemAdded += InventoryScript_ItemAdded;
         Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
         Inventory.instance.ItemUsed += Inventory_ItemUsed;
+        Inventory.instance.InventoryUpdate += Inventory_Update;
     }
 
    
@@ -81,32 +90,88 @@ public class UIManager : MonoBehaviour
             }
             PlayerController.instance.p_currentHealthFloat += 0.5f;
         }
+        displayTimePlayerBeAttacked += Time.deltaTime;
+        if (displayTimePlayerBeAttacked > 0.7) //0.7 là thời gian gài để tự biến mất
+        {
+            damageDealByMonster.text = null;
+        }
+        UpdateHealButton();
+        UpdateManaButton();
 
 
     }
+    
     public void ManaPotionClick()
     {
-
-        PlayerController.instance.p_currentManaFade += 50;
-        if (PlayerController.instance.p_currentManaFade > PlayerController.instance.p_MaxMana)
+        if (numberManaPotionInt > 0)
         {
-            PlayerController.instance.p_currentManaFade = PlayerController.instance.p_MaxMana;
+            Transform inventoryPanel = transform.Find("InventoryPanel");
+            foreach (Transform slot in inventoryPanel)
+            {
+                if (slot.childCount == 1)
+                {
+                    Transform imageTransform = slot.GetChild(0).GetChild(0);
+                    UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
+                    ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+                    if (itemDragHandler.Item != null&&itemDragHandler.Item.itemTypes==ItemTypes.ManaPotion)
+                    {
+                        Inventory.instance.UseItemClickInventory(itemDragHandler.Item);break;
+                    }
+                }
+                
+            }
         }
-        isRefillMana = true;
+        
+        
+    }
+    void UpdateManaButton()
+    {
+        if (numberManaPotionInt == 0)
+        {
+            imageManaPotion.color = new UnityEngine.Color(imageManaPotion.color.r, imageManaPotion.color.g, imageManaPotion.color.b, 0.2f);
+        }
+        else
+        {
+            imageManaPotion.color = new UnityEngine.Color(imageManaPotion.color.r, imageManaPotion.color.g, imageManaPotion.color.b, 1f);
+        }
     }
     public void HealthPotionClick()
     {
-
-        PlayerController.instance.p_currentHealthFade += 50;
-        if (PlayerController.instance.p_currentHealthFade > PlayerController.instance.p_maxHealth)
+        if (numberHealPotionInt>0)
         {
-            PlayerController.instance.p_currentHealthFade = PlayerController.instance.p_maxHealth;
+            
+            Transform inventoryPanel = transform.Find("InventoryPanel");
+            foreach (Transform slot in inventoryPanel)
+            {
+                if (slot.childCount == 1)
+                {
+                    Transform imageTransform = slot.GetChild(0).GetChild(0);
+                    UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
+                    ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+                    if (itemDragHandler.Item!=null&&itemDragHandler.Item.itemTypes == ItemTypes.HealPotion)
+                    {
+                        Inventory.instance.UseItemClickInventory(itemDragHandler.Item);break;
+                    }
+                }
+
+            }
         }
-        isRefillHealth = true;
+       
+    }
+    void UpdateHealButton()
+    {
+        if (numberHealPotionInt == 0)
+        {
+            imageHealPotion.color = new UnityEngine.Color(imageHealPotion.color.r, imageHealPotion.color.g, imageHealPotion.color.b, 0.2f);
+        }
+        else
+        {
+            imageHealPotion.color = new UnityEngine.Color(imageHealPotion.color.r, imageHealPotion.color.g, imageHealPotion.color.b, 1f);
+        }
     }
     public void ShowDamageDealByMonster(int damage)
     {
-        Debug.Log("hien damage");
+        displayTimePlayerBeAttacked = 0;
         damageDealByMonster.text = "-" + damage;
    
     }
@@ -197,6 +262,37 @@ public class UIManager : MonoBehaviour
     }
     private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
     {
-        IInventoryItem item = e.Item;
+        
+    }
+    void Inventory_Update(object sender, InventoryEventArgs e)
+    {
+      
+        numberHealPotionInt = 0; numberManaPotionInt = 0;
+        Transform inventoryPanel = transform.Find("InventoryPanel");
+        foreach (Transform slot in inventoryPanel)
+        {
+            if (slot.childCount==1)  //vì nút close panel ko có child
+            {
+                Transform imageTransform = slot.GetChild(0).GetChild(0);
+                UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
+                ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+                if (itemDragHandler.Item != null)
+                {
+                    if (itemDragHandler.Item.itemTypes == ItemTypes.HealPotion)
+                    {
+                        numberHealPotionInt += 1;
+                      
+                    }
+                    if (itemDragHandler.Item.itemTypes == ItemTypes.ManaPotion)
+                    {
+                        numberManaPotionInt += 1;
+                        
+                    }
+                }
+            }
+            
+        }
+        numberHealPotionTMP.text = numberHealPotionInt.ToString();
+        numberManaPotionTMP.text = numberManaPotionInt.ToString();
     }
 }

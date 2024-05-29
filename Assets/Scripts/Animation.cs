@@ -12,6 +12,7 @@ public enum State
     Idle,
     Injured,
     Jump,
+    Fall,
     LevelUp,
     MainSkill,
     Run,
@@ -48,7 +49,8 @@ public enum State
     [SpineAnimation]
     public string walkAnimationName;
 
-    
+    [SpineAnimation]
+    public string fallAnimationName;
 
     [SpineAnimation]
     public string jumpAnimationName;
@@ -111,6 +113,7 @@ public enum State
         else if (state == State.Die) { return "Die"; }
         else if (state == State.Injured) { return "Injured"; }
         else if (state == State.Jump) { return "Jump"; }
+        else if (state == State.Fall) { return "Fall"; }
         else if (state == State.LevelUp) { return "LevelUp"; }
         else if (state == State.MainSkill) { return "MainSkill"; }
         else if (state == State.Walk) { return "Walk"; }
@@ -160,6 +163,10 @@ public enum State
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
+        }
+        if (a == "Fall")
+        {
+            spineAnimationState.SetAnimation(0, fallAnimationName, true);
         }
         if (a == "Attack")
         {

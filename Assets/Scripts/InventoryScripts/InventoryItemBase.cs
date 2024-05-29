@@ -17,18 +17,24 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem
         }
     }
 
+    public virtual ItemTypes itemTypes { get; }
+
     public virtual void OnPickUp()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public virtual void OnDrop()
     {
-        gameObject.SetActive(true);
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        gameObject.transform.position = new Vector3(pos.x, pos.y, 0);
+        pos = new Vector3(pos.x, pos.y, 0);
+        Inventory.instance.CreateNewItem(pos, GetItemTypes());
 
-
+    }
+    public virtual ItemTypes GetItemTypes()
+    {
+        return itemTypes;
     }
     public virtual void OnUse()
     {

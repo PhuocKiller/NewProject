@@ -11,7 +11,7 @@ public class ItemClickHandler : MonoBehaviour
        // Debug.Log(item.Name);
         if (item != null )
         {
-            Inventory.instance.UseItem(item);
+            Inventory.instance.UseItemClickInventory(item);
         }
         
     }
