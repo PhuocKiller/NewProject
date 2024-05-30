@@ -65,6 +65,10 @@ public class Monster : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            rigid.velocity = Vector2.zero;
+        }
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
@@ -93,7 +97,7 @@ public class Monster : MonoBehaviour
         {
             damageofPlayer = PlayerController.instance.p_Attack - m_defend;
             isStun = true;
-            MonsterBeingAttacked((int)(0.1f* ((damageofPlayer ) + UnityEngine.Random.Range(-10,10))));
+            MonsterBeingAttacked((int)(0.2f* ((damageofPlayer ) + UnityEngine.Random.Range(-10,10))));
             PlayerController.instance.isIntervalSkill = false;
         }
 
@@ -126,13 +130,13 @@ public class Monster : MonoBehaviour
         animator.SetBool("die", true);
         isLive = false;
         Invoke("DestroyMonster", 2f);
-        newItem.CreateItemsFromDeath(); //rớt vật phẩm khi chết
     }
     
     void DestroyMonster()
     {
         Destroy(gameObject);
         PlayerController.instance.p_CurrentXP += m_XP;
+        newItem.CreateItemsFromDeath(); //rớt vật phẩm khi chết
     }
   
     void PlayerBeingAttacked(int damage)

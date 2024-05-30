@@ -7,8 +7,12 @@ using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 //using UnityEngine.UIElements;
-
+public enum UITypes
+{
+    Melee,Range
+}
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
@@ -24,6 +28,7 @@ public class UIManager : MonoBehaviour
     int numberHealPotionInt,numberManaPotionInt;
     float displayTimePlayerBeAttacked;
     public Image imageHealPotion, imageManaPotion;
+    public UITypes uiTypes;
  
 
 
@@ -215,6 +220,15 @@ public class UIManager : MonoBehaviour
     public void InventoryButton()
     {
         panelInventory.SetActive(true);
+    }
+    public void SaveButton()
+    {
+        SavingFile.instance.Save(PlayerController.instance. numberIndexCharacter, PlayerController.instance.characterType,
+            UIManager.instance.uiTypes, PlayerController.instance.p_Level);
+    }
+    public void LoadButton()
+    {
+        SavingFile.instance.Load(PlayerController.instance.numberIndexCharacter);
     }
     public void ClosePanelInventory()
     {

@@ -23,7 +23,7 @@ public class CreateItems : MonoBehaviour
         {
             if (GetChance(chance[i]) )
             {
-                Vector2 pos = new Vector2(transform.position.x + Random.Range(-2f, 2f), transform.position.y + Random.Range(0f, 4f));
+                Vector2 pos = new Vector2(transform.position.x + Random.Range(-1.5f, 1.5f), transform.position.y + Random.Range(0f, 4f));
                 Instantiate(items[i], pos, Quaternion.identity);
             }
         }
