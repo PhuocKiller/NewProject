@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4070660252719895337}
   - component: {fileID: 311332178104728949}
   m_Layer: 0
-  m_Name: Range UI
+  m_Name: Range Player UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

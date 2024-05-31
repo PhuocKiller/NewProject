@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CreatePlayerUI : MonoBehaviour
@@ -9,10 +10,9 @@ public class CreatePlayerUI : MonoBehaviour
     public CharacterType characterType;
     public int level;
     public UITypes uiTypes;
-    public static CreatePlayerUI instance;
+    public TextMeshProUGUI levelText;
     private void Awake()
     {
-        instance = this;
     }
     // Start is called before the first frame update
     void Start()
@@ -27,14 +27,22 @@ public class CreatePlayerUI : MonoBehaviour
     }
    public void CreateNewPlayerUI (CharacterType characterType)
     {
-        Debug.Log("len" + playerUI.Length);
         for (int i = 0; i < playerUI.Length; i++)
         {
             if (playerUI[i].characterType == characterType)
             {
                 Instantiate(playerUI[i],transform.position,Quaternion.identity,transform.parent);
-                
             }
         }
+        levelText.text = "Level: " + level;
+    }
+    public void SetInfoByButton()
+    {
+        Debug.Log("vo set info");
+        SavingFile.instance.numberIndexCharacter=numberIndexCharacter;
+        SavingFile.instance.characterType = characterType;
+        SavingFile.instance.level = level;
+        SavingFile.instance.uiTypes = uiTypes;
+
     }
 }

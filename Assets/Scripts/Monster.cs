@@ -87,17 +87,17 @@ public class Monster : MonoBehaviour
         {
             PlayerController.instance.isAttackExactly = false;
             damageofPlayer = PlayerController.instance.p_Attack - m_defend;
-            MonsterBeingAttacked(damageofPlayer);
+            MonsterBeingAttacked((int)(damageofPlayer*UnityEngine.Random.Range(0.8f,1.2f)));
         }
         if (collision.CompareTag("Player"))          //Player bị tấn công
         {
-            PlayerBeingAttacked(GetDamageOfTwoObject(m_attack,PlayerController.instance.p_Defend));
+            PlayerBeingAttacked(GetDamageOfTwoObject(m_attack,PlayerController.instance.p_Defend) * UnityEngine.Random.Range(0.8f, 1.2f));
         }
         if (collision.CompareTag("Skill")&& PlayerController.instance.isIntervalSkill)
         {
             damageofPlayer = PlayerController.instance.p_Attack - m_defend;
             isStun = true;
-            MonsterBeingAttacked((int)(0.2f* ((damageofPlayer ) + UnityEngine.Random.Range(-10,10))));
+            MonsterBeingAttacked((int)(0.2f* (damageofPlayer ) * UnityEngine.Random.Range(0.8f, 1.2f)));
             PlayerController.instance.isIntervalSkill = false;
         }
 
@@ -109,6 +109,14 @@ public class Monster : MonoBehaviour
             return 0;
         }
         else return a - b;
+    }
+    void PlayerBeingAttacked(float damage)
+    {
+        if (isLive)
+        {
+            PlayerController.instance.PlayerBeingAttacked(damage);
+
+        }
     }
     void MonsterBeingAttacked(int damage)
     {
@@ -139,14 +147,7 @@ public class Monster : MonoBehaviour
         newItem.CreateItemsFromDeath(); //rớt vật phẩm khi chết
     }
   
-    void PlayerBeingAttacked(int damage)
-    {
-        if(isLive)
-        {
-            PlayerController.instance.PlayerBeingAttacked(damage);
-
-        }
-    }
+    
     private void OnMouseDown()
     {
         UIManager.instance.ShowInfoMonster(this);

@@ -50,3 +50,14 @@ MonoBehaviour:
   characterType: 0
   level: 0
   uiTypes: 0
+  createPlayerUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerControllers:
+  - {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
+  - {fileID: 3918937484666585800, guid: bbfd3e028c49446458cdd1fb3f806548, type: 3}
+  uIManagers:
+  - {fileID: 3119146787115452692, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+  - {fileID: 3119146787115452692, guid: 9bf0a622c3386a54ba11d64b1eac6fe2, type: 3}
+  inventory: {fileID: 3829512240794463602, guid: 7161136374b7744469811e40c512f549, type: 3}

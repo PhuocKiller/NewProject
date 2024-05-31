@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5810494381301207883}
   - component: {fileID: 1752701597723447632}
   m_Layer: 0
-  m_Name: Melee UI
+  m_Name: Melee Player UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

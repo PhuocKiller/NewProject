@@ -67,12 +67,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         doJump = true; doAttack = true;
-        p_maxHealth = 100; p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
-        p_MaxMana = 100; p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
-        p_manaOfSkill = 40;
-        p_CurrentXP = 0; p_MaxXP = 100; p_Level = 1;
-        p_Attack = Random.Range(50, 60); p_Defend = Random.Range(10, 20);
-        numberIndexCharacter = 1;
+        p_maxHealth = 100 + 10*(p_Level-1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
+        p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
+        p_manaOfSkill = 40 + 2 * (p_Level - 1);
+        p_CurrentXP = 0; p_MaxXP = 100 + 10 * (p_Level - 1);
+        p_Attack = 50+ 20 * (p_Level - 1); p_Defend =15 + 2 * (p_Level - 1);
     }
 
     // Update is called once per frame
@@ -187,12 +186,13 @@ public class PlayerController : MonoBehaviour
         if (p_CurrentXP >= p_MaxXP)
         {
             p_CurrentXP = p_CurrentXP - p_MaxXP;
-            p_MaxXP += 10;
             p_Level++;
             Animation.instance.state = State.LevelUp;
-            p_maxHealth += 10; p_MaxMana += 10;
-            p_currentHealthFloat = p_maxHealth; p_currentManaFloat = p_MaxMana; p_currentHealthFade = p_maxHealth; p_currentManaFade = p_MaxMana;
-            p_Attack += 5; p_Defend += 5;
+            p_maxHealth = 100 + 10 * (p_Level - 1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
+            p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
+            p_manaOfSkill = 40 + 2 * (p_Level - 1);
+            p_MaxXP = 100 + 10 * (p_Level - 1);
+            p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 2 * (p_Level - 1);
         }
 
         UIManager.instance.levelPlayerTMP.text = p_Level.ToString();

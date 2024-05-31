@@ -282,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 73b3ed0dd02039040b9d040398d5d899, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   p_currentHealthFade: 0
   isIntervalSkill: 0
   numberIndexCharacter: 0
-  characterType: 0
+  characterType: 1
 --- !u!68 &1097768047809629731
 EdgeCollider2D:
   m_ObjectHideFlags: 0
