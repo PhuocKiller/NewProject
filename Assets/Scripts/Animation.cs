@@ -164,12 +164,12 @@ public enum State
         if (a == "Run")
         {
             spineAnimationState.SetAnimation(0, runAnimationName, true);
-            //AudioManager.instance.PlaySound(AudioManager.instance.run, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.run, 1);
         }
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
-            AudioManager.instance.PlaySound(AudioManager.instance.jump, 2);
+            AudioManager.instance.PlaySound(AudioManager.instance.jump, 1);
         }
         if (a == "Fall")
         {

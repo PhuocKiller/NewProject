@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
     private List<IInventoryItem> mItems= new List<IInventoryItem>();
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
-    public event EventHandler<InventoryEventArgs> ItemUsed;
     public event EventHandler<InventoryEventArgs> InventoryUpdate;
     public static Inventory instance;
     public InventoryItemBase[] inventoryItems;
@@ -31,8 +30,12 @@ public class Inventory : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+    private void Start()
+    {
+        LoadItemsFromSave();
+    }
 
-        public void AddItem(IInventoryItem item)
+    public void AddItem(IInventoryItem item)
     {
         if (mItems.Count<SLOTS)
         {
@@ -116,5 +119,31 @@ public class Inventory : MonoBehaviour
             }
         }
         Instantiate(inventoryItems[i],pos, Quaternion.identity);
+    }
+    public void LoadItemsFromSave()
+    {
+        for (int i = 0;i<9;i++)
+        {
+            for (int j = 0;j < inventoryItems.Length;j++)
+            {
+                if ((int)inventoryItems[j].itemTypes == SavingFile.instance.slot[i]) //dò items từ trong file saving
+                {
+                    if (mItems.Count < SLOTS)
+                    {
+                        
+                            mItems.Add(inventoryItems[j]);
+                            if (ItemAdded != null)
+                            {
+                                ItemAdded(this, new InventoryEventArgs(inventoryItems[j]));
+                            }
+                            if (InventoryUpdate != null)
+                            {
+                                InventoryUpdate(this, new InventoryEventArgs(inventoryItems[j]));
+                            }
+                        
+                    }
+                }
+            }
+        }
     }
 }

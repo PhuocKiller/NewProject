@@ -15,7 +15,7 @@ public class InventoryItem : MonoBehaviour
 }
 public interface IInventoryItem
 {
-    ItemTypes itemTypes { get; }
+    ItemTypes itemTypes { get; set; }
     string Name { get; }
     Sprite Image { get; }
     void OnPickUp();

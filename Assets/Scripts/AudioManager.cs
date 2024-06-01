@@ -6,7 +6,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioClip theme,attack, chargeSkill, die, idle, injured, jump, fall, levelUp, mainSkill, run;
+    public AudioClip theme,attack, chargeSkill, die, idle, injured, jump, fall, levelUp, mainSkill, run,error,reFillPotion;
     public AudioSource  themeSource, vfxAudioSource;
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         themeSource.clip = theme;
-        themeSource.volume = 0.3f;
+        themeSource.volume = 0.1f;
         themeSource.loop = true;
         themeSource.Play();
     }

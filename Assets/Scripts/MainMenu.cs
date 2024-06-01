@@ -7,9 +7,18 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public static MainMenu instance;
     public Image Character0, Character1, Character2, meleeImage, rangeImage;
     public CreatePlayerUI[] createPlayerUI;
     public GameObject newGamePanel, loadGamePanel,loginPanel;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+
+        }
+    }
     public void NewGame()
     {
         newGamePanel.SetActive(true);

@@ -1,3 +1,4 @@
+using Spine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,18 +7,21 @@ using UnityEngine;
 public class CreatePlayerUI : MonoBehaviour
 {
     public PlayerUI[] playerUI;
+    PlayerUI playerUiInstance;
     public int numberIndexCharacter;
     public CharacterType characterType;
     public int level;
     public UITypes uiTypes;
     public TextMeshProUGUI levelText;
+    public int[] slot;
     private void Awake()
     {
     }
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        SavingFile.instance.Get(numberIndexCharacter);
+        slot = new int[9];
+        SavingFile.instance.Get(this, numberIndexCharacter);
     }
 
     // Update is called once per frame
@@ -25,24 +29,35 @@ public class CreatePlayerUI : MonoBehaviour
     {
         
     }
-   public void CreateNewPlayerUI (CharacterType characterType)
+    private void OnDisable()
+    {
+        if( playerUiInstance!=null)
+        {
+            Destroy(playerUiInstance.gameObject);
+
+        }
+        
+    }
+    public void CreateNewPlayerUI (CharacterType characterType)
     {
         for (int i = 0; i < playerUI.Length; i++)
         {
             if (playerUI[i].characterType == characterType)
             {
-                Instantiate(playerUI[i],transform.position,Quaternion.identity,transform.parent);
+                playerUiInstance= Instantiate(playerUI[i],transform.position,Quaternion.identity,transform.parent);
             }
         }
         levelText.text = "Level: " + level;
     }
     public void SetInfoByButton()
     {
-        Debug.Log("vo set info");
         SavingFile.instance.numberIndexCharacter=numberIndexCharacter;
         SavingFile.instance.characterType = characterType;
         SavingFile.instance.level = level;
         SavingFile.instance.uiTypes = uiTypes;
-
+        for (int i = 0;i<9;i++)
+        {
+            SavingFile.instance.slot[i] = slot[i];
+        }
     }
 }

@@ -627,6 +627,46 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[0]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[1]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[3]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[4]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[5]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[6]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[7]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: slot.Array.data[8]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
       propertyPath: createPlayerUI.Array.data[0]
       value: 
       objectReference: {fileID: 2093487840}

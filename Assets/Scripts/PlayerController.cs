@@ -8,6 +8,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Cinemachine.DocumentationSortingAttribute;
 public enum CharacterType
 {
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour
             Run();
             FadeImmortal();
         }
-        
     }
     void OnMove(InputValue value)
     {
@@ -159,7 +159,8 @@ public class PlayerController : MonoBehaviour
            else
             {
                 rigid.velocity = new Vector2(moveInput.x * runSpeed * 0.3f, rigid.velocity.y); //0.3 là độ delay di chuyển horizontal
-                if(!(Animation.instance.state == State.Jump))
+                if(!(Animation.instance.state == State.Jump) && !(Animation.instance.state == State.Injured)
+                &&!(Animation.instance.state == State.Die))
                 {
                 Animation.instance.state = State.Fall;
                 }

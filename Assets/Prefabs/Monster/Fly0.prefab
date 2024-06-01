@@ -806,6 +806,8 @@ MonoBehaviour:
   items:
   - {fileID: 1827589331788588025, guid: 341c9597653821c4fab4c4808ab64212, type: 3}
   - {fileID: -5702003554691499069, guid: d640927d131c689489eb9b52ebec1f5f, type: 3}
+  - {fileID: -2622862995332784879, guid: 1267fc5ff9fd8934e9a2df8884e38c79, type: 3}
   chance:
+  - 1
   - 1
   - 1

@@ -17,7 +17,7 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem
         }
     }
 
-    public virtual ItemTypes itemTypes { get; }
+    public virtual ItemTypes itemTypes { get; set; }
 
     public virtual void OnPickUp()
     {

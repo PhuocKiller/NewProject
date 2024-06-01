@@ -19,6 +19,11 @@ public class GameIndexCharacter
     public CharacterType characterType;
     public UITypes uiTypes;
     public int level;
+    public int[] slot;
+    public void GetNotNUll()
+    {
+        slot=new int[9];
+    }
 }
 
 
@@ -30,10 +35,11 @@ public class SavingFile : MonoBehaviour
     public CharacterType characterType;
     public int level;
     public UITypes uiTypes;
-    public CreatePlayerUI[] createPlayerUI;
+   // public CreatePlayerUI[] createPlayerUI;
     public PlayerController[] playerControllers;
     public UIManager[] uIManagers;
     public GameObject inventory;
+    public int[] slot;
 
     private void Awake()
     {
@@ -55,7 +61,7 @@ public class SavingFile : MonoBehaviour
     private void Start()
     {
         LoadData();
-
+        
 
     }
     private void Update()
@@ -66,22 +72,32 @@ public class SavingFile : MonoBehaviour
 
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
+
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter)
             {
+                //indexCharacter.GetNotNUll();
                 indexCharacter.characterType = characterType;
                 indexCharacter.uiTypes = uiTypes;
                 indexCharacter.level = level;
+
+                for (int i = 0; i < 9; i++)
+                {
+                    indexCharacter.slot[i] = slot[i];
+                }
                 SaveData();
                 return;
             }
         }
-        GameIndexCharacter gameIndexCharacter = new GameIndexCharacter();
+        /*GameIndexCharacter gameIndexCharacter = new GameIndexCharacter();
+        gameIndexCharacter.GetNotNUll();
         gameIndexCharacter.numberIndexCharacter = numberIndexCharacter;
         gameIndexCharacter.characterType = characterType;
         gameIndexCharacter.uiTypes = uiTypes;
         gameIndexCharacter.level = level;
+        gameIndexCharacter.slot[1] = -1;
+        gameIndexCharacter.slot[2] = -2;
         gameProgress.listIndexCharacter.Add(gameIndexCharacter);
-        SaveData();
+        SaveData();*/
     }
     public void Load(int numberIndexCharacter)
     {
@@ -98,16 +114,20 @@ public class SavingFile : MonoBehaviour
             }
         }
     }
-    public void Get(int numberIndexCharacter)
+    public void Get(CreatePlayerUI createPlayerUI, int numberIndexCharacter)
     {
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter&& indexCharacter.level!=0)
             {
-                createPlayerUI[numberIndexCharacter ].characterType = indexCharacter.characterType;
-                createPlayerUI[numberIndexCharacter ].level = indexCharacter.level;
-                createPlayerUI[numberIndexCharacter ].uiTypes = indexCharacter.uiTypes;
-                createPlayerUI[numberIndexCharacter ].CreateNewPlayerUI(indexCharacter.characterType);
+                createPlayerUI.characterType = indexCharacter.characterType;
+                createPlayerUI.level = indexCharacter.level;
+                createPlayerUI.uiTypes = indexCharacter.uiTypes;
+                createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
+                for (int i = 0;i<9; i++)
+                {
+                    createPlayerUI.slot[i]= indexCharacter.slot[i];
+                }
 
                 return;
             }
@@ -120,7 +140,7 @@ public class SavingFile : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, file);
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "{\"listIndexCharacter\":[{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0},{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0}]}");
+            File.WriteAllText(filePath, "{\"listIndexCharacter\":[{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
         }
         gameProgress = JsonUtility.FromJson<GameProgress>(File.ReadAllText(filePath));
     }
@@ -173,9 +193,6 @@ public class SavingFile : MonoBehaviour
             {
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
-                    Debug.Log(playerControllers[i].characterType);
-                    Debug.Log(characterType);
-                    Debug.Log(indexCharacter.numberIndexCharacter);
                     if (playerControllers[i].characterType == characterType)
                     {
                         if (PlayerController.instance == null)
@@ -204,10 +221,12 @@ public class SavingFile : MonoBehaviour
     {
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
-            if (indexCharacter.numberIndexCharacter == numberIndexCharacter)
+            if (indexCharacter.numberIndexCharacter == numberIndexCharacter && level!=0)
             {
                 Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0);
-                SceneManager.LoadScene("MainMenu");
+                MainMenu.instance.loadGamePanel.SetActive(false);
+                MainMenu.instance.loadGamePanel.SetActive(true);
+
             }
         }
     }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
 //using UnityEngine.UIElements;
@@ -21,7 +22,7 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana;
     public bool isRefillHealth;
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP;
@@ -57,7 +58,6 @@ public class UIManager : MonoBehaviour
     {
         Inventory.instance.ItemAdded += InventoryScript_ItemAdded;
         Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
-        Inventory.instance.ItemUsed += Inventory_ItemUsed;
         Inventory.instance.InventoryUpdate += Inventory_Update;
     }
 
@@ -110,6 +110,7 @@ public class UIManager : MonoBehaviour
     {
         if (numberManaPotionInt > 0)
         {
+            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion, 1);
             Transform inventoryPanel = transform.Find("InventoryPanel");
             foreach (Transform slot in inventoryPanel)
             {
@@ -126,6 +127,7 @@ public class UIManager : MonoBehaviour
                 
             }
         }
+        else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
         
         
     }
@@ -144,7 +146,7 @@ public class UIManager : MonoBehaviour
     {
         if (numberHealPotionInt>0)
         {
-            
+            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion, 1);
             Transform inventoryPanel = transform.Find("InventoryPanel");
             foreach (Transform slot in inventoryPanel)
             {
@@ -161,7 +163,8 @@ public class UIManager : MonoBehaviour
 
             }
         }
-       
+        else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
+
     }
     void UpdateHealButton()
     {
@@ -203,7 +206,7 @@ public class UIManager : MonoBehaviour
         xpPlayerTMP.text = "XP: " + PlayerController.instance.p_CurrentXP + "/" + PlayerController.instance.p_MaxXP;
         manaOfSkilPlayerTMP.text = "Mana cost: " + PlayerController.instance.p_manaOfSkill;
         panelPlayerInfo.SetActive(true);
-        Debug.Log("a");
+      
     }
     public void ClosePanelPlayer()
     {
@@ -221,11 +224,7 @@ public class UIManager : MonoBehaviour
     {
         panelInventory.SetActive(true);
     }
-    public void SaveButton()
-    {
-        SavingFile.instance.Save(PlayerController.instance. numberIndexCharacter, PlayerController.instance.characterType,
-            UIManager.instance.uiTypes, PlayerController.instance.p_Level);
-    }
+   
     public void LoadButton()
     {
         SavingFile.instance.Load(PlayerController.instance.numberIndexCharacter);
@@ -274,10 +273,23 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    private void Inventory_ItemUsed(object sender, InventoryEventArgs e)
+    public void Inventory_ItemSave()
     {
-        
+        SavingFile.instance.slot = new int[9];
+        Transform inventoryPanel = transform.Find("InventoryPanel");
+        for (int i = 0; i < 9; i++)
+        {
+            ItemDragHandler itemDragHandler= inventoryPanel.GetChild(i).GetChild(0).GetChild(0).GetComponent<ItemDragHandler>();
+           
+            if (itemDragHandler.Item!=null)
+            {
+                SavingFile.instance.slot[i] = (int)itemDragHandler.Item.itemTypes;
+            }
+            else { SavingFile.instance.slot[i] = -1; }
+           
+        }
     }
+    
     void Inventory_Update(object sender, InventoryEventArgs e)
     {
       
@@ -309,4 +321,40 @@ public class UIManager : MonoBehaviour
         numberHealPotionTMP.text = numberHealPotionInt.ToString();
         numberManaPotionTMP.text = numberManaPotionInt.ToString();
     }
+    public void PauseButton()
+    {
+        Time.timeScale = 0;
+        unpauseButton.SetActive(true);
+    }
+    public void UnPauseButton()
+    {
+        Time.timeScale = 1f;
+        unpauseButton.SetActive(false);
+    }
+    public void SettingButton()
+    {
+        panelSetting.SetActive(true);
+       Time.timeScale = 0;
+    }
+    public void SaveButton()
+    {
+        Inventory_ItemSave();
+        SavingFile.instance.Save(PlayerController.instance.numberIndexCharacter, PlayerController.instance.characterType,
+            UIManager.instance.uiTypes, PlayerController.instance.p_Level);
+        
+    }
+    public void  BackButtonInSetting()
+    {
+        panelSetting.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    public void QuitButtonInSetting()
+    {
+        PlayerController.instance.transform.parent = GameObject.Find("Entrance").transform;
+        UIManager.instance.transform.SetParent (GameObject.Find("Entrance").transform);
+        Inventory.instance.transform.parent = GameObject.Find("Entrance").transform;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }
