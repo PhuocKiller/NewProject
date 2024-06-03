@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public GameObject swordGameObject, skillGameObject;
     GameObject feet;
     CapsuleCollider2D capSword, capSkill, bodyPlayer;
-    BoxCollider2D feetBoxCollider;
+    CircleCollider2D feetCircleCollider;
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
-        feetBoxCollider=feet.GetComponent<BoxCollider2D>();
+        feetCircleCollider=feet.GetComponent<CircleCollider2D>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
     // Start is called before the first frame update
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
         
-           if(feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+           if(feetCircleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
                 if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
                 {
@@ -257,14 +257,5 @@ public class PlayerController : MonoBehaviour
             Inventory.instance.AddItem(item);
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if ( (collision.CompareTag("Spike")))
-        {
-            PlayerBeingAttacked(0.2f * p_maxHealth + Random.Range(20,50));
-        }
-    }
-
-
 }
   

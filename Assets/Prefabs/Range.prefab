@@ -76,10 +76,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5201962241826024539}
-  - component: {fileID: 5326411218627261055}
+  - component: {fileID: 178744952296082723}
   m_Layer: 3
   m_Name: Feet
-  m_TagString: Skill
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8023039177383878710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5326411218627261055
-BoxCollider2D:
+--- !u!58 &178744952296082723
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,19 +131,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0039654523, y: 0.019827202}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.035104103, y: 0.07848021}
   serializedVersion: 2
-  m_Size: {x: 0.62724936, y: 0.27829126}
-  m_EdgeRadius: 0
+  m_Radius: 0.27737603
 --- !u!1 &1534256025028681622
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +272,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73b3ed0dd02039040b9d040398d5d899, type: 2}
+  - {fileID: 2100000, guid: 4f6ce9599d95d5043b699317c21856b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -316,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: cdf900e83c5475e4d857059b386a0edd, type: 2}
-  initialSkinName: 
+  skeletonDataAsset: {fileID: 11400000, guid: 4744740ac113d4c4c95522fb9492ec5d, type: 2}
+  initialSkinName: Lv2
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -607,7 +597,6 @@ MonoBehaviour:
   mainSkillAnimationName: MainSkill
   runAnimationName: Run
   idleAnimationName: Idle
-  walkAnimationName: Walk
   fallAnimationName: Fall
   jumpAnimationName: Jump
   skeletonAnimation: {fileID: 0}

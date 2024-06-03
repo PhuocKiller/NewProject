@@ -76,10 +76,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5201962241826024539}
-  - component: {fileID: 5326411218627261055}
+  - component: {fileID: 6530156411327579228}
   m_Layer: 3
   m_Name: Feet
-  m_TagString: Skill
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,14 +93,14 @@ Transform:
   m_GameObject: {fileID: 1099873865610417858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.015, y: 0.157, z: 0}
+  m_LocalPosition: {x: 0.119, y: 0.245, z: 0}
   m_LocalScale: {x: 0.572906, y: 0.572906, z: 0.572906}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8023039177383878710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5326411218627261055
-BoxCollider2D:
+--- !u!58 &6530156411327579228
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,19 +131,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0039654523, y: 0.019827202}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.16814284, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.62724936, y: 0.27829126}
-  m_EdgeRadius: 0
+  m_Radius: 0.33185714
 --- !u!1 &1534256025028681622
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,13 +408,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordGameObject: {fileID: 577959706955924223}
   skillGameObject: {fileID: 1534256025028681622}
-  feet: {fileID: 1099873865610417858}
   runSpeed: 10
   jumpSpeed: 8
   doJump: 0
   doAttack: 0
   isAttackExactly: 0
   beImmortal: 0
+  beFadeIncrease: 0
   isDie: 0
   p_maxHealth: 0
   p_MaxMana: 0
@@ -439,6 +429,8 @@ MonoBehaviour:
   p_currentHealthFloat: 0
   p_currentHealthFade: 0
   isIntervalSkill: 0
+  numberIndexCharacter: 0
+  characterType: 0
 --- !u!68 &1097768047809629731
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -605,7 +597,6 @@ MonoBehaviour:
   mainSkillAnimationName: MainSkill
   runAnimationName: Run
   idleAnimationName: Idle
-  walkAnimationName: Walk
   fallAnimationName: Fall
   jumpAnimationName: Jump
   skeletonAnimation: {fileID: 0}

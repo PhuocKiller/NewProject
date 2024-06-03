@@ -22,6 +22,7 @@ public class CreatePlayerUI : MonoBehaviour
     {
         slot = new int[9];
         SavingFile.instance.Get(this, numberIndexCharacter);
+        Debug.Log("vo onenable");
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class CreatePlayerUI : MonoBehaviour
                 playerUiInstance= Instantiate(playerUI[i],transform.position,Quaternion.identity,transform.parent);
             }
         }
-        levelText.text = "Level: " + level;
+        levelText.text = "Level: " + level;Debug.Log("goi laji playerui moi");
     }
     public void SetInfoByButton()
     {

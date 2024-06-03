@@ -2499,6 +2499,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1146146161}
+    - target: {fileID: 1611501020870942787, guid: f171ea064255f464fb00e9c142243b95, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 2761714526776993366, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2507,6 +2511,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1146146161}
+    - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
+      propertyPath: initialSkinName
+      value: Lv2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4744740ac113d4c4c95522fb9492ec5d, type: 2}
+    - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
+      propertyPath: startingAnimation
+      value: Idle
+      objectReference: {fileID: 0}
     - target: {fileID: 6655735080906131661, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

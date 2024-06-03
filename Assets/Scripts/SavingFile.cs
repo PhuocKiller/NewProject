@@ -118,12 +118,16 @@ public class SavingFile : MonoBehaviour
     {
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
-            if (indexCharacter.numberIndexCharacter == numberIndexCharacter&& indexCharacter.level!=0)
+            if (indexCharacter.numberIndexCharacter == numberIndexCharacter)
             {
                 createPlayerUI.characterType = indexCharacter.characterType;
                 createPlayerUI.level = indexCharacter.level;
                 createPlayerUI.uiTypes = indexCharacter.uiTypes;
-                createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
+                if (indexCharacter.level != 0)
+                {
+                    createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
+                }
+                
                 for (int i = 0;i<9; i++)
                 {
                     createPlayerUI.slot[i]= indexCharacter.slot[i];

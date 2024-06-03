@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         numberHealPotionTMP,numberManaPotionTMP;
     int numberHealPotionInt,numberManaPotionInt;
     float displayTimePlayerBeAttacked;
-    public Image imageHealPotion, imageManaPotion;
+    Image imageHealPotion, imageManaPotion;
     public UITypes uiTypes;
  
 

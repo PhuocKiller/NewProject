@@ -46,8 +46,6 @@ public enum State
     [SpineAnimation]
     public string idleAnimationName;
 
-    [SpineAnimation]
-    public string walkAnimationName;
 
     [SpineAnimation]
     public string fallAnimationName;
@@ -157,10 +155,7 @@ public enum State
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
             AudioManager.instance.PlaySound(AudioManager.instance.mainSkill, 1,true);
         }
-        if (a == "Walk")
-        {
-            spineAnimationState.SetAnimation(0, walkAnimationName, true);
-        }
+       
         if (a == "Run")
         {
             spineAnimationState.SetAnimation(0, runAnimationName, true);
