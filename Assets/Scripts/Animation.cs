@@ -99,7 +99,7 @@ public enum State
         }
 
         previousState = currentModelState;
-        MainSkill();
+        MainSkill(); //cập nhật mainskill liên tục
     }
     public string GetStringState ()
     {
@@ -194,6 +194,10 @@ public enum State
     {
         if (Input.GetMouseButton(0) &&( state == State.ChargeSkill|| state == State.MainSkill))
         {
+            if (PlayerController.instance.characterType==CharacterType.Melee)
+            {
+                PlayerController.instance.skillMeleeGameObject.SetActive(true);
+            }
             chargedTime += Time.deltaTime; 
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
             {
@@ -236,6 +240,10 @@ public enum State
         }
         else
         {
+            if(PlayerController.instance.characterType==CharacterType.Melee)
+            {
+                PlayerController.instance.skillMeleeGameObject.SetActive(false);
+            }
             chargedTime = 0; skillTime = 0;
         }
     }

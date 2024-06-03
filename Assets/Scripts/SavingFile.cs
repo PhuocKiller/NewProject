@@ -123,10 +123,8 @@ public class SavingFile : MonoBehaviour
                 createPlayerUI.characterType = indexCharacter.characterType;
                 createPlayerUI.level = indexCharacter.level;
                 createPlayerUI.uiTypes = indexCharacter.uiTypes;
-                if (indexCharacter.level != 0)
-                {
                     createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
-                }
+                
                 
                 for (int i = 0;i<9; i++)
                 {

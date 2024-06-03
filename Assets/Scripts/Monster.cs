@@ -83,7 +83,7 @@ public class Monster : MonoBehaviour
    
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Sword") && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm
+        if ((collision.CompareTag("Sword")|| collision.CompareTag("Arrow")) && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm hoặc cung
         {
             PlayerController.instance.isAttackExactly = false;
             damageofPlayer = PlayerController.instance.p_Attack - m_defend;
@@ -100,6 +100,7 @@ public class Monster : MonoBehaviour
             MonsterBeingAttacked((int)(0.2f* (damageofPlayer ) * UnityEngine.Random.Range(0.8f, 1.2f)));
             PlayerController.instance.isIntervalSkill = false;
         }
+
 
     }
     int GetDamageOfTwoObject(int a,int b)

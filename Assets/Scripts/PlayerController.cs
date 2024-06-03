@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D rigid;
     public static PlayerController instance;
-    public GameObject swordGameObject, skillGameObject;
+    public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject;
     GameObject feet;
-    CapsuleCollider2D capSword, capSkill, bodyPlayer;
+    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer;
+    BoxCollider2D arrowBox, skillRangeBox;
     CircleCollider2D feetCircleCollider;
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private void Awake()
+     void Awake()
     {
         if (instance == null)
         {
@@ -56,8 +57,16 @@ public class PlayerController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         rigid = GetComponent<Rigidbody2D>();
-        capSword = swordGameObject.GetComponent<CapsuleCollider2D>();
-        capSkill = skillGameObject.GetComponent<CapsuleCollider2D>();
+        if (characterType==CharacterType.Melee)
+        {
+            capSword = swordGameObject.GetComponent<CapsuleCollider2D>();
+            capSkillMelee = skillMeleeGameObject.GetComponent<CapsuleCollider2D>();
+        }
+        else
+        {
+            arrowBox=GetComponent<BoxCollider2D>();
+            skillRangeBox= GetComponent<BoxCollider2D>();
+        }
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
@@ -93,19 +102,27 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerAttack()
     {
-        if (!isDie&& Animation.instance.state==State.Idle)
+        
+            if (!isDie&& Animation.instance.state==State.Idle &&doAttack)
         {
-            if (!doAttack)
+            if (PlayerController.instance.characterType == CharacterType.Melee)
             {
-                return;
+                swordGameObject.SetActive(true);
+                isAttackExactly = true;
+                Animation.instance.state = State.Attack;
+                doAttack = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
             }
-
-            swordGameObject.SetActive(true);
-            isAttackExactly = true;
-            Animation.instance.state = State.Attack;
-            doAttack = false;
-            Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
-
+            else
+            {
+                arrowGameObject.SetActive(true);
+                isAttackExactly = true;
+                arrowGameObject.GetComponent<Rigidbody2D>().velocity = 
+                new Vector2(-20f* arrowGameObject.transform.lossyScale.x, arrowGameObject.GetComponent<Rigidbody2D>().velocity.y);
+                Animation.instance.state = State.Attack;
+                doAttack = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
+            }
         }
     }
     public void PlayerSkill()
@@ -178,8 +195,17 @@ public class PlayerController : MonoBehaviour
     void SetIdleState()
     {
         Animation.instance.state = State.Idle;
-        doAttack = true; doJump = true;
-        swordGameObject.SetActive(false);
+        if (characterType==CharacterType.Melee)
+        {
+            doAttack = true; doJump = true;
+            swordGameObject.SetActive(false);
+        }
+        else
+        {
+            doAttack = true;
+            arrowGameObject.SetActive(false);
+            arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
     }
   
     public void GetLevel()  // Điều chỉnh XP và tăng LV

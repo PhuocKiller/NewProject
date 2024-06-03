@@ -22,7 +22,6 @@ public class CreatePlayerUI : MonoBehaviour
     {
         slot = new int[9];
         SavingFile.instance.Get(this, numberIndexCharacter);
-        Debug.Log("vo onenable");
     }
 
     // Update is called once per frame
@@ -41,14 +40,20 @@ public class CreatePlayerUI : MonoBehaviour
     }
     public void CreateNewPlayerUI (CharacterType characterType)
     {
-        for (int i = 0; i < playerUI.Length; i++)
+        if (level != 0)
         {
-            if (playerUI[i].characterType == characterType)
+            for (int i = 0; i < playerUI.Length; i++)
             {
-                playerUiInstance= Instantiate(playerUI[i],transform.position,Quaternion.identity,transform.parent);
+                if (playerUI[i].characterType == characterType)
+                {
+                    playerUiInstance = Instantiate(playerUI[i], transform.position, Quaternion.identity, transform.parent);
+                }
             }
+            levelText.text = "Level: " + level; Debug.Log("goi laji playerui moi");
         }
-        levelText.text = "Level: " + level;Debug.Log("goi laji playerui moi");
+        else levelText.text = "";
+
+
     }
     public void SetInfoByButton()
     {
