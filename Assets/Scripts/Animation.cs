@@ -194,16 +194,18 @@ public enum State
     {
         if (Input.GetMouseButton(0) &&( state == State.ChargeSkill|| state == State.MainSkill))
         {
-            if (PlayerController.instance.characterType==CharacterType.Melee)
-            {
-                PlayerController.instance.skillMeleeGameObject.SetActive(true);
-            }
+           
             chargedTime += Time.deltaTime; 
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
             {
                 if (state != State.MainSkill)
                 {
-                    state = State.MainSkill; 
+                    state = State.MainSkill;
+                    if (PlayerController.instance.characterType == CharacterType.Melee)
+                    {
+                        PlayerController.instance.skillMeleeGameObject.SetActive(true);
+                    }
+                    else { PlayerController.instance.skillRangeGameObject.SetActive(true); }
                 }
                 else
                 {
@@ -244,6 +246,7 @@ public enum State
             {
                 PlayerController.instance.skillMeleeGameObject.SetActive(false);
             }
+            else { PlayerController.instance.skillRangeGameObject.SetActive(false); }
             chargedTime = 0; skillTime = 0;
         }
     }

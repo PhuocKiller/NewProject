@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 461069900529673704}
   - component: {fileID: 7103328360544123985}
   m_Layer: 0
-  m_Name: AudioSource
+  m_Name: ThemeSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +312,8 @@ MonoBehaviour:
   fall: {fileID: 0}
   levelUp: {fileID: 8300000, guid: 8e3c11bf68a148049a0a55dc27aa5922, type: 3}
   mainSkill: {fileID: 8300000, guid: f11b60e63695cdc41aa9a8a745ab9ca0, type: 3}
-  run: {fileID: 0}
+  run: {fileID: 8300000, guid: 36c5fff2a3a9d8e42b6d9b8b39077b13, type: 3}
+  error: {fileID: 8300000, guid: 299e933835f6ad643bdfdf28a9f45edd, type: 3}
+  reFillPotion: {fileID: 8300000, guid: 0cac9c41e4cfe5345aa6d95ef2941f16, type: 3}
   themeSource: {fileID: 7103328360544123985}
   vfxAudioSource: {fileID: 7518489453098321088}

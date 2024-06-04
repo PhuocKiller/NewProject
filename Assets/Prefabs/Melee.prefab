@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordGameObject: {fileID: 577959706955924223}
-  skillMeleeGameObject: {fileID: 0}
+  skillMeleeGameObject: {fileID: 1534256025028681622}
   arrowGameObject: {fileID: 0}
   skillRangeGameObject: {fileID: 0}
   runSpeed: 10

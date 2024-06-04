@@ -18,20 +18,18 @@ public class Monster : MonoBehaviour
     public MonsterType monsType;
     CreateItems newItem;
     public float moveSpeed = 1f;
-    CapsuleCollider2D capsule;
-    BoxCollider2D box;
-    Rigidbody2D rigid;
-    Animator animator;
+    
+    
+    public Rigidbody2D rigid;
+    public Animator animator;
     public int m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
     public Bars healthBarMonster;
-    bool isLive, isStun;
+    public bool isLive, isStun,isDetect;
     public UIMonster UIMonster;
-    float timeStun;
+    public float timeStun;
     
     private void Awake()
     {
-        capsule = GetComponent<CapsuleCollider2D>();
-        box = GetComponent<BoxCollider2D>();
         rigid = GetComponent<Rigidbody2D>();
         animator= GetComponent<Animator>();
         newItem = GetComponent<CreateItems>();
@@ -53,7 +51,11 @@ public class Monster : MonoBehaviour
 
             if (!isStun)
             {
-                rigid.velocity = new Vector2(-moveSpeed, 0);
+                if (!isDetect)
+                {
+                    rigid.velocity = new Vector2(-moveSpeed, 0);
+                }
+                else { rigid.velocity = new Vector2(-2*moveSpeed, 0); } //khi phát hiện thì tăng tốc
             }
             else
             {
@@ -72,38 +74,7 @@ public class Monster : MonoBehaviour
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
-    private void OnTriggerExit2D(Collider2D collision) //xoay chiều di chuyển Monster
-    {
-       if (collision.gameObject.tag=="Ground")
-        {
-            moveSpeed = -moveSpeed;
-            transform.localScale = new Vector2(0.1f * Mathf.Sign(rigid.velocity.x), 0.1f);
-        }
-    }
-   
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if ((collision.CompareTag("Sword")|| collision.CompareTag("Arrow")) && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm hoặc cung
-        {
-            PlayerController.instance.isAttackExactly = false;
-            damageofPlayer = PlayerController.instance.p_Attack - m_defend;
-            MonsterBeingAttacked((int)(damageofPlayer*UnityEngine.Random.Range(0.8f,1.2f)));
-        }
-        if (collision.CompareTag("Player"))          //Player bị tấn công
-        {
-            PlayerBeingAttacked(GetDamageOfTwoObject(m_attack,PlayerController.instance.p_Defend) * UnityEngine.Random.Range(0.8f, 1.2f));
-        }
-        if (collision.CompareTag("Skill")&& PlayerController.instance.isIntervalSkill)
-        {
-            damageofPlayer = PlayerController.instance.p_Attack - m_defend;
-            isStun = true;
-            MonsterBeingAttacked((int)(0.2f* (damageofPlayer ) * UnityEngine.Random.Range(0.8f, 1.2f)));
-            PlayerController.instance.isIntervalSkill = false;
-        }
-
-
-    }
-    int GetDamageOfTwoObject(int a,int b)
+    public int GetDamageOfTwoObject(int a,int b)
     {
         if ((a - b) < 0)
         {
@@ -111,7 +82,7 @@ public class Monster : MonoBehaviour
         }
         else return a - b;
     }
-    void PlayerBeingAttacked(float damage)
+    public void PlayerBeingAttacked(float damage)
     {
         if (isLive)
         {
@@ -119,7 +90,7 @@ public class Monster : MonoBehaviour
 
         }
     }
-    void MonsterBeingAttacked(int damage)
+    public void MonsterBeingAttacked(int damage)
     {
         if (isLive)
         {

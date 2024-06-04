@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            doAttack = true;
+            doAttack = true; doJump = true;
             arrowGameObject.SetActive(false);
             arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
