@@ -216,6 +216,10 @@ public class UIManager : MonoBehaviour
     {
         PlayerController.instance.PlayerAttack();
     }
+    public void Skill_1_Button()
+    {
+        PlayerController.instance.PlayerSkill_1();
+    }
     public void SkillButton()
     {
         PlayerController.instance.PlayerSkill();

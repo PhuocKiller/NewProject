@@ -49,7 +49,7 @@ public class CreatePlayerUI : MonoBehaviour
                     playerUiInstance = Instantiate(playerUI[i], transform.position, Quaternion.identity, transform.parent);
                 }
             }
-            levelText.text = "Level: " + level; Debug.Log("goi laji playerui moi");
+            levelText.text = "Level: " + level;
         }
         else levelText.text = "";
 

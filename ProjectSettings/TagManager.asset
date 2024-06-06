@@ -12,6 +12,7 @@ TagManager:
   - Audio
   - Spike
   - Arrow
+  - Skill1
   layers:
   - Default
   - TransparentFX

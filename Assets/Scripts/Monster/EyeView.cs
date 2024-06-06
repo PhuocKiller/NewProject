@@ -18,18 +18,15 @@ public class EyeView : MonoBehaviour
     {
        if (collision.CompareTag("Player"))
         {
-            Debug.Log("see");
             mon.isDetect = true;
-            mon.animator.SetBool("run", true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("no see");
             mon.isDetect = false;
-            mon.animator.SetBool("run", false);
+           
         }
     }
 }

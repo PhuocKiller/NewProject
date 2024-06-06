@@ -78,12 +78,12 @@ GameObject:
   - component: {fileID: 1703547548004342080}
   - component: {fileID: 608623772698684519}
   m_Layer: 3
-  m_Name: SkillRange
-  m_TagString: Untagged
+  m_Name: MainSkillRange
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1703547548004342080
 Transform:
   m_ObjectHideFlags: 0
@@ -144,6 +144,111 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1210752, y: 2.9766054}
   m_EdgeRadius: 0
+--- !u!1 &2434345183631071785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7224061432226046925}
+  - component: {fileID: 7675183779512612752}
+  - component: {fileID: 7435942928095719698}
+  m_Layer: 3
+  m_Name: Skill1
+  m_TagString: Skill1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7224061432226046925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434345183631071785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7675183779512612752
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434345183631071785}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.9180424, y: 1.3317535}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.99781275, y: 0.9172163}
+  m_EdgeRadius: 0
+--- !u!50 &7435942928095719698
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434345183631071785}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4993074614299259893
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +289,7 @@ Transform:
   m_Children:
   - {fileID: 5201962241826024539}
   - {fileID: 2704700889789107794}
+  - {fileID: 7224061432226046925}
   - {fileID: 1703547548004342080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -215,7 +321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f6ce9599d95d5043b699317c21856b2, type: 2}
+  - {fileID: 2100000, guid: 73b3ed0dd02039040b9d040398d5d899, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -249,8 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 4744740ac113d4c4c95522fb9492ec5d, type: 2}
-  initialSkinName: Lv2
+  skeletonDataAsset: {fileID: 11400000, guid: cdf900e83c5475e4d857059b386a0edd, type: 2}
+  initialSkinName: Lv1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -353,6 +459,8 @@ MonoBehaviour:
   skillMeleeGameObject: {fileID: 0}
   arrowGameObject: {fileID: 7165063685650886077}
   skillRangeGameObject: {fileID: 1674485936911124233}
+  skill_1MeleeGameObject: {fileID: 0}
+  skill_1RangeGameObject: {fileID: 2434345183631071785}
   runSpeed: 10
   jumpSpeed: 8
   doJump: 0
@@ -535,6 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackAnimationName: Attack
+  skill_1_AnimationName: Skill1
   chargeSkillAnimationName: ChargeSkill
   dieAnimationName: Die
   injuredAnimationName: Injured
@@ -545,7 +654,7 @@ MonoBehaviour:
   fallAnimationName: Fall
   jumpAnimationName: Jump
   skeletonAnimation: {fileID: 0}
-  state: 3
+  state: 4
   stateString: 
 --- !u!1 &7165063685650886077
 GameObject:
@@ -612,7 +721,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.92297775, y: 1.5286975}
+  m_Offset: {x: -2.1617942, y: 1.5286975}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -623,7 +732,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3463975, y: 0.5233284}
+  m_Size: {x: 1.4049695, y: 0.5233283}
   m_EdgeRadius: 0
 --- !u!50 &4609789478900203180
 Rigidbody2D:

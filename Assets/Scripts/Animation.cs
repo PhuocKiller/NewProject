@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public enum State
 {
     Attack,
+    Skill1,
     ChargeSkill,
     Die,
     Idle,
@@ -24,6 +25,8 @@ public enum State
     // [SpineAnimation] attribute allows an Inspector dropdown of Spine animation names coming form SkeletonAnimation.
     [SpineAnimation]
     public string attackAnimationName;
+    [SpineAnimation]
+    public string skill_1_AnimationName;
 
     [SpineAnimation]
     public string chargeSkillAnimationName;
@@ -116,6 +119,7 @@ public enum State
         else if (state == State.MainSkill) { return "MainSkill"; }
         else if (state == State.Walk) { return "Walk"; }
         else if (state == State.Run) { return "Run"; }
+        else if (state == State.Skill1) { return "Skill1"; }
         else  { return "Attack"; }
 
     }
@@ -153,7 +157,11 @@ public enum State
         if (a == "MainSkill")
         {
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
-            AudioManager.instance.PlaySound(AudioManager.instance.mainSkill, 1,true);
+            if(PlayerController.instance.characterType==CharacterType.Melee)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Melee, 1, true);
+            }
+            else { AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Range, 1, true); }
         }
        
         if (a == "Run")
@@ -173,9 +181,22 @@ public enum State
         if (a == "Attack")
         {
             spineAnimationState.SetAnimation(0, attackAnimationName, false);
-            AudioManager.instance.PlaySound(AudioManager.instance.attack, 1);
+           if (PlayerController.instance.characterType==CharacterType.Melee)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee, 1);
+            }
+           else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range, 1); }
         }
-        
+        if (a == "Skill1")
+        {
+            spineAnimationState.SetAnimation(0, skill_1_AnimationName, false);
+            if (PlayerController.instance.characterType == CharacterType.Melee)
+            {
+                AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee, 1);
+            }
+            else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range, 1); }
+        }
+
     }
     void DelaySetStateIdle()
     {
@@ -184,6 +205,10 @@ public enum State
     public float GetTimeOfAttackAnimation()
     {
         return skeleton.Data.FindAnimation(attackAnimationName).Duration;
+    }
+    public float GetTimeOfSkill_1_Animation()
+    {
+        return skeleton.Data.FindAnimation(skill_1_AnimationName).Duration;
     }
     public float GetTimeOfJumpAnimation()
     {

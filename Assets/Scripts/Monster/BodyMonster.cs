@@ -20,6 +20,12 @@ public class BodyMonster : MonoBehaviour
             mon.damageofPlayer = PlayerController.instance.p_Attack - mon.m_defend;
             mon.MonsterBeingAttacked((int)(mon.damageofPlayer * UnityEngine.Random.Range(0.8f, 1.2f)));
         }
+        if ((collision.CompareTag("Skill1") && PlayerController.instance.isAttackExactly)) //Monster bị tấn công bởi skill1
+        {
+            PlayerController.instance.isAttackExactly = false;
+            mon.damageofPlayer = PlayerController.instance.p_Attack - mon.m_defend;
+            mon.MonsterBeingAttacked((int)(mon.damageofPlayer *3* UnityEngine.Random.Range(0.8f, 1.2f)));
+        }
         if (collision.CompareTag("Player"))          //Player bị tấn công
         {
             mon.PlayerBeingAttacked(mon.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend) * UnityEngine.Random.Range(0.8f, 1.2f));

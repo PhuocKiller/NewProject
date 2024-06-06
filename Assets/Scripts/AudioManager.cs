@@ -6,7 +6,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioClip theme,attack, chargeSkill, die, idle, injured, jump, fall, levelUp, mainSkill, run,error,reFillPotion;
+    public AudioClip theme,attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
+        levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion;
     public AudioSource  themeSource, vfxAudioSource;
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class AudioManager : MonoBehaviour
     }
    /* public void PlaySound(AudioClip clip, float volume)
     {
-        if (clip == this.attack)
+        if (clip == this.attack_Melee)
         {
             Play(clip, volume);
             return;
@@ -82,7 +83,7 @@ public class AudioManager : MonoBehaviour
             Play(clip,volume);
             return;
         }
-        if (clip == this.mainSkill)
+        if (clip == this.mainSkill_Melee)
         {
             Play(clip, volume);
             return;
