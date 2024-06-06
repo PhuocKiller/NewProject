@@ -303,7 +303,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: {fileID: 8300000, guid: e4fd656a4f219a741b073cacc32f3e0d, type: 3}
-  attack: {fileID: 8300000, guid: 6cdf2b6afcdf03c4fb959f056819ba48, type: 3}
+  attack_Melee: {fileID: 8300000, guid: 6cdf2b6afcdf03c4fb959f056819ba48, type: 3}
+  attack_Range: {fileID: 8300000, guid: a344e40e5c2029744a175663f2e15b8c, type: 3}
+  skill1_Melee: {fileID: 0}
+  skill1_Range: {fileID: 8300000, guid: d6c2f8a9cf2b4fd4daadb79baa7d42ee, type: 3}
   chargeSkill: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   die: {fileID: 8300000, guid: 548b087b598994d4e808569b8961bc1e, type: 3}
   idle: {fileID: 0}
@@ -311,7 +314,8 @@ MonoBehaviour:
   jump: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
   fall: {fileID: 0}
   levelUp: {fileID: 8300000, guid: 8e3c11bf68a148049a0a55dc27aa5922, type: 3}
-  mainSkill: {fileID: 8300000, guid: f11b60e63695cdc41aa9a8a745ab9ca0, type: 3}
+  mainSkill_Melee: {fileID: 8300000, guid: f11b60e63695cdc41aa9a8a745ab9ca0, type: 3}
+  mainSkill_Range: {fileID: 8300000, guid: c0b34d1c3a3bd8544a993e93935bd6aa, type: 3}
   run: {fileID: 8300000, guid: 36c5fff2a3a9d8e42b6d9b8b39077b13, type: 3}
   error: {fileID: 8300000, guid: 299e933835f6ad643bdfdf28a9f45edd, type: 3}
   reFillPotion: {fileID: 8300000, guid: 0cac9c41e4cfe5345aa6d95ef2941f16, type: 3}

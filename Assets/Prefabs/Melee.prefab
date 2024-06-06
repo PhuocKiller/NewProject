@@ -240,6 +240,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 163473356679057379}
+  - {fileID: 8893956985328698245}
   - {fileID: 2086555212930992358}
   - {fileID: 5201962241826024539}
   m_Father: {fileID: 0}
@@ -272,7 +273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6261c386768492445a05642fa9bdda8e, type: 2}
+  - {fileID: 2100000, guid: 6d83267f6a96efb49803c16c8fd475e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 967d5f8fdcb596841a9a643b8f0d28ba, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3e6e77f30adaec34192edceada8e6901, type: 2}
   initialSkinName: Lv1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -410,6 +411,8 @@ MonoBehaviour:
   skillMeleeGameObject: {fileID: 1534256025028681622}
   arrowGameObject: {fileID: 0}
   skillRangeGameObject: {fileID: 0}
+  skill_1MeleeGameObject: {fileID: 5329518511298843587}
+  skill_1RangeGameObject: {fileID: 0}
   runSpeed: 10
   jumpSpeed: 8
   doJump: 0
@@ -592,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackAnimationName: Attack
+  skill_1_AnimationName: Skill1
   chargeSkillAnimationName: ChargeSkill
   dieAnimationName: Die
   injuredAnimationName: Injured
@@ -602,5 +606,72 @@ MonoBehaviour:
   fallAnimationName: Fall
   jumpAnimationName: Jump
   skeletonAnimation: {fileID: 0}
-  state: 3
+  state: 4
   stateString: 
+--- !u!1 &5329518511298843587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8893956985328698245}
+  - component: {fileID: 9048975298161620845}
+  m_Layer: 3
+  m_Name: Skill_1
+  m_TagString: Skill1
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8893956985328698245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329518511298843587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 0.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &9048975298161620845
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329518511298843587}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.58441687, y: 0.7436876}
+  m_Size: {x: 2.5187626, y: 2.5187626}
+  m_Direction: 0

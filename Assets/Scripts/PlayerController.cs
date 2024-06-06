@@ -20,16 +20,16 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D rigid;
     public static PlayerController instance;
-    public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject;
+    public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject, skill_1MeleeGameObject, skill_1RangeGameObject;
     GameObject feet;
-    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer;
-    BoxCollider2D arrowBox, skillRangeBox;
+    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer; //collider các skill Range body Player
+    BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
     CircleCollider2D feetCircleCollider;
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
     public float jumpSpeed = 5f;
-    public bool doJump, doAttack; //cho phép dc attack hoặc jump liên tiếp
+    public bool doJump, doAttack; //cho phép dc attack_Melee hoặc jump liên tiếp
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            arrowBox=GetComponent<BoxCollider2D>();
-            skillRangeBox= GetComponent<BoxCollider2D>();
+            arrowBox= arrowGameObject.GetComponent<BoxCollider2D>();
+            skillRangeBox= skillRangeGameObject.GetComponent<BoxCollider2D>();
         }
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
@@ -117,12 +117,60 @@ public class PlayerController : MonoBehaviour
             {
                 arrowGameObject.SetActive(true);
                 isAttackExactly = true;
-                arrowGameObject.GetComponent<Rigidbody2D>().velocity = 
-                new Vector2(-20f* arrowGameObject.transform.lossyScale.x, arrowGameObject.GetComponent<Rigidbody2D>().velocity.y);
+                Invoke("DelayArrow", 0.3f); //Arrow ko bay liền ra khi ấn button
                 Animation.instance.state = State.Attack;
                 doAttack = false;
                 Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
             }
+        }
+    }
+    public void PlayerSkill_1()
+    {
+        if (!isDie && Animation.instance.state == State.Idle && doAttack)
+        {
+            if (PlayerController.instance.characterType == CharacterType.Melee)
+            {
+                skill_1MeleeGameObject.SetActive(true);
+                isAttackExactly = true;
+                Animation.instance.state = State.Skill1;
+                doAttack = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfSkill_1_Animation());
+            }
+            else
+            {
+                skill_1RangeGameObject.SetActive(true);
+                isAttackExactly = true;
+                Invoke("DelayArrow", 0.75f); //Arrow ko bay liền ra khi ấn button
+                Animation.instance.state = State.Skill1;
+                doAttack = false;
+                Invoke("SetIdleState", Animation.instance.GetTimeOfSkill_1_Animation());
+            }
+        }
+    }
+    void DelayArrow()
+    {
+        skill_1RangeGameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-25f * skill_1RangeGameObject.transform.lossyScale.x, skill_1RangeGameObject.GetComponent<Rigidbody2D>().velocity.y);
+        arrowGameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-20f * arrowGameObject.transform.lossyScale.x, arrowGameObject.GetComponent<Rigidbody2D>().velocity.y);
+        
+    }
+    void SetIdleState()
+    {
+        Animation.instance.state = State.Idle;
+        if (characterType == CharacterType.Melee)
+        {
+            doAttack = true; doJump = true;
+            swordGameObject.SetActive(false);
+            skill_1MeleeGameObject.SetActive(false);
+        }
+        else
+        {
+            doAttack = true; doJump = true;
+            arrowGameObject.SetActive(false);
+            skill_1RangeGameObject.SetActive(false);
+            arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            skill_1RangeGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
     }
     public void PlayerSkill()
@@ -166,7 +214,7 @@ public class PlayerController : MonoBehaviour
                     if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
                && !Input.GetMouseButton(0)
                && !(Animation.instance.state == State.LevelUp)
-               && !(Animation.instance.state == State.Injured))
+               && !(Animation.instance.state == State.Injured) && !(Animation.instance.state == State.Skill1))
                     {
                         Animation.instance.state = State.Idle;
                     }
@@ -192,22 +240,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    void SetIdleState()
-    {
-        Animation.instance.state = State.Idle;
-        if (characterType==CharacterType.Melee)
-        {
-            doAttack = true; doJump = true;
-            swordGameObject.SetActive(false);
-        }
-        else
-        {
-            doAttack = true; doJump = true;
-            arrowGameObject.SetActive(false);
-            arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        }
-    }
-  
+   
     public void GetLevel()  // Điều chỉnh XP và tăng LV
     {
         if (p_CurrentXP >= p_MaxXP)

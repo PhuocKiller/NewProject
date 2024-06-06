@@ -7,16 +7,15 @@ using UnityEngine;
 
 
 public enum MonsterType 
-{fly0, fly1,fly2,fly3,fly4,fly5,fly6,fly7,fly8
+{fly0, fly1,fly2,fly3,fly4,fly5,fly6,fly7,fly8,Boss
 }
 
     
 
 public class Monster : MonoBehaviour
 {
-    public static Action <Monster> beHit;
     public MonsterType monsType;
-    CreateItems newItem;
+    public CreateItems newItem;
     public float moveSpeed = 1f;
     
     
@@ -90,7 +89,7 @@ public class Monster : MonoBehaviour
 
         }
     }
-    public void MonsterBeingAttacked(int damage)
+    public virtual void MonsterBeingAttacked(int damage)
     {
         if (isLive)
         {
@@ -104,7 +103,7 @@ public class Monster : MonoBehaviour
         }
     }
     
-    void MonsterDie()
+    public virtual void MonsterDie()
     {
         m_currentHealth = 0;
         animator.SetBool("die", true);
@@ -112,7 +111,7 @@ public class Monster : MonoBehaviour
         Invoke("DestroyMonster", 2f);
     }
     
-    void DestroyMonster()
+    public void DestroyMonster()
     {
         Destroy(gameObject);
         PlayerController.instance.p_CurrentXP += m_XP;

@@ -88,16 +88,7 @@ public class SavingFile : MonoBehaviour
                 return;
             }
         }
-        /*GameIndexCharacter gameIndexCharacter = new GameIndexCharacter();
-        gameIndexCharacter.GetNotNUll();
-        gameIndexCharacter.numberIndexCharacter = numberIndexCharacter;
-        gameIndexCharacter.characterType = characterType;
-        gameIndexCharacter.uiTypes = uiTypes;
-        gameIndexCharacter.level = level;
-        gameIndexCharacter.slot[1] = -1;
-        gameIndexCharacter.slot[2] = -2;
-        gameProgress.listIndexCharacter.Add(gameIndexCharacter);
-        SaveData();*/
+        
     }
     public void Load(int numberIndexCharacter)
     {
@@ -231,5 +222,6 @@ public class SavingFile : MonoBehaviour
 
             }
         }
+        level = 0;
     }
 }
