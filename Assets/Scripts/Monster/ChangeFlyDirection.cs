@@ -17,7 +17,11 @@ public class ChangeFlyDirection : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             mon.moveSpeed = -mon.moveSpeed;
-            mon.transform.localScale = new Vector2(0.1f * Mathf.Sign(mon.rigid.velocity.x), 0.1f);
+            if (mon.monsType==MonsterType.Boss)
+            {
+                mon.transform.localScale = new Vector2(Mathf.Sign(mon.rigid.velocity.x),1f);
+            }
+            else { mon.transform.localScale = new Vector2(0.1f * Mathf.Sign(mon.rigid.velocity.x), 0.1f); }
         }
     }
 }

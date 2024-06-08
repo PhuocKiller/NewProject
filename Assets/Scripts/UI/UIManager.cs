@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
     float displayTimePlayerBeAttacked;
     Image imageHealPotion, imageManaPotion;
     public UITypes uiTypes;
- 
+    public TMP_Text coinValues;
+
 
 
 
@@ -75,7 +76,7 @@ public class UIManager : MonoBehaviour
             PlayerController.instance.GetLevel();
             XPBar.UpdateBar(PlayerController.instance.p_CurrentXP, PlayerController.instance.p_MaxXP);
         }
-        if (isRefillMana)
+        if (isRefillMana) // hồi mana
         {
 
             if (PlayerController.instance.p_currentManaFloat >= PlayerController.instance.p_currentManaFade)
@@ -85,7 +86,7 @@ public class UIManager : MonoBehaviour
             }
             PlayerController.instance.p_currentManaFloat += 0.5f;
         }
-        if (isRefillHealth)
+        if (isRefillHealth) //hồi máu
         {
 
             if (PlayerController.instance.p_currentHealthFloat >= PlayerController.instance.p_currentHealthFade)

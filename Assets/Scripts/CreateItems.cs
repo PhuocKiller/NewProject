@@ -6,17 +6,7 @@ public class CreateItems : MonoBehaviour
 {
     public InventoryItemBase[] items;
     public float[] chance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     public void CreateItemsFromDeath()
     {
         for (int i = 0; i < items.Length; i++)
