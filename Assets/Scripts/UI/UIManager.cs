@@ -60,6 +60,7 @@ public class UIManager : MonoBehaviour
         Inventory.instance.ItemAdded += InventoryScript_ItemAdded;
         Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
         Inventory.instance.InventoryUpdate += Inventory_Update;
+        coinValues.text= PlayerController.instance.coins.ToString();
     }
 
    
@@ -228,11 +229,13 @@ public class UIManager : MonoBehaviour
     public void InventoryButton()
     {
         panelInventory.SetActive(true);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
    
     public void LoadButton()
     {
         SavingFile.instance.Load(PlayerController.instance.numberIndexCharacter);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     public void ClosePanelInventory()
     {
@@ -330,28 +333,33 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         unpauseButton.SetActive(true);
+        AudioManager.instance.PlaySound(AudioManager.instance.pauseGame, 1);
     }
     public void UnPauseButton()
     {
         Time.timeScale = 1f;
         unpauseButton.SetActive(false);
+        AudioManager.instance.PlaySound(AudioManager.instance.unpauseGame, 1);
     }
     public void SettingButton()
     {
         panelSetting.SetActive(true);
        Time.timeScale = 0;
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     public void SaveButton()
     {
         Inventory_ItemSave();
         SavingFile.instance.Save(PlayerController.instance.numberIndexCharacter, PlayerController.instance.characterType,
-            UIManager.instance.uiTypes, PlayerController.instance.p_Level);
-        
+         UIManager.instance.uiTypes, PlayerController.instance.p_Level, PlayerController.instance.coins);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+
     }
     public void  BackButtonInSetting()
     {
         panelSetting.SetActive(false);
         Time.timeScale = 1f;
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     public void QuitButtonInSetting()
     {
@@ -360,6 +368,7 @@ public class UIManager : MonoBehaviour
         Inventory.instance.transform.parent = GameObject.Find("Entrance").transform;
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
 
 }

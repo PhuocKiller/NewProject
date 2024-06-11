@@ -13,6 +13,7 @@ TagManager:
   - Spike
   - Arrow
   - Skill1
+  - FeetPlayer
   layers:
   - Default
   - TransparentFX

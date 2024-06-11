@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1363154888864595350}
   m_Layer: 3
   m_Name: Feet
-  m_TagString: Untagged
+  m_TagString: FeetPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,6 +446,7 @@ MonoBehaviour:
   p_currentHealthFade: 0
   isIntervalSkill: 0
   numberIndexCharacter: 0
+  coins: 0
   characterType: 0
 --- !u!68 &1097768047809629731
 EdgeCollider2D:

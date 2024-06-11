@@ -10,7 +10,7 @@ public class CreatePlayerUI : MonoBehaviour
     PlayerUI playerUiInstance;
     public int numberIndexCharacter;
     public CharacterType characterType;
-    public int level;
+    public int level, coins;
     public UITypes uiTypes;
     public TextMeshProUGUI levelText;
     public int[] slot;
@@ -61,6 +61,7 @@ public class CreatePlayerUI : MonoBehaviour
         SavingFile.instance.characterType = characterType;
         SavingFile.instance.level = level;
         SavingFile.instance.uiTypes = uiTypes;
+        SavingFile.instance.coins = coins;
         for (int i = 0;i<9;i++)
         {
             SavingFile.instance.slot[i] = slot[i];

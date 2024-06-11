@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
     public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill, p_manaofSkill_1;
-    public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade, myCoins;
+    public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
-    public int numberIndexCharacter;public CharacterType characterType; //thông tin khi save
+    public int numberIndexCharacter, coins; public CharacterType characterType; //thông tin khi save
     bool isPressMove;
     float timeJump;
 

@@ -107,7 +107,21 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
+    public void BuyItemInShop (IInventoryItem item)
+    {
+        if (mItems.Count < SLOTS)
+        {
+            mItems.Add(item);
+            if (ItemAdded != null)
+            {
+                ItemAdded(this, new InventoryEventArgs(item));
+            }
+            if (InventoryUpdate != null)
+            {
+                InventoryUpdate(this, new InventoryEventArgs(item));
+            }
+        }
+    }
     public void CreateNewItem(Vector3 pos, ItemTypes itemTypes) //tạo ra item khi quăng ra đất
     {
         int i;
