@@ -5058,11 +5058,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8023039177383878710, guid: bbfd3e028c49446458cdd1fb3f806548, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.3
+      value: 27.98
       objectReference: {fileID: 0}
     - target: {fileID: 8023039177383878710, guid: bbfd3e028c49446458cdd1fb3f806548, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.38
+      value: 2.52
       objectReference: {fileID: 0}
     - target: {fileID: 8023039177383878710, guid: bbfd3e028c49446458cdd1fb3f806548, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23608,7 +23608,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.51666665, y: 0, z: 0}
   m_MaxChunkCount: 16
