@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using Spine;
+using Spine.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class BossAI : Monster
-    
 {
+    public GameObject[] posBoss;
+    int posBossIndex, newPosBossIndex;
     private void Awake()
     {
             rigid = GetComponent<Rigidbody2D>();
@@ -16,29 +19,47 @@ public class BossAI : Monster
     void Start()
     {
         m_maxHealth = 200; m_currentHealth = m_maxHealth;
-        m_attack = UnityEngine.Random.Range(140,150); m_defend = UnityEngine.Random.Range(90,100);
+        m_attack = UnityEngine.Random.Range(40,50); m_defend = UnityEngine.Random.Range(50,60);
         isLive = true;
         moveSpeed = 2f;
+        InvokeRepeating("ChangePosition", 0, 10);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        healthBarMonster.UpdateBar(m_currentHealth, m_maxHealth);
+        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(transform.localScale.x, 1);
         if (isLive)
         {
 
             if (!isStun)
             {
-                if (!isDetect)
+                if ((BossAnimation.instance.skeletonBossAnimation.state.GetCurrent(0).ToString() == "Attack"
+                    || BossAnimation.instance.skeletonBossAnimation.state.GetCurrent(0).ToString() == "Skill")
+                    && BossAnimation.instance.skeletonBossAnimation.state.GetCurrent(0).IsComplete==false)
                 {
-                    rigid.velocity = new Vector2(-moveSpeed, 0);
+                    rigid.velocity = Vector3.zero; 
+                    return;
                 }
-                else { rigid.velocity = new Vector2(-3 * moveSpeed, 0); } //khi phát hiện thì tăng tốc
+                else
+                {
+                    BossAnimation.instance.bossState = BossState.Walk;
+                    if (!isDetect)
+                    {
+                        rigid.velocity = new Vector2(-moveSpeed, 0);
+                    }
+                    else { rigid.velocity = new Vector2(-3 * moveSpeed, 0); } //khi phát hiện thì tăng tốc
+                }
+
+
+
             }
             else
             {
                 timeStun += Time.deltaTime;
                 rigid.velocity = -rigid.velocity;
+                BossAnimation.instance.bossState = BossState.Idle;
                 if (timeStun >= 2)
                 {
                     timeStun = 0; isStun = false;
@@ -49,8 +70,7 @@ public class BossAI : Monster
         {
             rigid.velocity = Vector2.zero;
         }
-        healthBarMonster.UpdateBar(m_currentHealth, m_maxHealth);
-        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(transform.localScale.x, 1);
+        
     }
     public override void MonsterBeingAttacked(int damage)
     {
@@ -67,5 +87,23 @@ public class BossAI : Monster
     public override void MonsterDie()
     {
         Debug.Log("you win");
+    }
+    public void ChangeDirection()
+    {
+        moveSpeed = -moveSpeed;
+        transform.localScale = new Vector2(Mathf.Sign(rigid.velocity.x), 1);
+    }
+    void ChangePosition()
+    {
+        newPosBossIndex = Random.Range(0, 6);
+        if (newPosBossIndex == posBossIndex)
+        {
+            ChangePosition();
+        }
+        else
+        {
+            posBossIndex=newPosBossIndex;
+            transform.position = posBoss[posBossIndex].transform.position;
+        }
     }
 }

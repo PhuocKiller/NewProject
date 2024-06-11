@@ -18,7 +18,8 @@ public class GameIndexCharacter
     public int numberIndexCharacter;
     public CharacterType characterType;
     public UITypes uiTypes;
-    public int level;
+    public int level, coins;
+
     public int[] slot;
     public void GetNotNUll()
     {
@@ -35,6 +36,7 @@ public class SavingFile : MonoBehaviour
     public CharacterType characterType;
     public int level;
     public UITypes uiTypes;
+    public int coins;
    // public CreatePlayerUI[] createPlayerUI;
     public PlayerController[] playerControllers;
     public UIManager[] uIManagers;
@@ -61,13 +63,11 @@ public class SavingFile : MonoBehaviour
     private void Start()
     {
         LoadData();
-        
-
     }
     private void Update()
     {
     }
-    public void Save(int numberIndexCharacter, CharacterType characterType, UITypes uiTypes, int level)
+    public void Save(int numberIndexCharacter, CharacterType characterType, UITypes uiTypes, int level, int coins)
     {
 
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
@@ -75,11 +75,10 @@ public class SavingFile : MonoBehaviour
 
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter)
             {
-                //indexCharacter.GetNotNUll();
                 indexCharacter.characterType = characterType;
                 indexCharacter.uiTypes = uiTypes;
                 indexCharacter.level = level;
-
+                indexCharacter.coins = coins;
                 for (int i = 0; i < 9; i++)
                 {
                     indexCharacter.slot[i] = slot[i];
@@ -113,8 +112,9 @@ public class SavingFile : MonoBehaviour
             {
                 createPlayerUI.characterType = indexCharacter.characterType;
                 createPlayerUI.level = indexCharacter.level;
+                createPlayerUI.coins=indexCharacter.coins;
                 createPlayerUI.uiTypes = indexCharacter.uiTypes;
-                    createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
+                createPlayerUI.CreateNewPlayerUI(indexCharacter.characterType);
                 
                 
                 for (int i = 0;i<9; i++)
@@ -133,7 +133,7 @@ public class SavingFile : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, file);
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "{\"listIndexCharacter\":[{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
+            File.WriteAllText(filePath, "{\"listIndexCharacter\":[{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
         }
         gameProgress = JsonUtility.FromJson<GameProgress>(File.ReadAllText(filePath));
     }
@@ -170,6 +170,7 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.characterType= characterType;
                         if(level==0) { level=1; }
                         PlayerController.instance.p_Level = level;
+                        PlayerController.instance.coins = coins;
                         UIManager.instance.uiTypes = uiTypes;
                         SceneManager.LoadScene("Round1");
                     }
@@ -203,6 +204,7 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.numberIndexCharacter = indexCharacter.numberIndexCharacter;
                         PlayerController.instance.characterType = characterType;
                         PlayerController.instance.p_Level = 1;
+                        PlayerController.instance.coins = 0;
                         UIManager.instance.uiTypes = uiTypes;
                         SceneManager.LoadScene("Round1");
                     }
@@ -216,7 +218,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter && level!=0)
             {
-                Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0);
+                Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0,0);
                 MainMenu.instance.loadGamePanel.SetActive(false);
                 MainMenu.instance.loadGamePanel.SetActive(true);
 

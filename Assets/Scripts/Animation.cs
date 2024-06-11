@@ -103,6 +103,7 @@ public enum State
 
         previousState = currentModelState;
         MainSkill(); //cập nhật mainskill liên tục
+        
     }
     public string GetStringState ()
     {

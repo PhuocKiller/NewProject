@@ -319,5 +319,10 @@ MonoBehaviour:
   run: {fileID: 8300000, guid: 36c5fff2a3a9d8e42b6d9b8b39077b13, type: 3}
   error: {fileID: 8300000, guid: 299e933835f6ad643bdfdf28a9f45edd, type: 3}
   reFillPotion: {fileID: 8300000, guid: 0cac9c41e4cfe5345aa6d95ef2941f16, type: 3}
+  goldDrop: {fileID: 8300000, guid: 68ebeaf0add6ab04e97617283cec7aef, type: 3}
+  buyItem: {fileID: 8300000, guid: 30f01818f93e3eb418d85b42fb8f422f, type: 3}
+  clickButton: {fileID: 8300000, guid: 8cecdd8b75237324bbfdc0c1cead3a5e, type: 3}
+  pauseGame: {fileID: 8300000, guid: b83bf8726a7fac349a54389f0c57cda6, type: 3}
+  unpauseGame: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
   themeSource: {fileID: 7103328360544123985}
   vfxAudioSource: {fileID: 7518489453098321088}

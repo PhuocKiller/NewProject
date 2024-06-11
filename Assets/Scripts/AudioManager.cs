@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public AudioClip theme,attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
-        levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion;
+        levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton, pauseGame,unpauseGame;
     public AudioSource  themeSource, vfxAudioSource;
     private void Awake()
     {
@@ -41,59 +41,7 @@ public class AudioManager : MonoBehaviour
         vfxAudioSource.loop = isLoop; 
         vfxAudioSource.Play();
     }
-   /* public void PlaySound(AudioClip clip, float volume)
-    {
-        if (clip == this.attack_Melee)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip==this.chargeSkill)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.die)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.idle)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.injured)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.jump)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.fall)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.levelUp)
-        {
-            Play(clip,volume);
-            return;
-        }
-        if (clip == this.mainSkill_Melee)
-        {
-            Play(clip, volume);
-            return;
-        }
-        if (clip == this.run)
-        {
-            Play(clip,volume);
-            return;
-        }
-    }*/
+ 
     public void StopSound()
     {
         vfxAudioSource.Stop();

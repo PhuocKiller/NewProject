@@ -7,7 +7,7 @@ using UnityEngine;
     public enum BossState
     {
         Attack,
-        Skill1,
+        Skill,
         Idle,
         Walk
     }
@@ -75,6 +75,7 @@ using UnityEngine;
             }
 
         previousBossState = currentModelState;
+        
         }
         public string GetStringState()
         {
@@ -83,7 +84,7 @@ using UnityEngine;
                 return "Idle";
             }
             else if (bossState == BossState.Walk) { return "Walk"; }
-            else if (bossState == BossState.Skill1) { return "Skill1"; }
+            else if (bossState == BossState.Skill) { return "Skill"; }
             else { return "Attack"; }
 
         }
@@ -105,5 +106,13 @@ using UnityEngine;
         {
             spineBossAnimationState.SetAnimation(0, walkBossAnimationName, true);
         }
+    }
+    public float GetTimeOfAttackBoss()
+    {
+        return skeletonBoss.Data.FindAnimation(attackBossAnimationName).Duration;
+    }
+    public float GetTimeOfSkillBoss()
+    {
+        return skeletonBoss.Data.FindAnimation(skillBossAnimationName).Duration;
     }
  }

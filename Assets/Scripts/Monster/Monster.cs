@@ -80,6 +80,7 @@ public class Monster : MonoBehaviour
             return 0;
         }
         else return a - b;
+        
     }
     public void PlayerBeingAttacked(float damage)
     {
@@ -119,11 +120,7 @@ public class Monster : MonoBehaviour
     }
   
     
-    private void OnMouseDown()
-    {
-        UIManager.instance.ShowInfoMonster(this);
-
-    }
+    
 
 
 

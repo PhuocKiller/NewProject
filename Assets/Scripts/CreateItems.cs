@@ -5,18 +5,9 @@ using UnityEngine;
 public class CreateItems : MonoBehaviour
 {
     public InventoryItemBase[] items;
+    public Coins coins;
     public float[] chance;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     public void CreateItemsFromDeath()
     {
         for (int i = 0; i < items.Length; i++)
@@ -27,11 +18,11 @@ public class CreateItems : MonoBehaviour
                 Instantiate(items[i], pos, Quaternion.identity);
             }
         }
-       
+        Instantiate(coins,transform.position, Quaternion.identity);
     }
     bool GetChance(float chance)
     {
-        int r = Random.Range(1, 100);
+        float r = Random.Range(1f, 100f);
         if (r / 100 < chance)
         {
             return true;

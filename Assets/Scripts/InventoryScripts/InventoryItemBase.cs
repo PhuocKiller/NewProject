@@ -30,7 +30,6 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos = new Vector3(pos.x, pos.y, 0);
         Inventory.instance.CreateNewItem(pos, GetItemTypes());
-
     }
     public virtual ItemTypes GetItemTypes()
     {

@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
     public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject, skill_1MeleeGameObject, skill_1RangeGameObject;
     GameObject feet;
     CapsuleCollider2D capSword, capSkillMelee, bodyPlayer; //collider các skill Range body Player
-    BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
-    CircleCollider2D feetCircleCollider;
+    BoxCollider2D arrowBox, skillRangeBox, feetBoxCollider; //collider các skill Range
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
@@ -33,14 +32,17 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill;
+    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill, p_manaofSkill_1;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
-    public int numberIndexCharacter;public CharacterType characterType; //thông tin khi save
+    public int numberIndexCharacter, coins; public CharacterType characterType; //thông tin khi save
+    bool isPressMove;
+    float timeJump;
 
 
 
-     void Awake()
+
+    void Awake()
     {
         if (instance == null)
         {
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
-        feetCircleCollider=feet.GetComponent<CircleCollider2D>();
+        feetBoxCollider=feet.GetComponent<BoxCollider2D>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
     // Start is called before the first frame update
@@ -82,24 +84,28 @@ public class PlayerController : MonoBehaviour
         p_manaOfSkill = 40 + 2 * (p_Level - 1);
         p_CurrentXP = 0; p_MaxXP = 100 + 10 * (p_Level - 1);
         p_Attack = 50+ 20 * (p_Level - 1); p_Defend =15 + 2 * (p_Level - 1);
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+       // Debug.Log(isPressMove);
         if (!isDie)
         {
+            if (Input.GetKeyDown(KeyCode.Space)) { Jump(); }
+            if (!doJump)
+            {
+                timeJump += Time.deltaTime;
+            }
+            else { timeJump=0; }
             Run();
             FadeImmortal();
         }
+        
+
     }
-    void OnMove(InputValue value)
-    {
-        if (!isDie&& !(Animation.instance.state==State.Attack))
-        {
-            moveInput = value.Get<Vector2>();
-        }
-    }
+   
     public void PlayerAttack()
     {
         
@@ -126,8 +132,9 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerSkill_1()
     {
-        if (!isDie && Animation.instance.state == State.Idle && doAttack)
+        if (!isDie && Animation.instance.state == State.Idle && doAttack && p_currentManaFloat>=10)
         {
+            p_currentManaFade -= 10; p_currentManaFloat -=10;
             if (PlayerController.instance.characterType == CharacterType.Melee)
             {
                 skill_1MeleeGameObject.SetActive(true);
@@ -157,20 +164,23 @@ public class PlayerController : MonoBehaviour
     }
     void SetIdleState()
     {
-        Animation.instance.state = State.Idle;
-        if (characterType == CharacterType.Melee)
+        if (!isDie)
         {
-            doAttack = true; doJump = true;
-            swordGameObject.SetActive(false);
-            skill_1MeleeGameObject.SetActive(false);
-        }
-        else
-        {
-            doAttack = true; doJump = true;
-            arrowGameObject.SetActive(false);
-            skill_1RangeGameObject.SetActive(false);
-            arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            skill_1RangeGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            Animation.instance.state = State.Idle;
+            if (characterType == CharacterType.Melee)
+            {
+                doAttack = true; doJump = true;
+                swordGameObject.SetActive(false);
+                skill_1MeleeGameObject.SetActive(false);
+            }
+            else
+            {
+                doAttack = true; doJump = true;
+                arrowGameObject.SetActive(false);
+                skill_1RangeGameObject.SetActive(false);
+                arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                skill_1RangeGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            }
         }
     }
     public void PlayerSkill()
@@ -181,58 +191,66 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnJump(InputValue value)
+    void Jump()
     {
-        if (!isDie && Animation.instance.state == State.Idle)
+        if (!isDie && (Animation.instance.state == State.Idle || Animation.instance.state == State.Run))
         {
             if (!doJump) { return; }
-            if (value.isPressed)
-            {
-                rigid.velocity = new Vector2(0, jumpSpeed);
+                rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
                 Animation.instance.state = State.Jump;
                 doJump = false;
-                Invoke("SetIdleState", Animation.instance.GetTimeOfJumpAnimation());
-            }
+              // Invoke("SetIdleState", Animation.instance.GetTimeOfJumpAnimation());
         }
     }
     void Run()
     {
+        if (!isDie && !(Animation.instance.state == State.Attack))
+        {
+            moveInput = new Vector2(Input.GetAxis("Horizontal"), rigid.velocity.y);
+        }
+            
         rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
 
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
         
-           if(feetCircleCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+           if(feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
                 if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
                 {
-                    Animation.instance.state = State.Run;
+                    if (timeJump>0.5f ||timeJump==0) //khi jump đủ time hoặc khi ko jump thì Run
+                        {
+                            Animation.instance.state = State.Run;
+                            doJump = true;
+                        }
+                
                     rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
                 }
                 else
                 {
-                    if (!(Animation.instance.state == State.Attack) && !(Animation.instance.state == State.Jump)
+                    if (!(Animation.instance.state == State.Attack) 
                && !Input.GetMouseButton(0)
                && !(Animation.instance.state == State.LevelUp)
                && !(Animation.instance.state == State.Injured) && !(Animation.instance.state == State.Skill1))
+                {
+                    if (timeJump > 0.5f || timeJump == 0) //khi jump đủ time hoặc khi ko jump thì Run
                     {
                         Animation.instance.state = State.Idle;
+                        doJump = true;
                     }
+                }
                 }
                     
             }
            else
             {
-                rigid.velocity = new Vector2(moveInput.x * runSpeed * 0.3f, rigid.velocity.y); //0.3 là độ delay di chuyển horizontal
+                rigid.velocity = new Vector2(moveInput.x * runSpeed * 0.4f, rigid.velocity.y); //0.3 là độ delay di chuyển horizontal
                 if(!(Animation.instance.state == State.Jump) && !(Animation.instance.state == State.Injured)
                 &&!(Animation.instance.state == State.Die))
                 {
                 Animation.instance.state = State.Fall;
                 }
             }
-        
-
-       
         if (playerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(-Mathf.Sign(rigid.velocity.x), 1f);  //mathf.Sign là trả về giá trị -1 hoặc 1 để chọn hướng
@@ -251,6 +269,7 @@ public class PlayerController : MonoBehaviour
             p_maxHealth = 100 + 10 * (p_Level - 1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
             p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
             p_manaOfSkill = 40 + 2 * (p_Level - 1);
+            p_manaofSkill_1=10 + (p_Level - 1);
             p_MaxXP = 100 + 10 * (p_Level - 1);
             p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 2 * (p_Level - 1);
         }
@@ -263,6 +282,7 @@ public class PlayerController : MonoBehaviour
         beImmortal = true;
         p_currentHealthFloat = p_currentHealthFloat - damage;
         p_currentHealthFade = p_currentHealthFade - damage;
+        UIManager.instance.ShowDamageDealByMonster((int)damage);
         if (p_currentHealthFloat < 0)
         {
             p_currentHealthFloat = 0; p_currentHealthFade = 0;
@@ -273,7 +293,7 @@ public class PlayerController : MonoBehaviour
         }
         DelayDeactiveImmortal();
         Animation.instance.state = State.Injured;
-        UIManager.instance.ShowDamageDealByMonster((int)damage);
+        
     }
     void DeactiveImmortal()
     {
