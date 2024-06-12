@@ -80,6 +80,8 @@ public class BossAI : Monster
             m_currentHealth = m_currentHealth - damage;
             if (m_currentHealth <= 0)
             {
+                m_currentHealth = 0;
+                isLive = false;
                 MonsterDie();
             }
         }
@@ -90,20 +92,26 @@ public class BossAI : Monster
     }
     public void ChangeDirection()
     {
-        moveSpeed = -moveSpeed;
-        transform.localScale = new Vector2(Mathf.Sign(rigid.velocity.x), 1);
+       if (!isLive)
+        {
+            moveSpeed = -moveSpeed;
+            transform.localScale = new Vector2(Mathf.Sign(rigid.velocity.x), 1);
+        }
     }
     void ChangePosition()
     {
-        newPosBossIndex = Random.Range(0, 6);
-        if (newPosBossIndex == posBossIndex)
+        if(isLive)
         {
-            ChangePosition();
-        }
-        else
-        {
-            posBossIndex=newPosBossIndex;
-            transform.position = posBoss[posBossIndex].transform.position;
+            newPosBossIndex = Random.Range(0, 6);
+            if (newPosBossIndex == posBossIndex)
+            {
+                ChangePosition();
+            }
+            else
+            {
+                posBossIndex = newPosBossIndex;
+                transform.position = posBoss[posBossIndex].transform.position;
+            }
         }
     }
 }

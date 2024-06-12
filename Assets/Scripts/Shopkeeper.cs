@@ -42,14 +42,20 @@ public class Shopkeeper : MonoBehaviour
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     private void OnTriggerStay2D(Collider2D collision)
-    {
-        canTrade = true;
+    {if(collision.CompareTag("Player"))
+        {
+            canTrade = true;
+        }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        canTrade = false;
-        talkPanel.SetActive(false);
-        shopPanel.SetActive(false);
+        if(collision.CompareTag("Player"))
+        {
+            canTrade = false;
+            talkPanel.SetActive(false);
+            shopPanel.SetActive(false);
+        }
     }
     public void BuySlot_0 ()
     {

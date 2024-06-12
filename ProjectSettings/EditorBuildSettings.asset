@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Login.unity
-    guid: 9734534cdda9b0a41a2fb69a3bc015ee
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: e7eeacf7c2e2f6c4fb27db34d4469731
   - enabled: 1
@@ -16,9 +13,9 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Round2.unity
-    guid: 5596db4d62e12ca478680578598366cd
+    guid: f9dc1745167cc0f46b399bf1d024438c
   - enabled: 1
-    path: Assets/Scenes/LoadGame.unity
-    guid: 14797ffbfe1a7c949aa4654dd5b94182
+    path: Assets/Scenes/Boss.unity
+    guid: 24c72ffded45c9c4d973fdd478103316
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e69bd100d76ebee47a1855ea00e28c86, type: 2}

@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
+    public string RoundName;
+    public int posIndex;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Round2");
+            SceneManager.LoadScene(RoundName);
+            PlayerController.instance.posIndex=posIndex;
         }
     }
 }

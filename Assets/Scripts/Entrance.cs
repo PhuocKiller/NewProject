@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Entrance : MonoBehaviour
 {
+    public int posIndex;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController.instance.transform.position = transform.position;
+        if (PlayerController.instance.posIndex== posIndex)
+        {
+            PlayerController.instance.transform.position = transform.position;
+        }
     }
 
     // Update is called once per frame
