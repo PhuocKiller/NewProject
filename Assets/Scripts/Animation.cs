@@ -1,4 +1,5 @@
-﻿using Spine.Unity;
+﻿using Spine;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -277,6 +278,16 @@ public enum State
             chargedTime = 0; skillTime = 0;
         }
     }
-
+    public void SetupSkins(int level)
+    {
+        if(level<5)
+        {
+            skeleton.SetSkin("Lv1");
+        }
+        else if(level<10)
+        {
+            skeleton.SetSkin("Lv5");
+        }
+    }
 
 }

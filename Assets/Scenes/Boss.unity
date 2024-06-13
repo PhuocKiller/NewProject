@@ -672,61 +672,9 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: combo.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: combo.Array.data[0]
-      value: 49
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: combo.Array.data[1]
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: combo.Array.data[2]
-      value: 51
-      objectReference: {fileID: 0}
     - target: {fileID: 4993074614299259893, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Name
       value: Melee
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780178401145391303, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6780178401145391303, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: b147a90da59db8642b88a5ded50f77a3, type: 2}
-    - target: {fileID: 6780178401145391303, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_NotificationBehavior
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
-      value: 141113a1-dc25-4e5b-88b4-4233c30ee062
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
-      value: d3a78a16-006b-4eba-b613-10feb1dd78e3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
-      value: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684123638596049439, guid: 49299295de627b64cb8244746238eedd, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
-      value: Player/Jump[/Keyboard/space]
       objectReference: {fileID: 0}
     - target: {fileID: 8023039177383878710, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_LocalPosition.x

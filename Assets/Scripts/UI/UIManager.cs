@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana;
     public bool isRefillHealth;
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP;
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
    
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         healthBar.UpdateBar(PlayerController.instance.p_currentHealthFloat, PlayerController.instance.p_maxHealth);
         healthBar.UpdateFadeBar(PlayerController.instance.p_currentHealthFade, PlayerController.instance.p_maxHealth);
@@ -363,12 +363,24 @@ public class UIManager : MonoBehaviour
     }
     public void QuitButtonInSetting()
     {
-        PlayerController.instance.transform.parent = GameObject.Find("Entrance").transform;
-        UIManager.instance.transform.SetParent (GameObject.Find("Entrance").transform);
-        Inventory.instance.transform.parent = GameObject.Find("Entrance").transform;
+        PlayerController.instance.transform.parent = GameObject.Find("Entrances").transform;
+        UIManager.instance.transform.SetParent (GameObject.Find("Entrances").transform);
+        Inventory.instance.transform.parent = GameObject.Find("Entrances").transform;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        panelPlayAgain.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void PlayAgainButton()
+    {
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        PlayerController.instance.FullEngergy();
+        PlayerController.instance.isDie = false;
+        PlayerController.instance.beImmortal=false;
+        PlayerController.instance.posIndex = 0;
+        Animation.instance.state = State.Idle;
+        panelPlayAgain.SetActive(false);
+        SceneManager.LoadScene("Round1");
     }
 
 }
