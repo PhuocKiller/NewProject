@@ -302,7 +302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adb642514e114c418f4ea7274daab11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theme: {fileID: 8300000, guid: e4fd656a4f219a741b073cacc32f3e0d, type: 3}
   attack_Melee: {fileID: 8300000, guid: 6cdf2b6afcdf03c4fb959f056819ba48, type: 3}
   attack_Range: {fileID: 8300000, guid: a344e40e5c2029744a175663f2e15b8c, type: 3}
   skill1_Melee: {fileID: 0}
@@ -324,5 +323,10 @@ MonoBehaviour:
   clickButton: {fileID: 8300000, guid: 8cecdd8b75237324bbfdc0c1cead3a5e, type: 3}
   pauseGame: {fileID: 8300000, guid: b83bf8726a7fac349a54389f0c57cda6, type: 3}
   unpauseGame: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
+  theme:
+  - {fileID: 8300000, guid: d0de22ce30929c34fa8838236eea71cf, type: 3}
+  - {fileID: 8300000, guid: e4fd656a4f219a741b073cacc32f3e0d, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   themeSource: {fileID: 7103328360544123985}
   vfxAudioSource: {fileID: 7518489453098321088}

@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public AudioClip theme,attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
+    public AudioClip attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
         levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton, pauseGame,unpauseGame;
+    public AudioClip[] theme;
     public AudioSource  themeSource, vfxAudioSource;
     private void Awake()
     {
@@ -17,22 +19,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        themeSource.clip = theme;
-        themeSource.volume = 0.1f;
-        themeSource.loop = true;
-        themeSource.Play();
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            if (i == SceneManager.GetActiveScene().buildIndex)
+            {
+                themeSource.clip = theme[i];
+                themeSource.volume = 0.3f;
+                themeSource.loop = true;
+                themeSource.Play();
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-  
 
     public void PlaySound(AudioClip clip, float volume, bool isLoop=false)
     {

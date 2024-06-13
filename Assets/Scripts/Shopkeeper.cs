@@ -26,6 +26,7 @@ public class Shopkeeper : MonoBehaviour
        if(canTrade &&!shopPanel.activeInHierarchy&&!talkPanel.activeInHierarchy)
         {
             talkPanel.SetActive(true);
+            AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
         }
     }
     public void YesButtonShop()
