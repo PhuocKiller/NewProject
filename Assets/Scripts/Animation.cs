@@ -173,6 +173,7 @@ public enum State
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
+            spineAnimationState.AddAnimation(0, fallAnimationName, true,0);
             AudioManager.instance.PlaySound(AudioManager.instance.jump, 1);
         }
         if (a == "Fall")

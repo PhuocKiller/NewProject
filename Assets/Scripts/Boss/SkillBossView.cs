@@ -15,7 +15,7 @@ public class SkillBossView : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Skill
-            &&(mon.m_currentHealth/mon.m_maxHealth)<0.5f)
+            &&(mon.m_currentHealth/mon.m_maxHealth)<0.5f&&mon.isLive)
         {
             BossAnimation.instance.bossState = BossState.Skill;
             Invoke("DelayActiveSkillBossGameObject", 1f);

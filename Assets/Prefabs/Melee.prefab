@@ -131,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16347921, y: -0.014093429}
+  m_Offset: {x: -0.15860005, y: 0.36819375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -142,7 +142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3720565, y: 0.6223065}
+  m_Size: {x: 1.0304469, y: 1.3868809}
   m_EdgeRadius: 0
 --- !u!1 &1534256025028681622
 GameObject:
@@ -448,6 +448,7 @@ MonoBehaviour:
   numberIndexCharacter: 0
   coins: 0
   characterType: 0
+  posIndex: 0
 --- !u!68 &1097768047809629731
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -588,7 +589,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.040232122, y: 1.3314332}

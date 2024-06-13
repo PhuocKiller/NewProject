@@ -14,7 +14,7 @@ public class ChangeFlyDirection : MonoBehaviour
    
     private void OnTriggerExit2D(Collider2D collision) //xoay chiều di chuyển Monster
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" &&mon.isLive)
         {
             mon.moveSpeed = -mon.moveSpeed;
             if (mon.monsType==MonsterType.Boss)

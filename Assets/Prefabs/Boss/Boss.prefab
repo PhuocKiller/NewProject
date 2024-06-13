@@ -120,6 +120,7 @@ Transform:
   - {fileID: 2061400314104126394}
   - {fileID: 155248060487358411}
   - {fileID: 67514600053720329}
+  - {fileID: 1819168872871408505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2713786587758739687
@@ -150,7 +151,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79e0e4509f8349d45a9e49a74ccb0692, type: 2}
+  - {fileID: 2100000, guid: a12f4f8dbfe3556488099072d70f4e5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: eccb605dc4d304d429a3a8f6329726b6, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: c27e0c4d5b66bc14dba15a230a4aecf6, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -227,7 +228,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -272,6 +273,13 @@ MonoBehaviour:
   isDetect: 0
   UIMonster: {fileID: 5926944063164182901}
   timeStun: 0
+  posBoss:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2395033395964977882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +296,10 @@ MonoBehaviour:
   skillBossAnimationName: Skill
   idleBossAnimationName: Idle
   walkBossAnimationName: Walk
+  chaseBossAnimationName: Chase
+  dieBossAnimationName: Die
   skeletonBossAnimation: {fileID: 0}
-  bossState: 2
+  bossState: 3
   stateBossString: 
 --- !u!1 &2492474441961696579
 GameObject:
@@ -300,8 +310,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 67514600053720329}
+  - component: {fileID: 8722596191592311147}
+  - component: {fileID: 4064634050271581361}
   m_Layer: 0
-  m_Name: SkillBoss
+  m_Name: SkillBossView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,6 +334,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8205716816885106856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8722596191592311147
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492474441961696579}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -3.6932802, y: 1.8414774}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.807064, y: 3.6880398}
+  m_EdgeRadius: 0
+--- !u!114 &4064634050271581361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492474441961696579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1e5c793d478b0498446f8e3e72be70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillBossGameObject: {fileID: 4210812823006362212}
 --- !u!1 &3780005381403295632
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +457,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.4024973, y: 1.8637023}
+  m_Offset: {x: -2.6160395, y: 1.8637023}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -398,7 +468,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4060993, y: 3.5081606}
+  m_Size: {x: 2.8331847, y: 3.5081606}
   m_EdgeRadius: 0
 --- !u!114 &6019611756716008906
 MonoBehaviour:
@@ -410,6 +480,96 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feba443ccc539dd4292ba39a7fa2f8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4210812823006362212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1819168872871408505}
+  - component: {fileID: 5883643278544519465}
+  - component: {fileID: 8967065323620034538}
+  m_Layer: 0
+  m_Name: SkillBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1819168872871408505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210812823006362212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8205716816885106856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &5883643278544519465
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210812823006362212}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.9618082, y: 1.8073897}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.320013, y: 3.6956892}
+  m_EdgeRadius: 0
+--- !u!114 &8967065323620034538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210812823006362212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6abe43ee8df92344a74fbb93a7d27af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5038852628638033154
@@ -566,8 +726,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 633581594531949403, guid: d1be67867f23711489d5e511ea10aa7e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2769774170657931751}
   m_SourcePrefab: {fileID: 100100000, guid: d1be67867f23711489d5e511ea10aa7e, type: 3}
+--- !u!1 &5009658348908204918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 633581594531949403, guid: d1be67867f23711489d5e511ea10aa7e, type: 3}
+  m_PrefabInstance: {fileID: 5570687360191117357}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &2769774170657931751
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5009658348908204918}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &7819532587273487570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2435182783756516607, guid: d1be67867f23711489d5e511ea10aa7e, type: 3}

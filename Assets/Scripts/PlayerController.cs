@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        doJump = true; doAttack = true;
+        doAttack = true;
         p_maxHealth = 100 + 10*(p_Level-1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
         p_manaOfSkill = 40 + 2 * (p_Level - 1);
@@ -94,13 +94,16 @@ public class PlayerController : MonoBehaviour
        // Debug.Log(isPressMove);
         if (!isDie)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) { Jump(); }
+            if (Input.GetKey(KeyCode.Space)) { Jump(); }
             if (!doJump)
             {
                 timeJump += Time.deltaTime;
             }
             else { timeJump=0; }
-            Run();
+            if (Animation.instance.state!=State.Injured)
+            {
+                Run();
+            }
             FadeImmortal();
         }
         
@@ -212,9 +215,8 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (!isDie)
+        if (!isDie&&doJump&& feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-            if (!doJump) { return; }
                 rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
                 Animation.instance.state = State.Jump;
                 doJump = false;
