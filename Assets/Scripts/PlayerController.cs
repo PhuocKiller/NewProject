@@ -106,8 +106,6 @@ public class PlayerController : MonoBehaviour
             }
             FadeImmortal();
         }
-        
-
     }
    
     public void PlayerAttack()
