@@ -19289,7 +19289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1363154888864595350, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Size.y
-      value: 0.50308037
+      value: 1.1129557
       objectReference: {fileID: 0}
     - target: {fileID: 1363154888864595350, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Offset.x
@@ -19297,7 +19297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1363154888864595350, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Offset.y
-      value: -0.073706456
+      value: 0.23123115
       objectReference: {fileID: 0}
     - target: {fileID: 2985178505919917707, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Mesh
@@ -19309,6 +19309,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6780178401145391303, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780178401145391303, guid: 49299295de627b64cb8244746238eedd, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8023039177383878710, guid: 49299295de627b64cb8244746238eedd, type: 3}
