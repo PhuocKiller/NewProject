@@ -15,7 +15,7 @@ public class AttackBossView : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Attack
-            && (mon.m_currentHealth / mon.m_maxHealth) >= 0.5f)
+            && (mon.m_currentHealth / mon.m_maxHealth) >= 0.5f &&mon.isLive)
         {
             BossAnimation.instance.bossState = BossState.Attack;
             Invoke("DelayActiveAttackBossGameObject", 0.6f);

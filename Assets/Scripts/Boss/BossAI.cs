@@ -44,12 +44,17 @@ public class BossAI : Monster
                 }
                 else
                 {
-                    BossAnimation.instance.bossState = BossState.Walk;
+                    
                     if (!isDetect)
                     {
                         rigid.velocity = new Vector2(-moveSpeed, 0);
+                        BossAnimation.instance.bossState = BossState.Walk;
                     }
-                    else { rigid.velocity = new Vector2(-3 * moveSpeed, 0); } //khi phát hiện thì tăng tốc
+                    else  //khi phát hiện thì tăng tốc
+                    {
+                        rigid.velocity = new Vector2(-3 * moveSpeed, 0);
+                        BossAnimation.instance.bossState = BossState.Chase;
+                    } 
                 }
 
 
@@ -88,15 +93,7 @@ public class BossAI : Monster
     }
     public override void MonsterDie()
     {
-        Debug.Log("you win");
-    }
-    public void ChangeDirection()
-    {
-       if (!isLive)
-        {
-            moveSpeed = -moveSpeed;
-            transform.localScale = new Vector2(Mathf.Sign(rigid.velocity.x), 1);
-        }
+        BossAnimation.instance.bossState = BossState.Die;
     }
     void ChangePosition()
     {

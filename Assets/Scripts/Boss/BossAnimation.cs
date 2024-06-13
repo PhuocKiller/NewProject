@@ -9,7 +9,9 @@ using UnityEngine;
         Attack,
         Skill,
         Idle,
-        Walk
+        Walk,
+        Chase,
+        Die
     }
     public class BossAnimation : MonoBehaviour
     {
@@ -28,11 +30,17 @@ using UnityEngine;
         [SpineAnimation]
         public string walkBossAnimationName;
 
+        [SpineAnimation]
+        public string chaseBossAnimationName;
+
+        [SpineAnimation]
+        public string dieBossAnimationName;
 
 
-        #endregion
 
-        public SkeletonAnimation skeletonBossAnimation;
+    #endregion
+
+    public SkeletonAnimation skeletonBossAnimation;
         public static BossAnimation instance;
         public BossState bossState;
         public string stateBossString;
@@ -85,6 +93,8 @@ using UnityEngine;
             }
             else if (bossState == BossState.Walk) { return "Walk"; }
             else if (bossState == BossState.Skill) { return "Skill"; }
+            else if (bossState == BossState.Chase) { return "Chase"; }
+            else if (bossState == BossState.Die) { return "Die"; }
             else { return "Attack"; }
 
         }
@@ -105,6 +115,14 @@ using UnityEngine;
         if (a == "Walk")
         {
             spineBossAnimationState.SetAnimation(0, walkBossAnimationName, true);
+        }
+        if (a == "Chase")
+        {
+            spineBossAnimationState.SetAnimation(0, chaseBossAnimationName, true);
+        }
+        if (a == "Die")
+        {
+            spineBossAnimationState.SetAnimation(0, dieBossAnimationName, false);
         }
     }
     public float GetTimeOfAttackBoss()

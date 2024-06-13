@@ -150,6 +150,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter &&level!=0)
             {
+                AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
                     if (playerControllers[i].characterType == characterType)
@@ -178,6 +179,7 @@ public class SavingFile : MonoBehaviour
                 }
             }
         }
+        AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
     }
     public void PlayNewGame()
     {
@@ -214,16 +216,22 @@ public class SavingFile : MonoBehaviour
     }
     public void DeleteGame()
     {
+        bool isHaveCharacter = false;
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter && level!=0)
             {
+                AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
                 Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0,0);
                 MainMenu.instance.loadGamePanel.SetActive(false);
-                MainMenu.instance.loadGamePanel.SetActive(true);
-
+                MainMenu.instance.loadGamePanel.SetActive(true); isHaveCharacter = true;
             }
         }
         level = 0;
+        if(!isHaveCharacter)
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+        }
+
     }
 }

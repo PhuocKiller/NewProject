@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        doJump = true; doAttack = true;
+        doAttack = true;
         p_maxHealth = 100 + 10*(p_Level-1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
         p_manaOfSkill = 40 + 2 * (p_Level - 1);
@@ -94,13 +94,16 @@ public class PlayerController : MonoBehaviour
        // Debug.Log(isPressMove);
         if (!isDie)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) { Jump(); }
+            if (Input.GetKey(KeyCode.Space)) { Jump(); }
             if (!doJump)
             {
                 timeJump += Time.deltaTime;
             }
             else { timeJump=0; }
-            Run();
+            if (Animation.instance.state!=State.Injured)
+            {
+                Run();
+            }
             FadeImmortal();
         }
         
@@ -212,9 +215,8 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (!isDie)
+        if (!isDie&&doJump&& feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-            if (!doJump) { return; }
                 rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
                 Animation.instance.state = State.Jump;
                 doJump = false;
@@ -284,15 +286,22 @@ public class PlayerController : MonoBehaviour
             p_CurrentXP = p_CurrentXP - p_MaxXP;
             p_Level++;
             Animation.instance.state = State.LevelUp;
-            p_maxHealth = 100 + 10 * (p_Level - 1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
-            p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
+            FullEngergy();
+            p_maxHealth = 100 + 10 * (p_Level - 1);
+            p_MaxMana = 100 + 10 * (p_Level - 1);
             p_manaOfSkill = 40 + 2 * (p_Level - 1);
             p_manaofSkill_1=10 + (p_Level - 1);
             p_MaxXP = 100 + 10 * (p_Level - 1);
             p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 2 * (p_Level - 1);
         }
+        Animation.instance.SetupSkins(p_Level);
 
         UIManager.instance.levelPlayerTMP.text = p_Level.ToString();
+    }
+    public void FullEngergy() //hồi full máu và mana
+    {
+        p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
+        p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
     }
     public void PlayerBeingAttacked(float damage) //Player bị tấn công
     {
@@ -306,10 +315,11 @@ public class PlayerController : MonoBehaviour
             p_currentHealthFloat = 0; p_currentHealthFade = 0;
             Animation.instance.state = State.Die;
             isDie = true;
+            Invoke("PlayAgain",3);
             return;
 
         }
-        DelayDeactiveImmortal();
+        Invoke("DeactiveImmortal", 3);
         Animation.instance.state = State.Injured;
         
     }
@@ -317,10 +327,11 @@ public class PlayerController : MonoBehaviour
     {
         beImmortal = false;
     }
-    public void DelayDeactiveImmortal()
+    void PlayAgain()
     {
-        Invoke("DeactiveImmortal", 3);
+        UIManager.instance.panelPlayAgain.SetActive(true);
     }
+
     void FadeImmortal()
     {
         if (beImmortal)

@@ -47,6 +47,7 @@ public class CreatePlayerUI : MonoBehaviour
                 if (playerUI[i].characterType == characterType)
                 {
                     playerUiInstance = Instantiate(playerUI[i], transform.position, Quaternion.identity, transform.parent);
+                    playerUiInstance.SetupSkinInUI(level);
                 }
             }
             levelText.text = "Level: " + level;

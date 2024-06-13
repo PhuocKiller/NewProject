@@ -1,4 +1,5 @@
-﻿using Spine.Unity;
+﻿using Spine;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -173,6 +174,7 @@ public enum State
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
+            spineAnimationState.AddAnimation(0, fallAnimationName, true,0);
             AudioManager.instance.PlaySound(AudioManager.instance.jump, 1);
         }
         if (a == "Fall")
@@ -276,6 +278,16 @@ public enum State
             chargedTime = 0; skillTime = 0;
         }
     }
-
+    public void SetupSkins(int level)
+    {
+        if(level<5)
+        {
+            skeleton.SetSkin("Lv1");
+        }
+        else if(level<10)
+        {
+            skeleton.SetSkin("Lv5");
+        }
+    }
 
 }

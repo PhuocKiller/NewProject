@@ -77,12 +77,11 @@ public class MainMenu : MonoBehaviour
     public void PlayLoadedGameButton()
     {
         SavingFile.instance.PlayLoadedGame();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        
     }
     public void DeleteGameButton()
     {
         SavingFile.instance.DeleteGame();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     public void PlayNewGameButton()
     {
