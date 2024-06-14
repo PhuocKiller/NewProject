@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject, skill_1MeleeGameObject, skill_1RangeGameObject;
     GameObject feet;
-    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer; //collider các skill Range body Player
-    BoxCollider2D arrowBox, skillRangeBox, feetBoxCollider; //collider các skill Range
+    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer, feetCapCollider; //collider các skill Range body Player
+    BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
-        feetBoxCollider=feet.GetComponent<BoxCollider2D>();
+        feetCapCollider=feet.GetComponent<CapsuleCollider2D>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
     // Start is called before the first frame update
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (!isDie&&doJump&& feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (!isDie&&doJump&& feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
                 rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
                 Animation.instance.state = State.Jump;
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
 
         bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
         
-           if(feetBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+           if(feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
                 if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
                 {

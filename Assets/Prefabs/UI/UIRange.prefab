@@ -5095,6 +5095,7 @@ MonoBehaviour:
   panelInventory: {fileID: 8260425906324472803}
   panelSetting: {fileID: 1742128182463090107}
   unpauseButton: {fileID: 145517629233721673}
+  panelPlayAgain: {fileID: 0}
   nameMonsterTMP: {fileID: 6687217852896496069}
   healthMonsterTMP: {fileID: 4478055560772119346}
   attackMonsterTMP: {fileID: 3562839309109272402}
@@ -5108,7 +5109,8 @@ MonoBehaviour:
   manaOfSkilPlayerTMP: {fileID: 347693187113898077}
   numberHealPotionTMP: {fileID: 5153896635708030922}
   numberManaPotionTMP: {fileID: 53541774017060261}
-  uiTypes: 0
+  uiTypes: 1
+  coinValues: {fileID: 0}
 --- !u!1 &5981323903510552794
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     private const int SLOTS = 9;
-    private List<IInventoryItem> mItems= new List<IInventoryItem>();
+    public List<IInventoryItem> mItems= new List<IInventoryItem>();
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
     public event EventHandler<InventoryEventArgs> InventoryUpdate;
@@ -42,17 +42,46 @@ public class Inventory : MonoBehaviour
             Collider2D collider= (item as MonoBehaviour).GetComponent<Collider2D>();
             if (collider.enabled)
             {
-                collider.enabled = false;
-                mItems.Add(item);
-                item.OnPickUp();
-                if (ItemAdded != null)
+                if (item.itemTypes != ItemTypes.Key)
                 {
-                    ItemAdded(this,new InventoryEventArgs(item));
+                    collider.enabled = false;
+                    mItems.Add(item);
+                    item.OnPickUp();
+                    if (ItemAdded != null)
+                    {
+                        ItemAdded(this, new InventoryEventArgs(item));
+                    }
+                    if (InventoryUpdate != null)
+                    {
+                        InventoryUpdate(this, new InventoryEventArgs(item));
+                    }
                 }
-                if (InventoryUpdate != null)
+                else
                 {
-                    InventoryUpdate(this, new InventoryEventArgs(item));
+                    if (InventoryUpdate != null)
+                    {
+                        InventoryUpdate(this, new InventoryEventArgs(item));
+                    }
+                    if (!UIManager.instance.isHaveKey)
+                    {
+                        collider.enabled = false;
+                        mItems.Add(item);
+                        item.OnPickUp();
+                        if (ItemAdded != null)
+                        {
+                            ItemAdded(this, new InventoryEventArgs(item));
+                        }
+                        if (InventoryUpdate != null)
+                        {
+                            InventoryUpdate(this, new InventoryEventArgs(item));
+                        }
+                    }
+                    else
+                    {
+
+                    }
                 }
+                   
             }
         }
     }
@@ -107,20 +136,47 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    public void BuyItemInShop (IInventoryItem item)
+    public void BuyItemInShop (IInventoryItem item, int itemCost)
     {
         if (mItems.Count < SLOTS)
         {
-            mItems.Add(item);
-            if (ItemAdded != null)
+            if (item.itemTypes!=ItemTypes.Key)
             {
-                ItemAdded(this, new InventoryEventArgs(item));
+                mItems.Add(item);
+                if (ItemAdded != null)
+                {
+                    ItemAdded(this, new InventoryEventArgs(item));
+                    BuyItemSuccess(itemCost);
+                }
+                if (InventoryUpdate != null)
+                {
+                    InventoryUpdate(this, new InventoryEventArgs(item));
+                }
             }
-            if (InventoryUpdate != null)
+            else
             {
-                InventoryUpdate(this, new InventoryEventArgs(item));
+                if (InventoryUpdate != null)
+                {
+                    InventoryUpdate(this, new InventoryEventArgs(item));
+                }
+                if (!UIManager.instance.isHaveKey)
+                {
+                    mItems.Add(item);
+                    if (ItemAdded != null)
+                    {
+                        ItemAdded(this, new InventoryEventArgs(item));
+                        BuyItemSuccess(itemCost);
+                    }
+                }
+                else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
             }
         }
+    }
+    void BuyItemSuccess(int itemCost)
+    {
+        PlayerController.instance.coins -= itemCost;
+        UIManager.instance.coinValues.text = PlayerController.instance.coins.ToString();
+        AudioManager.instance.PlaySound(AudioManager.instance.buyItem, 1);
     }
     public void CreateNewItem(Vector3 pos, ItemTypes itemTypes) //tạo ra item khi quăng ra đất
     {

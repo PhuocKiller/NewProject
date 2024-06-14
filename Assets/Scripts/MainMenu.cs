@@ -86,7 +86,6 @@ public class MainMenu : MonoBehaviour
     public void PlayNewGameButton()
     {
         SavingFile.instance.PlayNewGame();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
     public void Melee_Button()
     {
@@ -94,6 +93,7 @@ public class MainMenu : MonoBehaviour
         rangeImage.color = new Color(meleeImage.color.r, 0.5f, meleeImage.color.b);
         SavingFile.instance.characterType=CharacterType.Melee;
         SavingFile.instance.uiTypes=UITypes.Melee;
+        SavingFile.instance.level = 1;
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
 
     }
@@ -103,6 +103,7 @@ public class MainMenu : MonoBehaviour
         rangeImage.color = new Color(meleeImage.color.r, 1f, meleeImage.color.b);
         SavingFile.instance.characterType = CharacterType.Range;
         SavingFile.instance.uiTypes = UITypes.Range;
+        SavingFile.instance.level = 1;
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
    
@@ -110,6 +111,7 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
+        SavingFile.instance.level = 0;
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
 }

@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack_Melee: {fileID: 8300000, guid: 6cdf2b6afcdf03c4fb959f056819ba48, type: 3}
   attack_Range: {fileID: 8300000, guid: a344e40e5c2029744a175663f2e15b8c, type: 3}
-  skill1_Melee: {fileID: 0}
+  skill1_Melee: {fileID: 8300000, guid: a9fe83366307d414ea5aec26a348f3ea, type: 3}
   skill1_Range: {fileID: 8300000, guid: d6c2f8a9cf2b4fd4daadb79baa7d42ee, type: 3}
   chargeSkill: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   die: {fileID: 8300000, guid: 548b087b598994d4e808569b8961bc1e, type: 3}
@@ -326,7 +326,7 @@ MonoBehaviour:
   theme:
   - {fileID: 8300000, guid: d0de22ce30929c34fa8838236eea71cf, type: 3}
   - {fileID: 8300000, guid: e4fd656a4f219a741b073cacc32f3e0d, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 91e225ccc2ef0af47b55d332cb502b39, type: 3}
+  - {fileID: 8300000, guid: 2934403b08407494cbb7a55c057995c3, type: 3}
   themeSource: {fileID: 7103328360544123985}
   vfxAudioSource: {fileID: 7518489453098321088}

@@ -185,8 +185,10 @@ public class SavingFile : MonoBehaviour
     {
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
-            if (indexCharacter.level== 0)
+            if (indexCharacter.level== 0 &&level==1)
             {
+                AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+                level = 0;
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
                     if (playerControllers[i].characterType == characterType)
@@ -213,6 +215,7 @@ public class SavingFile : MonoBehaviour
                 }
             }
         }
+        AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
     }
     public void DeleteGame()
     {

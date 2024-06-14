@@ -19,8 +19,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     public Bars healthBar, manaBar, XPBar;
     public TextMeshProUGUI levelPlayerTMP, damageDealByMonster;
-    public bool isRefillMana;
-    public bool isRefillHealth;
+    public bool isRefillMana, isRefillHealth;
+    public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
     public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
@@ -195,25 +195,23 @@ public class UIManager : MonoBehaviour
 
         panelMonsterInfo.SetActive(true);
     }
-    public void ClosePanelMonster()
-    {
-        panelMonsterInfo.SetActive(false);
-    }
+    
     public void ShowInfoPlayer()
     {
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        if (panelPlayerInfo.activeInHierarchy==false)
+        {
+            panelPlayerInfo.SetActive(true);
+        }
+    else { panelPlayerInfo.SetActive(false); }
         healthPlayerTMP.text = "Halth: " + (int)PlayerController.instance.p_currentHealthFloat + "/" + PlayerController.instance.p_maxHealth;
         manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat + "/" + PlayerController.instance.p_MaxMana;
         attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
         defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
         xpPlayerTMP.text = "XP: " + PlayerController.instance.p_CurrentXP + "/" + PlayerController.instance.p_MaxXP;
         manaOfSkilPlayerTMP.text = "Mana cost: " + PlayerController.instance.p_manaOfSkill;
-        panelPlayerInfo.SetActive(true);
-      
-    }
-    public void ClosePanelPlayer()
-    {
-        panelPlayerInfo.SetActive(false);
-    }
+     }
+   
     public void AttackButton()
     {
         PlayerController.instance.PlayerAttack();
@@ -228,7 +226,11 @@ public class UIManager : MonoBehaviour
     }
     public void InventoryButton()
     {
-        panelInventory.SetActive(true);
+        if (panelInventory.activeInHierarchy==false)
+        {
+            panelInventory.SetActive(true);
+        }
+        else { panelInventory.SetActive(false); }
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
    
@@ -300,7 +302,7 @@ public class UIManager : MonoBehaviour
     
     void Inventory_Update(object sender, InventoryEventArgs e)
     {
-      
+        isHaveKey = false;
         numberHealPotionInt = 0; numberManaPotionInt = 0;
         Transform inventoryPanel = transform.Find("InventoryPanel");
         foreach (Transform slot in inventoryPanel)
@@ -322,6 +324,10 @@ public class UIManager : MonoBehaviour
                         numberManaPotionInt += 1;
                         
                     }
+                    if (itemDragHandler.Item.itemTypes ==ItemTypes.Key)
+                    {
+                        isHaveKey = true;
+                    }
                 }
             }
             
@@ -329,6 +335,7 @@ public class UIManager : MonoBehaviour
         numberHealPotionTMP.text = numberHealPotionInt.ToString();
         numberManaPotionTMP.text = numberManaPotionInt.ToString();
     }
+   
     public void PauseButton()
     {
         Time.timeScale = 0;

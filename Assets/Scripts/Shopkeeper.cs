@@ -87,14 +87,12 @@ public class Shopkeeper : MonoBehaviour
         }
     }
     public void BuyButton()
-    {if (PlayerController.instance.coins>= itemCost)
+    {if (PlayerController.instance.coins>= itemCost&&Inventory.instance.mItems.Count<9)
         {
             itemToBuy = Instantiate(ShopItem[itemIndex]);
-            Inventory.instance.BuyItemInShop(itemToBuy);
+            Inventory.instance.BuyItemInShop(itemToBuy, itemCost);
             Destroy(itemToBuy.gameObject);
-            PlayerController.instance.coins -= itemCost;
-            UIManager.instance.coinValues.text = PlayerController.instance.coins.ToString();
-            AudioManager.instance.PlaySound(AudioManager.instance.buyItem, 1);
+            
         }
     else
         {
