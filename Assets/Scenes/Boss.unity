@@ -672,6 +672,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3918937484666585800, guid: 49299295de627b64cb8244746238eedd, type: 3}
+      propertyPath: jumpSpeed
+      value: 14.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4993074614299259893, guid: 49299295de627b64cb8244746238eedd, type: 3}
       propertyPath: m_Name
       value: Melee
@@ -2164,6 +2168,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5340523216269531532, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5915280807738768253, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
       propertyPath: m_Name
       value: UIMelee
@@ -2896,7 +2904,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 1673859566}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2cb76561551a7594284ace6000dc00ad, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

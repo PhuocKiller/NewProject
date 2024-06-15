@@ -301,6 +301,9 @@ MonoBehaviour:
   skeletonBossAnimation: {fileID: 0}
   bossState: 3
   stateBossString: 
+  chase: {fileID: 4593184484909914550, guid: 5530efa4ab61b80488a9dfa6dda454be, type: 3}
+  boom1: {fileID: 2433282508523890284, guid: b2f5b6c06e868a64299983ec09677cd6, type: 3}
+  walk: {fileID: 8194992990867289333, guid: f675a3b93a695fc4887587c5382f81f5, type: 3}
 --- !u!1 &2492474441961696579
 GameObject:
   m_ObjectHideFlags: 0
