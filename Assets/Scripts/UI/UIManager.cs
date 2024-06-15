@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana, isRefillHealth;
     public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain, panelHelp;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP;
@@ -239,10 +239,7 @@ public class UIManager : MonoBehaviour
         SavingFile.instance.Load(PlayerController.instance.numberIndexCharacter);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
     }
-    public void ClosePanelInventory()
-    {
-        panelInventory.SetActive(false);
-    }
+    
     void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
     {
         Transform inventoryPanel = transform.Find("InventoryPanel");
@@ -347,6 +344,17 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         unpauseButton.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.unpauseGame, 1);
+    }
+    public void HelpButton()
+    {
+        panelHelp.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void CloseButton()
+    {
+        if (panelHelp.activeInHierarchy) { panelHelp.SetActive(false); }
+        Time.timeScale = 1f;
+
     }
     public void SettingButton()
     {

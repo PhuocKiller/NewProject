@@ -45,13 +45,9 @@ using UnityEngine;
         public BossState bossState;
         public string stateBossString;
 
-    [SerializeField] private ParticleSystem chase;
-    [SerializeField] private ParticleSystem boom1;
-    [SerializeField] private ParticleSystem walk;
-    private ParticleSystem ChaseInstance;
-    private ParticleSystem Boom1Instance;
-    private ParticleSystem WalkInstance;
-
+    [SerializeField] private ParticleSystem chase, boom1, walk;
+   
+    private ParticleSystem ChaseInstance, Boom1Instance, WalkInstance;
     public void SpawnBoom1()
     {
         Boom1Instance = Instantiate(boom1, transform.position, Quaternion.identity);

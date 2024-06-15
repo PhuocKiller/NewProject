@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &136486577604006241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8261527878117360099}
+  m_Layer: 0
+  m_Name: skill1Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8261527878117360099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136486577604006241}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8200002, y: 1.56, z: -0.04288374}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577959706955924223
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +274,8 @@ Transform:
   - {fileID: 8893956985328698245}
   - {fileID: 2086555212930992358}
   - {fileID: 5201962241826024539}
+  - {fileID: 6652679091914552623}
+  - {fileID: 8261527878117360099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2985178505919917707
@@ -619,6 +652,12 @@ MonoBehaviour:
   skeletonAnimation: {fileID: 0}
   state: 4
   stateString: 
+  attackPoint: {fileID: 6652679091914552623}
+  skill1Point: {fileID: 8261527878117360099}
+  skill1: {fileID: 5112403345868107899, guid: 76117f8d143b8684988a9907685028ca, type: 3}
+  level: {fileID: 4772634663558126228, guid: ad6f1ab178f92e644aff0c08286a414b, type: 3}
+  attack: {fileID: 5880797563141009103, guid: d98337de166e79745bfdb9f1465babb0, type: 3}
+  die: {fileID: 5515065002404772068, guid: dee1a91f022017c4d832f1131a58e96f, type: 3}
 --- !u!1 &5329518511298843587
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,3 +725,34 @@ CapsuleCollider2D:
   m_Offset: {x: -0.58441687, y: 0.7436876}
   m_Size: {x: 2.5187626, y: 2.5187626}
   m_Direction: 0
+--- !u!1 &5811297534719151369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6652679091914552623}
+  m_Layer: 0
+  m_Name: attackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6652679091914552623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5811297534719151369}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8300002, y: 1.52, z: -0.04288374}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

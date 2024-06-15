@@ -78,10 +78,8 @@ public enum State
     [SerializeField] private ParticleSystem level;
     [SerializeField] private ParticleSystem attack;
     [SerializeField] private ParticleSystem die;
-    private ParticleSystem Skill1Instance;
-    private ParticleSystem LevelInstance;
-    private ParticleSystem AttackInstance;
-    private ParticleSystem DieInstance;
+    private ParticleSystem Skill1Instance, LevelInstance, AttackInstance, DieInstance;
+   
 
     public void SpawnDie()
     {
