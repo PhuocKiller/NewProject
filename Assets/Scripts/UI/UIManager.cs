@@ -204,7 +204,7 @@ public class UIManager : MonoBehaviour
             panelPlayerInfo.SetActive(true);
         }
     else { panelPlayerInfo.SetActive(false); }
-        healthPlayerTMP.text = "Halth: " + (int)PlayerController.instance.p_currentHealthFloat + "/" + PlayerController.instance.p_maxHealth;
+        healthPlayerTMP.text = "Health: " + (int)PlayerController.instance.p_currentHealthFloat + "/" + PlayerController.instance.p_maxHealth;
         manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat + "/" + PlayerController.instance.p_MaxMana;
         attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
         defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
@@ -348,13 +348,10 @@ public class UIManager : MonoBehaviour
     public void HelpButton()
     {
         panelHelp.SetActive(true);
-        Time.timeScale = 0f;
     }
     public void CloseButton()
     {
         if (panelHelp.activeInHierarchy) { panelHelp.SetActive(false); }
-        Time.timeScale = 1f;
-
     }
     public void SettingButton()
     {
