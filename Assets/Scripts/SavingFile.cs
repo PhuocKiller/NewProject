@@ -10,6 +10,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 public class GameProgress
 {
     public List<GameIndexCharacter> listIndexCharacter;
+    public float musicVolume, soundVolume;
 }
 
 [System.Serializable]
@@ -37,11 +38,11 @@ public class SavingFile : MonoBehaviour
     public int level;
     public UITypes uiTypes;
     public int coins;
-   // public CreatePlayerUI[] createPlayerUI;
     public PlayerController[] playerControllers;
     public UIManager[] uIManagers;
     public GameObject inventory;
     public int[] slot;
+    public float musicVolume, soundVolume;
 
     private void Awake()
     {
@@ -67,12 +68,12 @@ public class SavingFile : MonoBehaviour
     private void Update()
     {
     }
-    public void Save(int numberIndexCharacter, CharacterType characterType, UITypes uiTypes, int level, int coins)
+    public void Save(int numberIndexCharacter, CharacterType characterType, UITypes uiTypes, int level, int coins, float musicVolume,float soundVolume)
     {
-
+        gameProgress.musicVolume = musicVolume;
+        gameProgress.soundVolume = soundVolume;
         foreach (var indexCharacter in gameProgress.listIndexCharacter)
         {
-
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter)
             {
                 indexCharacter.characterType = characterType;
@@ -87,7 +88,6 @@ public class SavingFile : MonoBehaviour
                 return;
             }
         }
-        
     }
     public void Load(int numberIndexCharacter)
     {
@@ -133,7 +133,7 @@ public class SavingFile : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, file);
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "{\"listIndexCharacter\":[{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
+            File.WriteAllText(filePath, "{\"musicVolume\":1,\"soundVolume\":1,\"listIndexCharacter\":[{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
         }
         gameProgress = JsonUtility.FromJson<GameProgress>(File.ReadAllText(filePath));
     }
@@ -173,6 +173,8 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.p_Level = level;
                         PlayerController.instance.coins = coins;
                         UIManager.instance.uiTypes = uiTypes;
+                       /* UIManager.instance.musicVolume = gameProgress.musicVolume;
+                        UIManager.instance.soundVolume = gameProgress.soundVolume;*/
                         SceneManager.LoadScene("Round1");
                     }
 
@@ -187,7 +189,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.level== 0 &&level==1)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.error);
+                AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
                 level = 0;
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
@@ -210,6 +212,8 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.p_Level = 1;
                         PlayerController.instance.coins = 0;
                         UIManager.instance.uiTypes = uiTypes;
+                        /*UIManager.instance.musicVolume = gameProgress.musicVolume;
+                        UIManager.instance.soundVolume = gameProgress.soundVolume;*/
                         SceneManager.LoadScene("Round1");
                     }
                 }
@@ -225,7 +229,7 @@ public class SavingFile : MonoBehaviour
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter && level!=0)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
-                Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0,0);
+                Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0,0,gameProgress.musicVolume, gameProgress.soundVolume);
                 MainMenu.instance.loadGamePanel.SetActive(false);
                 MainMenu.instance.loadGamePanel.SetActive(true); isHaveCharacter = true;
             }

@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public AudioClip attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
-        levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton, pauseGame,unpauseGame;
+        levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton,checkSound, pauseGame,unpauseGame;
     public AudioClip[] theme;
     public AudioSource  musicSource, soundSource;
     public float musicVolume, soundVolume;
@@ -18,6 +18,15 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);  //xóa cái mới sinh ra
+            }
+
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

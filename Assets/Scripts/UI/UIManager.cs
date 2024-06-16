@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     Image imageHealPotion, imageManaPotion;
     public UITypes uiTypes;
     public TMP_Text coinValues;
+    public Slider musicSlider, soundSlider;
 
 
 
@@ -363,7 +364,8 @@ public class UIManager : MonoBehaviour
     {
         Inventory_ItemSave();
         SavingFile.instance.Save(PlayerController.instance.numberIndexCharacter, PlayerController.instance.characterType,
-         UIManager.instance.uiTypes, PlayerController.instance.p_Level, PlayerController.instance.coins);
+         UIManager.instance.uiTypes, PlayerController.instance.p_Level, PlayerController.instance.coins,
+         musicSlider.value, soundSlider.value);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
 
     }

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public static MainMenu instance;
     public Image Character0, Character1, Character2, meleeImage, rangeImage;
     public CreatePlayerUI[] createPlayerUI;
-    public GameObject newGamePanel, loadGamePanel,loginPanel;
+    public GameObject newGamePanel, loadGamePanel,loginPanel, settingPanel;
     private void Awake()
     {
         if (instance == null)
@@ -33,11 +33,11 @@ public class MainMenu : MonoBehaviour
         loginPanel.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
-    public void BackToLogin()
+    public void Setting()
     { 
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
-        loginPanel.SetActive(true);
+        settingPanel.SetActive(true);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void EnterLogin()
@@ -111,6 +111,7 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
+        settingPanel.SetActive(false);
         SavingFile.instance.level = 0;
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
