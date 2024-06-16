@@ -150,7 +150,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter &&level!=0)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
                     if (playerControllers[i].characterType == characterType)
@@ -179,7 +179,7 @@ public class SavingFile : MonoBehaviour
                 }
             }
         }
-        AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.error);
     }
     public void PlayNewGame()
     {
@@ -187,7 +187,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.level== 0 &&level==1)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.error);
                 level = 0;
                 for (int i = 0; i < playerControllers.Length; i++)
                 {
@@ -215,7 +215,7 @@ public class SavingFile : MonoBehaviour
                 }
             }
         }
-        AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.error);
     }
     public void DeleteGame()
     {
@@ -224,7 +224,7 @@ public class SavingFile : MonoBehaviour
         {
             if (indexCharacter.numberIndexCharacter == numberIndexCharacter && level!=0)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
                 Save(numberIndexCharacter, CharacterType.Melee, UITypes.Melee, 0,0);
                 MainMenu.instance.loadGamePanel.SetActive(false);
                 MainMenu.instance.loadGamePanel.SetActive(true); isHaveCharacter = true;
@@ -233,7 +233,7 @@ public class SavingFile : MonoBehaviour
         level = 0;
         if(!isHaveCharacter)
         {
-            AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.error);
         }
 
     }

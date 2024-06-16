@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.error);
             }
 
         }
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.error);
             }
         }
       

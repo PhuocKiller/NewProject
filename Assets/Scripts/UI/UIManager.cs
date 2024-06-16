@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
     {
         if (numberManaPotionInt > 0)
         {
-            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion);
             Transform inventoryPanel = transform.Find("InventoryPanel");
             foreach (Transform slot in inventoryPanel)
             {
@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
                 
             }
         }
-        else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
+        else { AudioManager.instance.PlaySound(AudioManager.instance.error); }
         
         
     }
@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
     {
         if (numberHealPotionInt>0)
         {
-            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.reFillPotion);
             Transform inventoryPanel = transform.Find("InventoryPanel");
             foreach (Transform slot in inventoryPanel)
             {
@@ -165,7 +165,7 @@ public class UIManager : MonoBehaviour
 
             }
         }
-        else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
+        else { AudioManager.instance.PlaySound(AudioManager.instance.error); }
 
     }
     void UpdateHealButton()
@@ -198,7 +198,7 @@ public class UIManager : MonoBehaviour
     
     public void ShowInfoPlayer()
     {
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
         if (panelPlayerInfo.activeInHierarchy==false)
         {
             panelPlayerInfo.SetActive(true);
@@ -231,13 +231,13 @@ public class UIManager : MonoBehaviour
             panelInventory.SetActive(true);
         }
         else { panelInventory.SetActive(false); }
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
    
     public void LoadButton()
     {
         SavingFile.instance.Load(PlayerController.instance.numberIndexCharacter);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     
     void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
@@ -337,13 +337,13 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         unpauseButton.SetActive(true);
-        AudioManager.instance.PlaySound(AudioManager.instance.pauseGame, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.pauseGame);
     }
     public void UnPauseButton()
     {
         Time.timeScale = 1f;
         unpauseButton.SetActive(false);
-        AudioManager.instance.PlaySound(AudioManager.instance.unpauseGame, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.unpauseGame);
     }
     public void HelpButton()
     {
@@ -357,21 +357,21 @@ public class UIManager : MonoBehaviour
     {
         panelSetting.SetActive(true);
        Time.timeScale = 0;
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void SaveButton()
     {
         Inventory_ItemSave();
         SavingFile.instance.Save(PlayerController.instance.numberIndexCharacter, PlayerController.instance.characterType,
          UIManager.instance.uiTypes, PlayerController.instance.p_Level, PlayerController.instance.coins);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
 
     }
     public void  BackButtonInSetting()
     {
         panelSetting.SetActive(false);
         Time.timeScale = 1f;
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void QuitButtonInSetting()
     {
@@ -380,12 +380,12 @@ public class UIManager : MonoBehaviour
         Inventory.instance.transform.parent = GameObject.Find("Entrances").transform;
         Time.timeScale = 1f;
         panelPlayAgain.SetActive(false);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
         SceneManager.LoadScene("MainMenu");
     }
     public void PlayAgainButton()
     {
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
         PlayerController.instance.FullEngergy();
         PlayerController.instance.isDie = false;
         PlayerController.instance.beImmortal=false;

@@ -168,7 +168,7 @@ public class Inventory : MonoBehaviour
                         BuyItemSuccess(itemCost);
                     }
                 }
-                else { AudioManager.instance.PlaySound(AudioManager.instance.error, 1); }
+                else { AudioManager.instance.PlaySound(AudioManager.instance.error); }
             }
         }
     }
@@ -176,7 +176,7 @@ public class Inventory : MonoBehaviour
     {
         PlayerController.instance.coins -= itemCost;
         UIManager.instance.coinValues.text = PlayerController.instance.coins.ToString();
-        AudioManager.instance.PlaySound(AudioManager.instance.buyItem, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.buyItem);
     }
     public void CreateNewItem(Vector3 pos, ItemTypes itemTypes) //tạo ra item khi quăng ra đất
     {

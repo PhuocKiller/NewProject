@@ -10,7 +10,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
         levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton, pauseGame,unpauseGame;
     public AudioClip[] theme;
-    public AudioSource  themeSource, vfxAudioSource;
+    public AudioSource  musicSource, soundSource;
+    public float musicVolume, soundVolume;
     private void Awake()
     {
         if (instance == null)
@@ -25,26 +26,25 @@ public class AudioManager : MonoBehaviour
         {
             if (i == SceneManager.GetActiveScene().buildIndex)
             {
-                themeSource.clip = theme[i];
-                themeSource.volume = 0.3f;
-                themeSource.loop = true;
-                themeSource.Play();
+                musicSource.clip = theme[i];
+                musicSource.volume = 1f;
+                musicSource.loop = true;
+                musicSource.Play();
             }
         }
     }
 
 
-    public void PlaySound(AudioClip clip, float volume, bool isLoop=false)
+    public void PlaySound(AudioClip clip, bool isLoop=false)
     {
-        vfxAudioSource.clip = clip;
-        vfxAudioSource.volume = volume;
-        vfxAudioSource.loop = isLoop; 
-        vfxAudioSource.Play();
+        soundSource.clip = clip;
+        soundSource.loop = isLoop; 
+        soundSource.Play();
     }
  
     public void StopSound()
     {
-        vfxAudioSource.Stop();
+        soundSource.Stop();
     }
     
 }

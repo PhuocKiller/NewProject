@@ -164,26 +164,26 @@ public enum State
         {
             chargedTime = 0;
             spineAnimationState.SetAnimation(0, chargeSkillAnimationName, false);
-            AudioManager.instance.PlaySound(AudioManager.instance.chargeSkill, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.chargeSkill);
         }
         if (a == "Die")
         {
             spineAnimationState.SetAnimation(0, dieAnimationName, false);
-            AudioManager.instance.PlaySound(AudioManager.instance.die, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.die);
             SpawnDie();
         }
         if (a == "Injured")
         {
             spineAnimationState.SetAnimation(0, injuredAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(injuredAnimationName).Duration);
-            AudioManager.instance.PlaySound(AudioManager.instance.injured, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.injured);
 
         }
         if (a == "LevelUp")
         {
             spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
-            AudioManager.instance.PlaySound(AudioManager.instance.levelUp, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
             SpawnLevel();
         }
         if (a == "MainSkill")
@@ -191,21 +191,21 @@ public enum State
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
             if(PlayerController.instance.characterType==CharacterType.Melee)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Melee, 1, true);
+                AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Melee, true);
             }
-            else { AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Range, 1, true); }
+            else { AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Range, true); }
         }
        
         if (a == "Run")
         {
             spineAnimationState.SetAnimation(0, runAnimationName, true);
-            AudioManager.instance.PlaySound(AudioManager.instance.run, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.run);
         }
         if (a == "Jump")
         {
             spineAnimationState.SetAnimation(0, jumpAnimationName, false);
             spineAnimationState.AddAnimation(0, fallAnimationName, true,0);
-            AudioManager.instance.PlaySound(AudioManager.instance.jump, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.jump);
         }
         if (a == "Fall")
         {
@@ -216,9 +216,9 @@ public enum State
             spineAnimationState.SetAnimation(0, attackAnimationName, false);
            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee);
             }
-           else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range, 1); }
+           else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range); }
             SpawnAttack();
         }
         if (a == "Skill1")
@@ -226,9 +226,9 @@ public enum State
             spineAnimationState.SetAnimation(0, skill_1_AnimationName, false);
             if (PlayerController.instance.characterType == CharacterType.Melee)
             {
-                AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee, 1);
+                AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee);
             }
-            else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range, 1); }
+            else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range); }
             SpawnSkill1();
         }
 

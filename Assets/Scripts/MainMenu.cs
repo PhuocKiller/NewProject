@@ -24,21 +24,21 @@ public class MainMenu : MonoBehaviour
         newGamePanel.SetActive(true);
         loadGamePanel.SetActive(false);
         loginPanel.SetActive(false);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void LoadGame()
     {
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(true);
         loginPanel.SetActive(false);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void BackToLogin()
     { 
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
         loginPanel.SetActive(true);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void EnterLogin()
     {
@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
         Character1.color = new Color(Character0.color.r, Character0.color.g, 0);
         Character2.color = new Color(Character0.color.r, Character0.color.g, 0);
         createPlayerUI[0].SetInfoByButton();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void Cha_1_Button()
     {
@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
         Character1.color = new Color(Character0.color.r, Character0.color.g, 1);
         Character2.color = new Color(Character0.color.r, Character0.color.g, 0);
         createPlayerUI[1].SetInfoByButton();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void Cha_2_Button()
     {
@@ -72,7 +72,7 @@ public class MainMenu : MonoBehaviour
         Character1.color = new Color(Character0.color.r, Character0.color.g, 0);
         Character2.color = new Color(Character0.color.r, Character0.color.g, 1);
         createPlayerUI[2].SetInfoByButton();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void PlayLoadedGameButton()
     {
@@ -94,7 +94,7 @@ public class MainMenu : MonoBehaviour
         SavingFile.instance.characterType=CharacterType.Melee;
         SavingFile.instance.uiTypes=UITypes.Melee;
         SavingFile.instance.level = 1;
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
 
     }
     public void Range_Button()
@@ -104,7 +104,7 @@ public class MainMenu : MonoBehaviour
         SavingFile.instance.characterType = CharacterType.Range;
         SavingFile.instance.uiTypes = UITypes.Range;
         SavingFile.instance.level = 1;
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
    
     public void BackMenu()
@@ -112,6 +112,6 @@ public class MainMenu : MonoBehaviour
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
         SavingFile.instance.level = 0;
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
 }

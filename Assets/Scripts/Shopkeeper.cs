@@ -26,7 +26,7 @@ public class Shopkeeper : MonoBehaviour
        if(canTrade &&!shopPanel.activeInHierarchy&&!talkPanel.activeInHierarchy)
         {
             talkPanel.SetActive(true);
-            AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
         }
     }
     public void YesButtonShop()
@@ -34,13 +34,13 @@ public class Shopkeeper : MonoBehaviour
         shopPanel.SetActive(true);
         talkPanel.SetActive(false);
         SetDefaultAllBorder();
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void NoButtonShop()
     {
         talkPanel.SetActive(false);
         shopPanel.SetActive(false);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {if(collision.CompareTag("Player"))
@@ -63,21 +63,21 @@ public class Shopkeeper : MonoBehaviour
         itemIndex = 0; itemCost = 200;
         SetDefaultAllBorder();
         border[0].color = new Color(0, 1, 0, 1);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void BuySlot_1()
     {
         itemIndex = 1; itemCost = 200;
         SetDefaultAllBorder();
         border[1].color = new Color(0, 1, 0, 1);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void BuySlot_2()
     {
         itemIndex = 2; itemCost = 1500;
         SetDefaultAllBorder();
         border[2].color = new Color(0, 1, 0, 1);
-        AudioManager.instance.PlaySound(AudioManager.instance.clickButton, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     void SetDefaultAllBorder()
     {
@@ -96,7 +96,7 @@ public class Shopkeeper : MonoBehaviour
         }
     else
         {
-            AudioManager.instance.PlaySound(AudioManager.instance.error, 1);
+            AudioManager.instance.PlaySound(AudioManager.instance.error);
         }
             
     }
