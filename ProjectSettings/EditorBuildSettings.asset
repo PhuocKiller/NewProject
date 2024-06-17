@@ -15,7 +15,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Round2.unity
     guid: f9dc1745167cc0f46b399bf1d024438c
   - enabled: 1
-    path: Assets/Scenes/Boss.unity
+    path: Assets/Scenes/Round3.unity
     guid: 24c72ffded45c9c4d973fdd478103316
+  - enabled: 1
+    path: Assets/Scenes/Boss.unity
+    guid: 3f7d0052cc21d6a4b87b4f91d37034cb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e69bd100d76ebee47a1855ea00e28c86, type: 2}

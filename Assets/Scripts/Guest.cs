@@ -6,7 +6,6 @@ public class Guest : MonoBehaviour
 {
     bool canTalk;
     public GameObject talkPanel, noKeyPanel;
-    public Transform fightBossPos;
     Vector2 localScaleGuest;
     private void Start()
     {

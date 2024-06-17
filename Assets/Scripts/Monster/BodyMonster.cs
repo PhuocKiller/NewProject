@@ -18,21 +18,21 @@ public class BodyMonster : MonoBehaviour
         if ((collision.CompareTag("Sword") || collision.CompareTag("Arrow")) && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm hoặc cung
         {
             PlayerController.instance.isAttackExactly = false;
-            mon.MonsterBeingAttacked((int)(mon.damageofPlayer * UnityEngine.Random.Range(0.8f, 1.2f)));
+            mon.MonsterBeingAttacked((mon.damageofPlayer));
         }
         if ((collision.CompareTag("Skill1") && PlayerController.instance.isAttackExactly)) //Monster bị tấn công bởi skill1
         {
             PlayerController.instance.isAttackExactly = false;
-            mon.MonsterBeingAttacked((int)(mon.damageofPlayer *3* UnityEngine.Random.Range(0.8f, 1.2f)));
+            mon.MonsterBeingAttacked((mon.damageofPlayer *3));
         }
         if (collision.CompareTag("Player"))          //Player bị tấn công
         {
-            mon.PlayerBeingAttacked(mon.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend) * UnityEngine.Random.Range(0.8f, 1.2f));
+            mon.PlayerBeingAttacked(mon.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend) );
         }
         if (collision.CompareTag("Skill") && PlayerController.instance.isIntervalSkill)
         {
             mon.isStun = true;
-            mon.MonsterBeingAttacked((int)(0.2f * (mon.damageofPlayer) * UnityEngine.Random.Range(0.8f, 1.2f)));
+            mon.MonsterBeingAttacked((int)(0.2f * (mon.damageofPlayer)));
             PlayerController.instance.isIntervalSkill = false;
         }
     }

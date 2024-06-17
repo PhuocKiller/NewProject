@@ -75,11 +75,7 @@ public class Monster : MonoBehaviour
     }
     public int GetDamageOfTwoObject(int a,int b)
     {
-        if ((a - b) < 0)
-        {
-            return 0;
-        }
-        else return a - b;
+        return (int)(a * UnityEngine.Random.Range(0.9f, 1.1f) * (1 - (PlayerController.instance.deltaDamage * b / (1 + PlayerController.instance.deltaDamage * b))));
         
     }
     public void PlayerBeingAttacked(float damage)

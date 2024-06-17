@@ -18,15 +18,6 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
-        else
-        {
-            if (instance != this)
-            {
-                Destroy(gameObject);  //xóa cái mới sinh ra
-            }
-
-        }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -36,7 +27,6 @@ public class AudioManager : MonoBehaviour
             if (i == SceneManager.GetActiveScene().buildIndex)
             {
                 musicSource.clip = theme[i];
-                musicSource.volume = 1f;
                 musicSource.loop = true;
                 musicSource.Play();
             }

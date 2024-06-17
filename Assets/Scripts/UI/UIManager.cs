@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana, isRefillHealth;
     public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain, panelHelp;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain, panelHelp, loadNewScene;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP,
@@ -31,9 +31,11 @@ public class UIManager : MonoBehaviour
     int numberHealPotionInt,numberManaPotionInt;
     float displayTimePlayerBeAttacked;
     Image imageHealPotion, imageManaPotion;
+    public Image imageLoadNewScene;
     public UITypes uiTypes;
     public TMP_Text coinValues;
     public Slider musicSlider, soundSlider;
+    public bool isClosingScene, isOpeningScene;
 
 
 
@@ -64,9 +66,10 @@ public class UIManager : MonoBehaviour
         Inventory.instance.ItemRemoved += Inventory_ItemRemoved;
         Inventory.instance.InventoryUpdate += Inventory_Update;
         coinValues.text= PlayerController.instance.coins.ToString();
+        isOpeningScene = true;
     }
 
-   
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -107,8 +110,24 @@ public class UIManager : MonoBehaviour
         }
         UpdateHealButton();
         UpdateManaButton();
-
-
+        if (isClosingScene)
+        {
+            imageLoadNewScene.fillAmount+=0.5f*Time.deltaTime;
+            if(imageLoadNewScene.fillAmount==1)
+            {
+                isClosingScene=false;
+                isOpeningScene = true;
+            }
+        }
+        if (isOpeningScene)
+        {
+            imageLoadNewScene.fillAmount-= Time.deltaTime;
+            if (imageLoadNewScene.fillAmount == 0)
+            {
+                isOpeningScene = false;
+                loadNewScene.SetActive(false);
+            }
+        }
     }
     
     public void ManaPotionClick()
@@ -349,14 +368,17 @@ public class UIManager : MonoBehaviour
                     if (itemDragHandler.Item.itemTypes == ItemTypes.Key)
                     {
                         isHaveKey = true;
-                        Inventory.instance.UseItemClickInventory(itemDragHandler.Item);
-                        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
-                        PlayerController.instance.transform.position = guest.fightBossPos.position;
+                        Inventory.instance.UseKeyToFightBoss(itemDragHandler.Item);
                     }
                 }
             }
         }
-        if (!isHaveKey)
+        if (isHaveKey)
+        {
+            
+            AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+            EndOldScene("Boss");
+        } else 
         {
             guest.ActiveNoKeyPanel();
         }
@@ -426,6 +448,23 @@ public class UIManager : MonoBehaviour
         Animation.instance.state = State.Idle;
         panelPlayAgain.SetActive(false);
         SceneManager.LoadScene("Round1");
+    }
+    public void EndOldScene(string sceneName =null)
+    {
+        loadNewScene.SetActive(true);
+        isClosingScene = true;
+        if (sceneName != null)
+        {
+            StartCoroutine(LoadSceneDelay(sceneName));
+        }
+    }
+    IEnumerator LoadSceneDelay(string sceneName =null)
+    {
+        yield return new WaitForSeconds(2);
+        if (sceneName != null)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
 }

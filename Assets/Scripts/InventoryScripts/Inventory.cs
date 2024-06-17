@@ -120,6 +120,18 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public void UseKeyToFightBoss(IInventoryItem item)
+    {
+        if (mItems.Contains(item))
+        {
+            mItems.Remove(item);
+            item.OnUse();
+            if (ItemRemoved != null)
+            {
+                ItemRemoved(this, new InventoryEventArgs(item));
+            }
+        }
+    }
     internal void UseItemClickButton(IInventoryItem item) //Use item khi click button
     {
         if (mItems.Contains(item))

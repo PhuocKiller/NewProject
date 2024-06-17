@@ -14,6 +14,7 @@ TagManager:
   - Arrow
   - Skill1
   - FeetPlayer
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -51,9 +52,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 2161815665
-    locked: 0
   - name: UI
     uniqueID: 3207194383
+    locked: 0
+  - name: Player
+    uniqueID: 2161815665
     locked: 0

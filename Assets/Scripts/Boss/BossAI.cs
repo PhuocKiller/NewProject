@@ -40,7 +40,7 @@ public class BossAI : Monster
                     || BossAnimation.instance.skeletonBossAnimation.state.GetCurrent(0).ToString() == "Skill")
                     && BossAnimation.instance.skeletonBossAnimation.state.GetCurrent(0).IsComplete==false)
                 {
-                    rigid.velocity = Vector3.zero; 
+                    rigid.velocity = new Vector2(0, rigid.velocity.y); 
                     return;
                 }
                 else
@@ -48,12 +48,12 @@ public class BossAI : Monster
                     
                     if (!isDetect)
                     {
-                        rigid.velocity = new Vector2(-moveSpeed, 0);
+                        rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
                         BossAnimation.instance.bossState = BossState.Walk;
                     }
                     else  //khi phát hiện thì tăng tốc
                     {
-                        rigid.velocity = new Vector2(-3 * moveSpeed, 0);
+                        rigid.velocity = new Vector2(-3 * moveSpeed, rigid.velocity.y);
                         BossAnimation.instance.bossState = BossState.Chase;
                     } 
                 }
