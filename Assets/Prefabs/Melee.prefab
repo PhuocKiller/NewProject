@@ -232,6 +232,68 @@ CapsuleCollider2D:
   m_Offset: {x: -4.166625, y: 3.8107557}
   m_Size: {x: 4.3612237, y: 4.3612237}
   m_Direction: 0
+--- !u!1 &1690722793977660881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9162840198322381507}
+  m_Layer: 0
+  m_Name: attackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9162840198322381507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690722793977660881}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.37, y: 1.51, z: 0.013843311}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3477740149130833577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6524031885780537095}
+  m_Layer: 0
+  m_Name: skillPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6524031885780537095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477740149130833577}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.25, y: 1.54, z: 0.013843311}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8023039177383878710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4993074614299259893
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +338,8 @@ Transform:
   - {fileID: 5201962241826024539}
   - {fileID: 6652679091914552623}
   - {fileID: 8261527878117360099}
+  - {fileID: 9162840198322381507}
+  - {fileID: 6524031885780537095}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2985178505919917707
@@ -469,15 +533,15 @@ MonoBehaviour:
   p_Level: 0
   p_Attack: 0
   p_Defend: 0
-  p_manaOfSkill: 0
-  p_manaofSkill_1: 0
+  p_manaCostMainSkill: 0
+  p_manaCostSkill_1: 0
   p_currentManaFloat: 0
   p_currentManaFade: 0
   p_currentHealthFloat: 0
   p_currentHealthFade: 0
   isIntervalSkill: 0
   numberIndexCharacter: 0
-  coins: 0
+  coins: 10000
   characterType: 0
   posIndex: 0
 --- !u!68 &1097768047809629731
@@ -652,8 +716,8 @@ MonoBehaviour:
   skeletonAnimation: {fileID: 0}
   state: 4
   stateString: 
-  attackPoint: {fileID: 6652679091914552623}
-  skill1Point: {fileID: 8261527878117360099}
+  attackPoint: {fileID: 9162840198322381507}
+  skill1Point: {fileID: 6524031885780537095}
   skill1: {fileID: 5112403345868107899, guid: 76117f8d143b8684988a9907685028ca, type: 3}
   level: {fileID: 4772634663558126228, guid: ad6f1ab178f92e644aff0c08286a414b, type: 3}
   attack: {fileID: 5880797563141009103, guid: d98337de166e79745bfdb9f1465babb0, type: 3}

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaOfSkill, p_manaofSkill_1;
+    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaCostMainSkill, p_manaCostSkill_1;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
     public int numberIndexCharacter, coins; public CharacterType characterType; //thông tin khi save
@@ -82,7 +82,8 @@ public class PlayerController : MonoBehaviour
         doAttack = true;
         p_maxHealth = 100 + 10*(p_Level-1); p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
-        p_manaOfSkill = 40 + 2 * (p_Level - 1);
+        p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
+        p_manaCostSkill_1 = 10 + (p_Level - 1);
         p_CurrentXP = 0; p_MaxXP = 100 + 10 * (p_Level - 1);
         p_Attack = 50+ 20 * (p_Level - 1); p_Defend =15 + 2 * (p_Level - 1);
 
@@ -136,9 +137,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie && Animation.instance.state == State.Idle && doAttack  )
         {
-            if (p_currentManaFloat >= 10)
+            if (p_currentManaFloat >= p_manaCostSkill_1)
             {
-                p_currentManaFade -= 10; p_currentManaFloat -= 10;
+                p_currentManaFade -= p_manaCostSkill_1; p_currentManaFloat -= p_manaCostSkill_1;
                 if (PlayerController.instance.characterType == CharacterType.Melee)
                 {
                     skill_1MeleeGameObject.SetActive(true);
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie  && Animation.instance.state == State.Idle)
         {
-            if (p_currentManaFloat > p_manaOfSkill)
+            if (p_currentManaFloat > p_manaCostMainSkill)
             {
                 Animation.instance.state = State.ChargeSkill;
 
@@ -215,7 +216,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie&&doJump&& feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-                rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
+           // rigid.AddForce(new Vector2(rigid.velocity.x, jumpSpeed));
                 Animation.instance.state = State.Jump;
                 doJump = false;
         }
@@ -239,8 +241,11 @@ public class PlayerController : MonoBehaviour
                     if (timeJump>0.2f ||timeJump==0) //khi jump đủ time hoặc khi ko jump thì Run
                         {
                             Animation.instance.state = State.Run;
-                            doJump = true;
-                        }
+                    if (!Input.GetKey(KeyCode.Space))
+                    {
+                        doJump = true;
+                    }
+                }
                 
                     rigid.velocity = new Vector2(moveInput.x * runSpeed, rigid.velocity.y);
                 }
@@ -254,7 +259,10 @@ public class PlayerController : MonoBehaviour
                     if (timeJump > 0.2f || timeJump == 0) //khi jump đủ time hoặc khi ko jump thì Idle
                     {
                         Animation.instance.state = State.Idle;
-                        doJump = true;
+                        if (!Input.GetKey(KeyCode.Space))
+                        {
+                            doJump = true;
+                        }
                     }
                 }
                 }
@@ -287,8 +295,8 @@ public class PlayerController : MonoBehaviour
             FullEngergy();
             p_maxHealth = 100 + 10 * (p_Level - 1);
             p_MaxMana = 100 + 10 * (p_Level - 1);
-            p_manaOfSkill = 40 + 2 * (p_Level - 1);
-            p_manaofSkill_1=10 + (p_Level - 1);
+            p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
+            p_manaCostSkill_1=10 + (p_Level - 1);
             p_MaxXP = 100 + 10 * (p_Level - 1);
             p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 2 * (p_Level - 1);
         }

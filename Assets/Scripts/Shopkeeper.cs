@@ -15,7 +15,12 @@ public class Shopkeeper : MonoBehaviour
     public int itemIndex, itemCost;
     public Image[] border;
     public TextMeshProUGUI playerCoinsText;
-    
+    Vector2 localScaleShop;
+    private void Start()
+    {
+        localScaleShop=transform.localScale;
+    }
+
     private void FixedUpdate()
     {
         playerCoinsText.text = PlayerController.instance.coins.ToString();
@@ -46,8 +51,8 @@ public class Shopkeeper : MonoBehaviour
     {if(collision.CompareTag("Player"))
         {
             canTrade = true;
+            transform.localScale = 1.2f*localScaleShop;
         }
-        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -56,6 +61,7 @@ public class Shopkeeper : MonoBehaviour
             canTrade = false;
             talkPanel.SetActive(false);
             shopPanel.SetActive(false);
+            transform.localScale =localScaleShop;
         }
     }
     public void BuySlot_0 ()

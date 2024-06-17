@@ -8,6 +8,7 @@ using UnityEngine;
 public class BossAI : Monster
 {
     public GameObject[] posBoss;
+    public float timeToChangePosition = 20f;
     int posBossIndex, newPosBossIndex;
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class BossAI : Monster
         m_attack = UnityEngine.Random.Range(40,50); m_defend = UnityEngine.Random.Range(50,60);
         isLive = true;
         moveSpeed = 2f;
-        InvokeRepeating("ChangePosition", 0, 10);
+        InvokeRepeating("ChangePosition", 0, timeToChangePosition);
     }
 
     // Update is called once per frame
@@ -99,7 +100,7 @@ public class BossAI : Monster
     {
         if(isLive)
         {
-            newPosBossIndex = Random.Range(0, 6);
+            newPosBossIndex = Random.Range(0, 4);
             if (newPosBossIndex == posBossIndex)
             {
                 ChangePosition();

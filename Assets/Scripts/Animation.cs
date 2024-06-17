@@ -285,10 +285,10 @@ public enum State
                     {
                         
                         PlayerController.instance.p_currentManaFloat = PlayerController.instance.p_currentManaFloat -
-                       PlayerController.instance.p_manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
+                       PlayerController.instance.p_manaCostMainSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
 
                         PlayerController.instance.p_currentManaFade = PlayerController.instance.p_currentManaFade -
-                       PlayerController.instance.p_manaOfSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
+                       PlayerController.instance.p_manaCostMainSkill * 0.02f / skeleton.Data.FindAnimation(mainSkillAnimationName).Duration;
 
                     }
                     else

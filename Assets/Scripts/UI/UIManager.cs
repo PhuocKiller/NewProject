@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Cinemachine.DocumentationSortingAttribute;
+using static UnityEditor.Progress;
 //using UnityEngine.UIElements;
 public enum UITypes
 {
@@ -24,8 +25,9 @@ public class UIManager : MonoBehaviour
     float timeRefillMana, timeRefillHealth;
     public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain, panelHelp;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
-        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, manaOfSkilPlayerTMP,
-        numberHealPotionTMP,numberManaPotionTMP;
+        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
+        numberHealPotionTMP,numberManaPotionTMP,
+        manaCostSkill_1TMP, manaCostMainSkillTMP;
     int numberHealPotionInt,numberManaPotionInt;
     float displayTimePlayerBeAttacked;
     Image imageHealPotion, imageManaPotion;
@@ -210,7 +212,6 @@ public class UIManager : MonoBehaviour
         attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
         defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
         xpPlayerTMP.text = "XP: " + PlayerController.instance.p_CurrentXP + "/" + PlayerController.instance.p_MaxXP;
-        manaOfSkilPlayerTMP.text = "Mana cost: " + PlayerController.instance.p_manaOfSkill;
      }
    
     public void AttackButton()
@@ -333,6 +334,34 @@ public class UIManager : MonoBehaviour
         numberHealPotionTMP.text = numberHealPotionInt.ToString();
         numberManaPotionTMP.text = numberManaPotionInt.ToString();
     }
+    public void CheckKeyInventory(Guest guest)
+    {
+        isHaveKey = false;
+        Transform inventoryPanel = transform.Find("InventoryPanel");
+        foreach (Transform slot in inventoryPanel)
+        {
+            if (slot.childCount == 1)  //vì nút close panel ko có child
+            {
+                Transform imageTransform = slot.GetChild(0).GetChild(0);
+                ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
+                if (itemDragHandler.Item != null)
+                {
+                    if (itemDragHandler.Item.itemTypes == ItemTypes.Key)
+                    {
+                        isHaveKey = true;
+                        Inventory.instance.UseItemClickInventory(itemDragHandler.Item);
+                        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+                        PlayerController.instance.transform.position = guest.fightBossPos.position;
+                    }
+                }
+            }
+        }
+        if (!isHaveKey)
+        {
+            guest.ActiveNoKeyPanel();
+        }
+       
+    }
    
     public void PauseButton()
     {
@@ -349,6 +378,8 @@ public class UIManager : MonoBehaviour
     public void HelpButton()
     {
         panelHelp.SetActive(true);
+        manaCostSkill_1TMP.text = PlayerController.instance.p_manaCostSkill_1.ToString();
+        manaCostMainSkillTMP.text= PlayerController.instance.p_manaCostMainSkill.ToString();
     }
     public void CloseButton()
     {
