@@ -45,21 +45,7 @@ using UnityEngine;
         public BossState bossState;
         public string stateBossString;
 
-    [SerializeField] private ParticleSystem chase, boom1, walk;
-   
-    private ParticleSystem ChaseInstance, Boom1Instance, WalkInstance;
-    public void SpawnBoom1()
-    {
-        Boom1Instance = Instantiate(boom1, transform.position, Quaternion.identity);
-    }
-    public void SpawnWalk()
-    {
-        WalkInstance = Instantiate(walk, transform.position, Quaternion.identity);
-    }
-    public void SpawnChase()
-    {
-        ChaseInstance = Instantiate(chase, transform.position, Quaternion.identity);
-    }
+    
 
 
     // Spine.AnimationState and Spine.Skeleton are not Unity-serialized objects. You will not see them as fields in the inspector.
@@ -123,22 +109,22 @@ using UnityEngine;
         if (a == "Attack")
         {
             spineBossAnimationState.SetAnimation(0, attackBossAnimationName, false);
-            SpawnChase();
+            ParticleManager.instance.SpawnBoom1(transform.position);
         }
         if (a == "Skill")
         {
             spineBossAnimationState.SetAnimation(0, skillBossAnimationName, false);
-            SpawnBoom1();
+            
         }
         if (a == "Walk")
         {
             spineBossAnimationState.SetAnimation(0, walkBossAnimationName, true);
-            SpawnWalk();
+            
         }
         if (a == "Chase")
         {
             spineBossAnimationState.SetAnimation(0, chaseBossAnimationName, true);
-            SpawnChase();
+            ParticleManager.instance.SpawnChase(transform.position);
         }
         if (a == "Die")
         {

@@ -108,6 +108,7 @@ public class BossAI : Monster
             else
             {
                 posBossIndex = newPosBossIndex;
+                ParticleManager.instance.SpawnTele(transform.position);
                 transform.position = posBoss[posBossIndex].transform.position;
             }
         }

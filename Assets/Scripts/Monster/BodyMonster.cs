@@ -20,17 +20,20 @@ public class BodyMonster : MonoBehaviour
             PlayerController.instance.isAttackExactly = false;
             mon.MonsterBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(PlayerController.instance.p_Attack, mon.m_defend,
                 MechanicDamage.instance.IncreaseDamagePlayer(), 1));
+            ParticleManager.instance.SpawnBlood(transform.position);
         }
         if ((collision.CompareTag("Skill1") && PlayerController.instance.isAttackExactly)) //Monster bị tấn công bởi skill1
         {
             PlayerController.instance.isAttackExactly = false;
             mon.MonsterBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(PlayerController.instance.p_Attack, mon.m_defend,
                 MechanicDamage.instance.IncreaseDamagePlayer(), 1));
+            ParticleManager.instance.SpawnBlood(transform.position);
         }
         if (collision.CompareTag("Player"))          //Player bị tấn công
         {
             mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,1,
                 MechanicDamage.instance.DecreaseDamageMonster()) );
+            ParticleManager.instance.SpawnBlood(transform.position);
         }
         if (collision.CompareTag("Skill") && PlayerController.instance.isIntervalSkill)
         {
@@ -38,6 +41,7 @@ public class BodyMonster : MonoBehaviour
             mon.MonsterBeingAttacked((int)(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,
                 MechanicDamage.instance.IncreaseDamagePlayer(), 1)));
             PlayerController.instance.isIntervalSkill = false;
+            ParticleManager.instance.SpawnBlood(transform.position);
         }
     }
   

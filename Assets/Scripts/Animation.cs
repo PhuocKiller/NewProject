@@ -76,34 +76,7 @@ public enum Skins
     public Spine.Skeleton skeleton;
     State previousState; Skins previousSkin;
     float chargedTime, skillTime, intervalTime;
-    public Transform attackPoint;
-    public Transform skill1Point;
-
-    [SerializeField] private ParticleSystem skill1;
-    [SerializeField] private ParticleSystem level;
-    [SerializeField] private ParticleSystem attack;
-    [SerializeField] private ParticleSystem die;
-    private ParticleSystem Skill1Instance, LevelInstance, AttackInstance, DieInstance;
-   
-
-    public void SpawnDie()
-    {
-        DieInstance = Instantiate(die, transform.position, Quaternion.identity);
-    }
-    public void SpawnAttack()
-    {
-        AttackInstance = Instantiate(attack, attackPoint.position, Quaternion.identity);
-    }
-
-    public void SpawnLevel()
-    {
-        LevelInstance = Instantiate(level, transform.position, Quaternion.identity);
-    }
-    public void SpawnSkill1()
-    {
-
-        Skill1Instance = Instantiate(skill1, skill1Point.position, Quaternion.identity);
-    }
+    
 
     private void Awake()
     {
@@ -197,7 +170,7 @@ public enum Skins
         {
             spineAnimationState.SetAnimation(0, dieAnimationName, false);
             AudioManager.instance.PlaySound(AudioManager.instance.die);
-            SpawnDie();
+            ParticleManager.instance.SpawnDie(transform.position);
         }
         if (a == "Injured")
         {
@@ -211,7 +184,7 @@ public enum Skins
             spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
             AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
-            SpawnLevel();
+            ParticleManager.instance.SpawnLevel(transform.position);
         }
         if (a == "MainSkill")
         {
@@ -246,7 +219,7 @@ public enum Skins
                 AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee);
             }
            else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range); }
-            SpawnAttack();
+            
         }
         if (a == "Skill1")
         {
@@ -256,7 +229,7 @@ public enum Skins
                 AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee);
             }
             else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range); }
-            SpawnSkill1();
+            ParticleManager.instance.SpawnSkill1();
         }
 
     }

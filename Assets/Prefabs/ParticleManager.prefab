@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3681746104655751933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5654247850265009864}
+  - component: {fileID: 2981912447644946049}
+  m_Layer: 0
+  m_Name: ParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &5654247850265009864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681746104655751933}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.710569, y: -2.2189875, z: -0.39433286}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2981912447644946049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681746104655751933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0ebb872cb15414195e68dbef184c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 0}
+  skill1Point: {fileID: 0}
+  chase: {fileID: 4593184484909914550, guid: 5530efa4ab61b80488a9dfa6dda454be, type: 3}
+  boom1: {fileID: 2433282508523890284, guid: b2f5b6c06e868a64299983ec09677cd6, type: 3}
+  skill1: {fileID: 3424209798209665582, guid: 61f60e927fb00e04a81572767f5b37f6, type: 3}
+  skill: {fileID: 3424209798209665582, guid: 61f60e927fb00e04a81572767f5b37f6, type: 3}
+  die: {fileID: 3088706175883631523, guid: 114e2774dccb24e42a3b207a19bc3a9d, type: 3}
+  attack: {fileID: 6249457888948238889, guid: ce3035434f0c92743abb86c120bd8330, type: 3}
+  level: {fileID: 2653838518392426882, guid: 86267072a91fb004795b731ca4e0c82e, type: 3}
+  blood: {fileID: 6249457888948238889, guid: ce3035434f0c92743abb86c120bd8330, type: 3}
+  tele: {fileID: 2679603952799162550, guid: 86f98defbdfc393498ea2519069fbd45, type: 3}
