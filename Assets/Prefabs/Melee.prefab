@@ -162,8 +162,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16217446, y: -0.1718855}
-  m_Size: {x: 0.9107771, y: 0.26265803}
+  m_Offset: {x: -0.19523688, y: 0.11113911}
+  m_Size: {x: 1.7181345, y: 0.8287094}
   m_Direction: 1
 --- !u!1 &1534256025028681622
 GameObject:
@@ -370,7 +370,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02d75aabfcd2c074a8a3305d9c74a38b, type: 2}
+  - {fileID: 2100000, guid: 6d83267f6a96efb49803c16c8fd475e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 1b9f79e2fee3bc148afd4b67b21c5634, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 3e6e77f30adaec34192edceada8e6901, type: 2}
   initialSkinName: Lv1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0

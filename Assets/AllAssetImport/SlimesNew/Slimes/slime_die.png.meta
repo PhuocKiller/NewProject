@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 589f0e05ccb1e4545bf6742655405d69
+guid: 20a513c3b88285442bbddfe1d3cea786
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,284 +123,232 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Mossy - MossyHills_0
+      name: slime_die_0
       rect:
         serializedVersion: 2
-        x: 136
-        y: 1797
-        width: 9
+        x: 24
+        y: 456
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8858b65fbf9f72146a95eba81d406773
+      internalID: -1641433396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_die_1
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 456
+        width: 19
         height: 14
-      alignment: 9
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c3cc2f4856632b4b85900b24dba1807
-      internalID: -1752008862
+      spriteID: 0b68b87029e9f8e408523c6553da7acc
+      internalID: -128996857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_1
+      name: slime_die_2
       rect:
         serializedVersion: 2
-        x: 137
-        y: 1647
-        width: 257
-        height: 319
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 46.5, y: 29.5}
-        - {x: -68.5, y: 29.5}
-        - {x: -67.5, y: -69.5}
-        - {x: 47.5, y: -68.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14ae41a8e6bb8844690f771aad6bd65f
-      internalID: 1341843527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - MossyHills_2
-      rect:
-        serializedVersion: 2
-        x: 387
-        y: 1794
-        width: 15
-        height: 16
-      alignment: 9
+        x: 182
+        y: 456
+        width: 23
+        height: 13
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d185e5c190d06a4a82b5772314d2872
-      internalID: -1367087919
+      spriteID: 0336b2bbefedf1844bcbed782241774c
+      internalID: 1237419192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_3
+      name: slime_die_3
       rect:
         serializedVersion: 2
-        x: 689
-        y: 1523
-        width: 1156
-        height: 487
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 416.49658, y: 68.77661}
-        - {x: 56, y: 243.5}
-        - {x: -126, y: 243.5}
-        - {x: -481, y: 25.5}
-        - {x: -558, y: -89.5}
-        - {x: -561, y: -243.5}
-        - {x: 530, y: -243.5}
-        - {x: 530.0001, y: -130.40588}
-        - {x: 511, y: -42.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 111336fa31f184a4dabaad8380671c28
-      internalID: -1305433577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - MossyHills_4
-      rect:
-        serializedVersion: 2
-        x: 666
-        y: 1528
-        width: 8
-        height: 10
-      alignment: 9
+        x: 260
+        y: 456
+        width: 27
+        height: 11
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb67972d6e36e0947a26cb616ecf06f4
-      internalID: -133091619
+      spriteID: 00cb317e487e30f44956b6f8cf55f143
+      internalID: 1338450524
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_5
+      name: slime_die_4
       rect:
         serializedVersion: 2
-        x: 57
-        y: 1137
-        width: 7
-        height: 10
-      alignment: 9
+        x: 338
+        y: 456
+        width: 31
+        height: 9
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2431a3b1301a3a545acaef8cd2bdd7f5
-      internalID: 36040973
+      spriteID: d1f5ad03a04288c49ae82b0e2b0ac11b
+      internalID: -28038956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_6
+      name: slime_die_5
       rect:
         serializedVersion: 2
-        x: 68
-        y: 1106
-        width: 381
-        height: 368
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -107.5, y: 26}
-        - {x: -109.5, y: -88}
-        - {x: 75.5, y: -86}
-        - {x: 74.5, y: 28}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 135194283ccc9f046aed36ebf94fd816
-      internalID: 924985375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - MossyHills_7
-      rect:
-        serializedVersion: 2
-        x: 647
-        y: 575
-        width: 1239
-        height: 858
-      alignment: 9
+        x: 418
+        y: 456
+        width: 31
+        height: 7
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73d7b084ab2405b4d919401ee1974a31
-      internalID: -105486146
+      spriteID: 4de002208b2f00c4380a2e3267ad491d
+      internalID: 613144437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_8
+      name: slime_die_6
       rect:
         serializedVersion: 2
-        x: 134
-        y: 591
-        width: 283
-        height: 315
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -84.5, y: 31.5}
-        - {x: -85.5, y: -53.5}
-        - {x: 48.5, y: -53.5}
-        - {x: 48.5, y: 30.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5eedf5a4586d7f84591230724e48eab5
-      internalID: 1355825065
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - MossyHills_9
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 87
-        width: 1324
-        height: 451
-      alignment: 9
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: 185, y: 121.5}
-        - {x: -173, y: 128.5}
-        - {x: -598, y: -79.5}
-        - {x: -598, y: -219.5}
-        - {x: 583, y: -220.5}
-        - {x: 581, y: -108.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22947a1d0bbddfe4b867df68f92ec7f8
-      internalID: 1597297258
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mossy - MossyHills_10
-      rect:
-        serializedVersion: 2
-        x: 1445
-        y: 124
-        width: 7
-        height: 10
-      alignment: 9
+        x: 497
+        y: 456
+        width: 33
+        height: 6
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf32dfdf4026dc7469a6dc52f34d2f27
-      internalID: -1704829846
+      spriteID: 406c44c73d35b594ca0b07271889672e
+      internalID: -1091731542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mossy - MossyHills_11
+      name: slime_die_9
       rect:
         serializedVersion: 2
-        x: 1453
-        y: 43
-        width: 534
-        height: 425
-      alignment: 9
+        x: 577
+        y: 456
+        width: 33
+        height: 4
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape:
-      - - {x: 156, y: 62.5}
-        - {x: -168, y: 59.5}
-        - {x: -168, y: -71.5}
-        - {x: 156, y: -71.5}
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2d4aa1cab1d86645a0ebac938b583d3
-      internalID: -999967366
+      spriteID: 4e7cc3790d11f024ba646b5b90ccd420
+      internalID: 369275354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_die_7
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 455
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffd3e502a1f6ef34fb929ada0b75fe15
+      internalID: 239061970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_die_8
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 456
+        width: 27
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a1df12da264df4da4fed02ecd84402
+      internalID: 107264046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_die_70
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 456
+        width: 27
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a26354bc19301439f0b9f4167c76c2
+      internalID: 1900135092
       vertices: []
       indices: 
       edges: []
@@ -416,18 +364,77 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Mossy - MossyHills_0: -1752008862
-      Mossy - MossyHills_1: 1341843527
-      Mossy - MossyHills_10: -1704829846
-      Mossy - MossyHills_11: -999967366
-      Mossy - MossyHills_2: -1367087919
-      Mossy - MossyHills_3: -1305433577
-      Mossy - MossyHills_4: -133091619
-      Mossy - MossyHills_5: 36040973
-      Mossy - MossyHills_6: 924985375
-      Mossy - MossyHills_7: -105486146
-      Mossy - MossyHills_8: 1355825065
-      Mossy - MossyHills_9: 1597297258
+      slime_die_0: -1641433396
+      slime_die_1: -128996857
+      slime_die_10: 1442526108
+      slime_die_11: 2055716157
+      slime_die_12: 1575383092
+      slime_die_13: -287579322
+      slime_die_14: 259123378
+      slime_die_15: -944631304
+      slime_die_16: -696244866
+      slime_die_17: -1756450465
+      slime_die_18: 794201143
+      slime_die_19: -1444969361
+      slime_die_2: 1237419192
+      slime_die_20: -1224953751
+      slime_die_21: -38583298
+      slime_die_22: -1650844149
+      slime_die_23: 1704261881
+      slime_die_24: -1583911252
+      slime_die_25: -82281068
+      slime_die_26: -129310486
+      slime_die_27: 631496048
+      slime_die_28: 1655716118
+      slime_die_29: -787486086
+      slime_die_3: 1338450524
+      slime_die_30: 613147585
+      slime_die_31: 1327370319
+      slime_die_32: 117533535
+      slime_die_33: 1698418393
+      slime_die_34: 1371336907
+      slime_die_35: -89804003
+      slime_die_36: -1816065520
+      slime_die_37: 340508105
+      slime_die_38: -108126321
+      slime_die_39: 1742362071
+      slime_die_4: -28038956
+      slime_die_40: -542833505
+      slime_die_41: -1032715649
+      slime_die_42: -72022386
+      slime_die_43: 2123553658
+      slime_die_44: -453010267
+      slime_die_45: -36026144
+      slime_die_46: 1634452005
+      slime_die_47: 1614858324
+      slime_die_48: -1596348417
+      slime_die_49: -1839794784
+      slime_die_5: 613144437
+      slime_die_50: -1986354638
+      slime_die_51: 1676589175
+      slime_die_52: 1590202258
+      slime_die_53: -875629037
+      slime_die_54: 733383155
+      slime_die_55: -334805938
+      slime_die_56: -1592334886
+      slime_die_57: -428337604
+      slime_die_58: 1696329376
+      slime_die_59: 1921162868
+      slime_die_6: -1091731542
+      slime_die_60: -1486906873
+      slime_die_61: 918298513
+      slime_die_62: -1412490062
+      slime_die_63: 25940799
+      slime_die_64: -436089358
+      slime_die_65: -933064371
+      slime_die_66: -1832343525
+      slime_die_67: -65296050
+      slime_die_68: -1636838779
+      slime_die_69: -1666778056
+      slime_die_7: 239061970
+      slime_die_70: 1900135092
+      slime_die_8: 107264046
+      slime_die_9: 369275354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
