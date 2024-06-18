@@ -23,7 +23,8 @@ public class UIManager : MonoBehaviour
     public bool isRefillMana, isRefillHealth;
     public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
-    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, panelPlayAgain, panelHelp, loadNewScene;
+    public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, 
+        panelPlayAgain, panelHelp, panelLoadNewScene,panelPlayerBeAttacked;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP,
@@ -106,7 +107,7 @@ public class UIManager : MonoBehaviour
         displayTimePlayerBeAttacked += Time.deltaTime;
         if (displayTimePlayerBeAttacked > 0.7) //0.7 là thời gian gài để tự biến mất
         {
-            damageDealByMonster.text = null;
+            panelPlayerBeAttacked.SetActive(false);
         }
         UpdateHealButton();
         UpdateManaButton();
@@ -125,7 +126,7 @@ public class UIManager : MonoBehaviour
             if (imageLoadNewScene.fillAmount == 0)
             {
                 isOpeningScene = false;
-                loadNewScene.SetActive(false);
+                panelLoadNewScene.SetActive(false);
             }
         }
     }
@@ -203,6 +204,7 @@ public class UIManager : MonoBehaviour
     }
     public void ShowDamageDealByMonster(int damage)
     {
+        panelPlayerBeAttacked.SetActive(true);
         displayTimePlayerBeAttacked = 0;
         damageDealByMonster.text = "-" + damage;
    
@@ -451,7 +453,7 @@ public class UIManager : MonoBehaviour
     }
     public void EndOldScene(string sceneName =null)
     {
-        loadNewScene.SetActive(true);
+        panelLoadNewScene.SetActive(true);
         isClosingScene = true;
         if (sceneName != null)
         {

@@ -32,8 +32,6 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-
-
     public void PlaySound(AudioClip clip, bool isLoop=false)
     {
         soundSource.clip = clip;

@@ -2,6 +2,7 @@
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,10 @@ public enum State
     MainSkill,
     Run,
     Walk
+}
+public enum Skins
+{
+    Lv1,Lv5,Lv10
 }
     public class Animation : MonoBehaviour
 {
@@ -62,14 +67,14 @@ public enum State
 
     public SkeletonAnimation skeletonAnimation;
     public static Animation instance;
-    public State state;
+    public State state; public Skins skin;
     public string stateString;
     
 
     // Spine.AnimationState and Spine.Skeleton are not Unity-serialized objects. You will not see them as fields in the inspector.
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
-    State previousState;
+    State previousState; Skins previousSkin;
     float chargedTime, skillTime, intervalTime;
     public Transform attackPoint;
     public Transform skill1Point;
@@ -92,7 +97,7 @@ public enum State
 
     public void SpawnLevel()
     {
-        LevelInstance = Instantiate(LevelInstance, transform.position, Quaternion.identity);
+        LevelInstance = Instantiate(level, transform.position, Quaternion.identity);
     }
     public void SpawnSkill1()
     {
@@ -131,6 +136,13 @@ public enum State
         }
 
         previousState = currentModelState;
+        Skins currentSkin = skin;
+        if (previousSkin!=currentSkin)
+        {
+            skeleton.SetSkin((GetStringSkin()));
+        }
+        previousSkin=currentSkin;
+
         MainSkill(); //cập nhật mainskill liên tục
         
     }
@@ -152,6 +164,21 @@ public enum State
         else if (state == State.Skill1) { return "Skill1"; }
         else  { return "Attack"; }
 
+    }
+    public string GetStringSkin()
+    {
+        if (skin==Skins.Lv1)
+        {
+            return "Lv1";
+        }
+        else if (skin == Skins.Lv5)
+        {
+            return "Lv5";
+        }
+        else 
+        {
+            return "Lv10";
+        }
     }
     public void SetState(string a)
     {
@@ -314,12 +341,13 @@ public enum State
     {
         if(level<5)
         {
-            skeleton.SetSkin("Lv1");
+            skin=Skins.Lv1;
         }
         else if(level<10)
         {
-            skeleton.SetSkin("Lv5");
+            skin = Skins.Lv5;
         }
+        else { skin = Skins.Lv10; }
     }
 
 }

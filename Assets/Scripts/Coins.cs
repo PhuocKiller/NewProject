@@ -7,14 +7,14 @@ using UnityEngine;
 public class Coins : MonoBehaviour
 {
     public GameObject[] coins;
-    int value;
+    float value;
     public TextMeshProUGUI coinDropValue;
     bool isDropCoin;
     // Start is called before the first frame update
     void Start()
     {
         Setup();
-        value= UnityEngine.Random.Range(30, 50);
+        value= 50+20*PlayerController.instance.p_Level*UnityEngine.Random.Range(0.9f, 1.1f);
     }
 
     // Update is called once per frame
@@ -44,9 +44,9 @@ public class Coins : MonoBehaviour
     {
         if (collision.collider.CompareTag("FeetPlayer"))
             {
-                PlayerController.instance.coins += value;
+                PlayerController.instance.coins +=(int) value;
                 UIManager.instance.coinValues.text = PlayerController.instance.coins.ToString();
-            coinDropValue.text="+" + value;
+            coinDropValue.text="+" + (int)value;
             isDropCoin = true;
             coins[7].SetActive(false);
             Invoke("DestroyAllCoins", 1.2f);

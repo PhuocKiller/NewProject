@@ -7,6 +7,7 @@ using System.ComponentModel;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Cinemachine.DocumentationSortingAttribute;
@@ -81,12 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         doAttack = true;
         if(p_Level==0) { p_Level = 1; }
-        p_maxHealth = 100 *p_Level; p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
-        p_MaxMana = 100 + 10 * (p_Level - 1); p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
-        p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
-        p_manaCostSkill_1 = 10 + (p_Level - 1);
-        p_CurrentXP = 0; p_MaxXP = 100 *p_Level*p_Level;
-        p_Attack = 50+ 20 * (p_Level - 1); p_Defend =15 + 2 * (p_Level - 1);
+        UpdateLevelPlayer();
         deltaDamage = 0.06f;
     }
 
@@ -108,6 +104,7 @@ public class PlayerController : MonoBehaviour
             }
             FadeImmortal();
         }
+        
     }
    
     public void PlayerAttack()
@@ -293,19 +290,23 @@ public class PlayerController : MonoBehaviour
             p_CurrentXP = p_CurrentXP - p_MaxXP;
             p_Level++;
             Animation.instance.state = State.LevelUp;
-            FullEngergy();
-            p_maxHealth = 100 + 10 * (p_Level - 1);
-            p_MaxMana = 100 + 10 * (p_Level - 1);
-            p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
-            p_manaCostSkill_1=10 + (p_Level - 1);
-            p_MaxXP = 100 + 10 * (p_Level - 1);
-            p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 2 * (p_Level - 1);
+            UpdateLevelPlayer();
         }
         Animation.instance.SetupSkins(p_Level);
 
         UIManager.instance.levelPlayerTMP.text = p_Level.ToString();
     }
-    public void FullEngergy() //hồi full máu và mana
+    void UpdateLevelPlayer()
+    {
+        p_maxHealth = 100 * p_Level;
+        p_MaxMana = 100 + 10 * (p_Level - 1);
+        FullEngergy();
+        p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
+        p_manaCostSkill_1 = 10 + (p_Level - 1);
+        p_MaxXP = 100 * p_Level*p_Level;
+        p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
+    }
+    public void FullEngergy()
     {
         p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
@@ -372,5 +373,6 @@ public class PlayerController : MonoBehaviour
             Inventory.instance.AddItem(item);
         }
     }
+    
 }
   

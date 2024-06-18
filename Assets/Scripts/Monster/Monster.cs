@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
     
     public Rigidbody2D rigid;
     public Animator animator;
-    public int m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
+    public int m_level,m_currentHealth, m_maxHealth, m_attack, m_defend, m_XP, damageofPlayer,damageofMonster;
     public Bars healthBarMonster;
     public bool isLive, isStun,isDetect;
     public UIMonster UIMonster;
@@ -36,9 +36,10 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_maxHealth = 100; m_currentHealth = m_maxHealth;
-        m_attack = UnityEngine.Random.Range(30, 40);m_defend = UnityEngine.Random.Range(10, 15);
-        m_XP = 110;
+        m_level = PlayerController.instance.p_Level;
+        m_maxHealth = 100*m_level; m_currentHealth = m_maxHealth;
+        m_attack =20+ 10*m_level;m_defend = 20+2* m_level;
+        m_XP = 80+20*m_level;
         isLive = true;
     }
 
@@ -73,11 +74,7 @@ public class Monster : MonoBehaviour
        healthBarMonster.UpdateBar(m_currentHealth,m_maxHealth);
        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
-    public int GetDamageOfTwoObject(int a,int b)
-    {
-        return (int)(a * UnityEngine.Random.Range(0.9f, 1.1f) * (1 - (PlayerController.instance.deltaDamage * b / (1 + PlayerController.instance.deltaDamage * b))));
-        
-    }
+   
     public void PlayerBeingAttacked(float damage)
     {
         if (isLive)
@@ -115,8 +112,8 @@ public class Monster : MonoBehaviour
         newItem.CreateItemsFromDeath(); //rớt vật phẩm khi chết
     }
   
-    
-    
+
+
 
 
 

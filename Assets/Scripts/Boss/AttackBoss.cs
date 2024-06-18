@@ -15,7 +15,8 @@ public class AttackBoss : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            mon.PlayerBeingAttacked(mon.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend) * 2 * UnityEngine.Random.Range(0.8f, 1.2f));
+            mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,
+                2, MechanicDamage.instance.DecreaseDamageMonster()) );
            
         }
     }

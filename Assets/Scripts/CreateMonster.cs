@@ -37,6 +37,5 @@ public class CreateMonster : MonoBehaviour
     void ActiveMonsterAgain()
     {
         mon.gameObject.SetActive(true); 
-
     }
 }

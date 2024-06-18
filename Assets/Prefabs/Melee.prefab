@@ -544,6 +544,7 @@ MonoBehaviour:
   coins: 10000
   characterType: 0
   posIndex: 0
+  deltaDamage: 0
 --- !u!68 &1097768047809629731
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -715,6 +716,7 @@ MonoBehaviour:
   jumpAnimationName: Jump
   skeletonAnimation: {fileID: 0}
   state: 4
+  skin: 0
   stateString: 
   attackPoint: {fileID: 9162840198322381507}
   skill1Point: {fileID: 6524031885780537095}
