@@ -315,6 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         if (beImmortal) { return; }
         beImmortal = true;
+        ParticleManager.instance.SpawnBlood(new Vector2(transform.position.x, transform.position.y+2f));
         p_currentHealthFloat = p_currentHealthFloat - damage;
         p_currentHealthFade = p_currentHealthFade - damage;
         UIManager.instance.ShowDamageDealByMonster((int)damage);

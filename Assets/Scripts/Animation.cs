@@ -75,7 +75,7 @@ public enum Skins
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
     State previousState; Skins previousSkin;
-    float chargedTime, skillTime, intervalTime;
+    float chargedTime, skillTime, intervalTime, spawnEffectTime;
     
 
     private void Awake()
@@ -189,7 +189,7 @@ public enum Skins
         if (a == "MainSkill")
         {
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
-            if(PlayerController.instance.characterType==CharacterType.Melee)
+            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Melee, true);
             }
@@ -217,6 +217,7 @@ public enum Skins
            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee);
+                ParticleManager.instance.SpawnAttack();
             }
            else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range); }
             
@@ -229,7 +230,7 @@ public enum Skins
                 AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee);
             }
             else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range); }
-            ParticleManager.instance.SpawnSkill1();
+            ParticleManager.instance.SpawnSkill_1();
         }
 
     }
@@ -258,6 +259,13 @@ public enum Skins
             chargedTime += Time.deltaTime; 
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
             {
+                //kích hoạt effect liên tục
+                spawnEffectTime += Time.deltaTime;
+                if (spawnEffectTime>0.5f)
+                {
+                    ParticleManager.instance.SpawnSkill();
+                    spawnEffectTime = 0;
+                }
                 if (state != State.MainSkill)
                 {
                     state = State.MainSkill;
@@ -276,6 +284,7 @@ public enum Skins
                         if (intervalTime > 0.1f) 
                         {
                             PlayerController.instance.isIntervalSkill = true;
+                           
                             intervalTime = 0;
                         }
                     }

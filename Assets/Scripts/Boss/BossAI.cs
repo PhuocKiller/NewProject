@@ -19,7 +19,7 @@ public class BossAI : Monster
     // Start is called before the first frame update
     void Start()
     {
-        m_maxHealth = 200; m_currentHealth = m_maxHealth;
+        m_maxHealth = 200; m_currentHealth = 50;
         m_attack = UnityEngine.Random.Range(40,50); m_defend = UnityEngine.Random.Range(50,60);
         isLive = true;
         moveSpeed = 2f;
