@@ -263,7 +263,7 @@ public enum Skins
                 spawnEffectTime += Time.deltaTime;
                 if (spawnEffectTime>0.5f)
                 {
-                    ParticleManager.instance.SpawnSkill();
+                    ParticleManager.instance.SpawnSkill(transform.position);
                     spawnEffectTime = 0;
                 }
                 if (state != State.MainSkill)
