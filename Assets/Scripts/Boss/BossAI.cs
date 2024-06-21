@@ -95,6 +95,12 @@ public class BossAI : Monster
     public override void MonsterDie()
     {
         BossAnimation.instance.bossState = BossState.Die;
+        UIManager.instance.panelVictory.SetActive(true);
+        Animation.instance.VictoryAnimation();
+        PlayerController.instance.isDie = true;
+        AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
+
+
     }
     void ChangePosition()
     {

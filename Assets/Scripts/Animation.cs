@@ -170,7 +170,7 @@ public enum Skins
         {
             spineAnimationState.SetAnimation(0, dieAnimationName, false);
             AudioManager.instance.PlaySound(AudioManager.instance.die);
-            ParticleManager.instance.SpawnDie(transform.position);
+            ParticleManager.instance.SpawnDie(PlayerController.instance.transform.position);
         }
         if (a == "Injured")
         {
@@ -217,10 +217,10 @@ public enum Skins
            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee);
-                ParticleManager.instance.SpawnAttack();
+                
             }
            else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range); }
-            
+            ParticleManager.instance.SpawnAttack();
         }
         if (a == "Skill1")
         {
@@ -263,7 +263,7 @@ public enum Skins
                 spawnEffectTime += Time.deltaTime;
                 if (spawnEffectTime>0.5f)
                 {
-                    ParticleManager.instance.SpawnSkill(transform.position);
+                    ParticleManager.instance.SpawnSkill(ParticleManager.instance.mainSkillPoint.position);
                     spawnEffectTime = 0;
                 }
                 if (state != State.MainSkill)
@@ -271,9 +271,9 @@ public enum Skins
                     state = State.MainSkill;
                     if (PlayerController.instance.characterType == CharacterType.Melee)
                     {
-                        PlayerController.instance.skillMeleeGameObject.SetActive(true);
+                        PlayerController.instance.mainSkillGameObject.SetActive(true);
                     }
-                    else { PlayerController.instance.skillRangeGameObject.SetActive(true); }
+                    else { PlayerController.instance.mainSkillGameObject.SetActive(true); }
                 }
                 else
                 {
@@ -313,9 +313,9 @@ public enum Skins
         {
             if(PlayerController.instance.characterType==CharacterType.Melee)
             {
-                PlayerController.instance.skillMeleeGameObject.SetActive(false);
+                PlayerController.instance.mainSkillGameObject.SetActive(false);
             }
-            else { PlayerController.instance.skillRangeGameObject.SetActive(false); }
+            else { PlayerController.instance.mainSkillGameObject.SetActive(false); }
             chargedTime = 0; skillTime = 0;
         }
     }
@@ -331,5 +331,9 @@ public enum Skins
         }
         else { skin = Skins.Lv10; }
     }
+    public void VictoryAnimation()
+    {
+        spineAnimationState.SetAnimation(0, levelUpAnimationName, true);
 
+    }
 }

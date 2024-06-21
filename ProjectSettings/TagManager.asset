@@ -11,10 +11,11 @@ TagManager:
   - Exit
   - Audio
   - Spike
-  - Arrow
   - Skill1
   - FeetPlayer
   - FxTemporaire
+  - Attack
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -51,6 +52,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 106812251
     locked: 0
   - name: UI
     uniqueID: 3207194383

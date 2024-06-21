@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
     public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, 
-        panelPlayAgain, panelHelp, panelLoadNewScene,panelPlayerBeAttacked;
+        panelPlayAgain, panelHelp, panelLoadNewScene,panelPlayerBeAttacked, panelVictory,panelSkinLv5, panelSkinLv10;
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP,
@@ -433,12 +433,13 @@ public class UIManager : MonoBehaviour
     public void QuitButtonInSetting()
     {
         PlayerController.instance.transform.parent = GameObject.Find("Entrances").transform;
-        UIManager.instance.transform.SetParent (GameObject.Find("Entrances").transform);
+        transform.SetParent (GameObject.Find("Entrances").transform);
         Inventory.instance.transform.parent = GameObject.Find("Entrances").transform;
         Time.timeScale = 1f;
         panelPlayAgain.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
-        SceneManager.LoadScene("MainMenu");
+        SavingFile.instance.level = 0;
+        SceneManager.LoadScene(0);
     }
     public void PlayAgainButton()
     {
@@ -449,7 +450,13 @@ public class UIManager : MonoBehaviour
         PlayerController.instance.posIndex = 0;
         Animation.instance.state = State.Idle;
         panelPlayAgain.SetActive(false);
-        SceneManager.LoadScene("Round1");
+        SceneManager.LoadScene(0);
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex==4)
+        {
+            SceneManager.LoadScene(3);
+        }
+        else { SceneManager.LoadScene(sceneIndex); }
     }
     public void EndOldScene(string sceneName =null)
     {
@@ -467,6 +474,11 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
         }
+    }
+    public void CloseButtonInSkinPanel()
+    {
+        panelSkinLv5.SetActive(false);
+        panelSkinLv10.SetActive(false);
     }
 
 }

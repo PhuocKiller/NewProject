@@ -15,7 +15,7 @@ public class BodyMonster : MonoBehaviour
   
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if ((collision.CompareTag("Sword") || collision.CompareTag("Arrow")) && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm hoặc cung
+        if (collision.CompareTag("Attack")  && PlayerController.instance.isAttackExactly) //Monster bị tấn công bởi kiếm hoặc cung
         {
             PlayerController.instance.isAttackExactly = false;
             mon.MonsterBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(PlayerController.instance.p_Attack, mon.m_defend,

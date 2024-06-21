@@ -37,8 +37,8 @@ public class SkillBossView : MonoBehaviour
     }
     void DownSkillGameObject()
     {
-        skillBossGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10.4f);
-        Invoke("UpSkillGameObject", 0.5f);
+        skillBossGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10.8f);
+        Invoke("UpSkillGameObject", 0.45f);
     }
     void UpSkillGameObject()
     {

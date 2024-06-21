@@ -173,11 +173,9 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.p_Level = level;
                         PlayerController.instance.coins = coins;
                         UIManager.instance.uiTypes = uiTypes;
-                       /* UIManager.instance.musicVolume = gameProgress.musicVolume;
-                        UIManager.instance.soundVolume = gameProgress.soundVolume;*/
-                        SceneManager.LoadScene("Round1");
+                        SceneManager.LoadScene(1);
+                        return;
                     }
-
                 }
             }
         }
@@ -212,9 +210,8 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.p_Level = 1;
                         PlayerController.instance.coins = 0;
                         UIManager.instance.uiTypes = uiTypes;
-                        /*UIManager.instance.musicVolume = gameProgress.musicVolume;
-                        UIManager.instance.soundVolume = gameProgress.soundVolume;*/
-                        SceneManager.LoadScene("Round1");
+                        SceneManager.LoadScene(1);
+                        return;
                     }
                 }
             }

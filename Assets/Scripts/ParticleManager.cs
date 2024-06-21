@@ -12,10 +12,8 @@ public class ParticleManager : MonoBehaviour
             instance = this;
         }
     }
-    public Transform attackPoint, skill1Point;
-    [SerializeField] private ParticleSystem chase, boom1;
-    [SerializeField] private ParticleSystem skill_1, skill;
-    [SerializeField] private ParticleSystem die, attack, level, blood, tele;
+    public Transform attackPoint, skill1Point,mainSkillPoint;
+    public  ParticleSystem chase, boom1, skill_1, skill, die, attack, level, blood, tele;
     private ParticleSystem Skill_1Instance, LevelInstance, AttackInstance, DieInstance, SkillInstance,BloodInstance,TeleInstance;
     private ParticleSystem ChaseInstance, Boom1Instance;
 
@@ -29,7 +27,7 @@ public class ParticleManager : MonoBehaviour
     public void SpawnDie(Vector3 callerPosition)
     {
         DieInstance = Instantiate(die, callerPosition, Quaternion.identity);
-        Destroy(die.gameObject, die.main.duration);
+        Destroy(DieInstance.gameObject, die.main.duration);
     }
     public void SpawnAttack()
     {
@@ -47,6 +45,7 @@ public class ParticleManager : MonoBehaviour
     {
 
         Skill_1Instance = Instantiate(skill_1, skill1Point.position, Quaternion.identity);
+       // Skill_1Instance.transform.parent = skill1Point.transform;
         Destroy(Skill_1Instance.gameObject, Skill_1Instance.main.duration);
     }
     public void SpawnSkill(Vector3 callerPosition)
