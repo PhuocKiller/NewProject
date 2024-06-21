@@ -52,7 +52,8 @@ MonoBehaviour:
   skill_1: {fileID: 3424209798209665582, guid: 61f60e927fb00e04a81572767f5b37f6, type: 3}
   skill: {fileID: 1384847655082071330, guid: aa3ee4aca8704674eb18cf3e1068bd02, type: 3}
   die: {fileID: 3088706175883631523, guid: 114e2774dccb24e42a3b207a19bc3a9d, type: 3}
-  attack: {fileID: 6249457888948238889, guid: ce3035434f0c92743abb86c120bd8330, type: 3}
+  attack: {fileID: 6305107829054686543, guid: 537bf081b19a9c04d9a18a5751aede14, type: 3}
   level: {fileID: 2653838518392426882, guid: 86267072a91fb004795b731ca4e0c82e, type: 3}
   blood: {fileID: 6249457888948238889, guid: ce3035434f0c92743abb86c120bd8330, type: 3}
   tele: {fileID: 2679603952799162550, guid: 86f98defbdfc393498ea2519069fbd45, type: 3}
+  skinParticle: []
