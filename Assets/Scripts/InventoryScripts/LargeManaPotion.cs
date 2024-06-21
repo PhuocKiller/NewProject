@@ -21,5 +21,6 @@ public class LargeManaPotion : InventoryItemBase
             PlayerController.instance.p_currentManaFade = PlayerController.instance.p_MaxMana;
         }
         UIManager.instance.isRefillMana = true;
+        ParticleManager.instance.SpawnMana(PlayerController.instance.transform.position);
     }
 }

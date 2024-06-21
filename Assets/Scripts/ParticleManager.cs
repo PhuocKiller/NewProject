@@ -25,11 +25,13 @@ public class ParticleManager : MonoBehaviour
     {
         HealInstance = Instantiate(heal, callerPosition, Quaternion.identity);
         Destroy(HealInstance.gameObject, HealInstance.main.duration);
+        HealInstance.transform.parent = PlayerController.instance.transform;
     }
     public void SpawnMana(Vector3 callerPosition)
     {
         ManaInstance = Instantiate(mana, callerPosition, Quaternion.identity);
         Destroy(ManaInstance.gameObject, ManaInstance.main.duration);
+        ManaInstance.transform.parent = PlayerController.instance.transform;
     }
     public void SpawnBlood(Vector3 callerPosition)
     {
