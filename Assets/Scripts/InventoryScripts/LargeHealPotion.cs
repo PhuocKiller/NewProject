@@ -21,6 +21,6 @@ public class LargeHealPotion : InventoryItemBase
             PlayerController.instance.p_currentHealthFade = PlayerController.instance.p_maxHealth;
         }
         UIManager.instance.isRefillHealth = true;
-        ParticleManager.instance.SpawnHeal(PlayerController.instance.transform.position);
+        ParticleManager.instance.SpawnHeal(new Vector2(PlayerController.instance.transform.position.x, PlayerController.instance.transform.position.y + 1.5f));
     }
 }

@@ -133,7 +133,7 @@ public class SavingFile : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, file);
         if (!File.Exists(filePath))
         {
-            File.WriteAllText(filePath, "{\"musicVolume\":1,\"soundVolume\":1,\"listIndexCharacter\":[{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
+            File.WriteAllText(filePath, "{\"musicVolume\":0.5,\"soundVolume\":0.5,\"listIndexCharacter\":[{\"numberIndexCharacter\":0,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":1,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]},{\"numberIndexCharacter\":2,\"characterType\":0,\"uiTypes\":0,\"level\":0,\"Coins\":0,\"slot\":[-1,-1,-1,-1,-1,-1,-1,-1,-1]}]}");
         }
         gameProgress = JsonUtility.FromJson<GameProgress>(File.ReadAllText(filePath));
     }

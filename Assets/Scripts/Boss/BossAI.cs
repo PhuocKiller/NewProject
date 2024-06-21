@@ -18,8 +18,8 @@ public class BossAI : Monster
     // Start is called before the first frame update
     void Start()
     {
-        m_maxHealth = 200; m_currentHealth = 50;
-        m_attack = UnityEngine.Random.Range(40,50); m_defend = UnityEngine.Random.Range(50,60);
+        m_maxHealth = 50000; m_currentHealth = m_maxHealth;
+        m_attack = 900; m_defend = 150;
         isLive = true;
         moveSpeed = 2f;
         InvokeRepeating("ChangePosition", 0, timeToChangePosition);
@@ -94,12 +94,14 @@ public class BossAI : Monster
     public override void MonsterDie()
     {
         BossAnimation.instance.bossState = BossState.Die;
+        isLive = false;
+        Invoke("Victory", 3);
+    }
+    void Victory()
+    {
         UIManager.instance.panelVictory.SetActive(true);
         Animation.instance.VictoryAnimation();
-        PlayerController.instance.isDie = true;
         AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
-
-
     }
     void ChangePosition()
     {

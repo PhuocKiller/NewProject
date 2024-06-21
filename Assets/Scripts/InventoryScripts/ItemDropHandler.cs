@@ -8,6 +8,7 @@ public class ItemDropHandler : MonoBehaviour, IDropHandler
     // Start is called before the first frame update
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("vo on drop");
         RectTransform invPanel= transform as RectTransform;
         if (!RectTransformUtility.RectangleContainsScreenPoint(invPanel, Input.mousePosition))
         {

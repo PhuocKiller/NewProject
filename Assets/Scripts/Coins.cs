@@ -23,6 +23,7 @@ public class Coins : MonoBehaviour
         if (isDropCoin)
         {
             GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Rigidbody2D>().velocity=Vector2.zero;
             coinDropValue.GetComponent<RectTransform>().transform.position  //thay đổi vị trí tiền rơi
            = new Vector2(coinDropValue.GetComponent<RectTransform>().transform.position.x,
            coinDropValue.GetComponent<RectTransform>().transform.position.y + Time.deltaTime);
@@ -42,7 +43,7 @@ public class Coins : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("FeetPlayer"))
+        if (collision.collider.CompareTag("FeetPlayer")&& coins[7].activeInHierarchy)
             {
                 PlayerController.instance.coins +=(int) value;
                 UIManager.instance.coinValues.text = PlayerController.instance.coins.ToString();

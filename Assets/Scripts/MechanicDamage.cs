@@ -39,7 +39,7 @@ public class MechanicDamage : MonoBehaviour
         }
         else if (Animation.instance.state == State.Skill1)
         {
-            b = 2;
+            b = 3;
         }
         else if (Animation.instance.state == State.MainSkill)
         {

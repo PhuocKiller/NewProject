@@ -11,7 +11,7 @@ public class Exit : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene(RoundName);
+            UIManager.instance.EndOldScene(RoundName);
             PlayerController.instance.posIndex=posIndex;
         }
     }

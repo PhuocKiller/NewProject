@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Shopkeeper : MonoBehaviour
 {
     public GameObject talkPanel, shopPanel;

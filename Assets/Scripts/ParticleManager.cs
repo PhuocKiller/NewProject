@@ -14,7 +14,7 @@ public class ParticleManager : MonoBehaviour
         }
     }
     public Transform attackPoint, skill1Point,mainSkillPoint;
-    public  ParticleSystem chase, boom1, skill_1, skill, die, attack, level, blood, tele, heal, mana;
+    public  ParticleSystem b_Die,chase, boom1, skill_1, skill, die, attack, level, blood, tele, heal, mana;
     public ParticleSystem[] skinParticle;
     private ParticleSystem Skill_1Instance, LevelInstance, AttackInstance, DieInstance, SkillInstance,BloodInstance,TeleInstance,HealInstance, ManaInstance;
     private ParticleSystem ChaseInstance, Boom1Instance;
