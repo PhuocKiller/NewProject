@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         if(p_Level==0) { p_Level = 1; }
         UpdateLevelPlayer();
         deltaDamage = 0.06f;
+        ParticleManager.instance.SetSkinParticle(p_Level);
     }
 
     // Update is called once per frame
@@ -291,6 +292,7 @@ public class PlayerController : MonoBehaviour
         {
             p_CurrentXP = p_CurrentXP - p_MaxXP;
             p_Level++;
+            ParticleManager.instance.SetSkinParticle(p_Level);
             if (p_Level==5)
             {
                 UIManager.instance.panelSkinLv5.SetActive(true);
@@ -302,14 +304,14 @@ public class PlayerController : MonoBehaviour
             Animation.instance.state = State.LevelUp;
             UpdateLevelPlayer();
         }
+        
         Animation.instance.SetupSkins(p_Level);
-
         UIManager.instance.levelPlayerTMP.text = p_Level.ToString();
     }
     void UpdateLevelPlayer()
     {
         p_maxHealth = 100 * p_Level;
-        p_MaxMana = 100 + 10 * (p_Level - 1);
+        p_MaxMana = 100 + 50 * (p_Level - 1);
         FullEngergy();
         p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
         p_manaCostSkill_1 = 10 + (p_Level - 1);
