@@ -4,7 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Shopkeeper : MonoBehaviour
 {
@@ -39,6 +38,7 @@ public class Shopkeeper : MonoBehaviour
         shopPanel.SetActive(true);
         talkPanel.SetActive(false);
         SetDefaultAllBorder();
+        UIManager.instance.panelInventory.SetActive(true);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void NoButtonShop()
@@ -46,6 +46,7 @@ public class Shopkeeper : MonoBehaviour
         talkPanel.SetActive(false);
         shopPanel.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+        UIManager.instance.panelInventory.SetActive(false);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {if(collision.CompareTag("Player"))
@@ -62,6 +63,7 @@ public class Shopkeeper : MonoBehaviour
             talkPanel.SetActive(false);
             shopPanel.SetActive(false);
             transform.localScale =localScaleShop;
+            UIManager.instance.panelInventory.SetActive(false);
         }
     }
     public void BuySlot_0 ()
@@ -73,16 +75,30 @@ public class Shopkeeper : MonoBehaviour
     }
     public void BuySlot_1()
     {
-        itemIndex = 1; itemCost = 200;
+        itemIndex = 1; itemCost = 500;
         SetDefaultAllBorder();
         border[1].color = new Color(0, 1, 0, 1);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void BuySlot_2()
     {
-        itemIndex = 2; itemCost = 1500;
+        itemIndex = 2; itemCost = 200;
         SetDefaultAllBorder();
         border[2].color = new Color(0, 1, 0, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+    }
+    public void BuySlot_3()
+    {
+        itemIndex = 3; itemCost = 500;
+        SetDefaultAllBorder();
+        border[3].color = new Color(0, 1, 0, 1);
+        AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+    }
+    public void BuySlot_4()
+    {
+        itemIndex = 4; itemCost = 1500;
+        SetDefaultAllBorder();
+        border[4].color = new Color(0, 1, 0, 1);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     void SetDefaultAllBorder()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
@@ -13,12 +14,25 @@ public class ParticleManager : MonoBehaviour
         }
     }
     public Transform attackPoint, skill1Point,mainSkillPoint;
-    public  ParticleSystem chase, boom1, skill_1, skill, die, attack, level, blood, tele;
-    private ParticleSystem Skill_1Instance, LevelInstance, AttackInstance, DieInstance, SkillInstance,BloodInstance,TeleInstance;
+    public  ParticleSystem chase, boom1, skill_1, skill, die, attack, level, blood, tele, heal, mana;
+    public ParticleSystem[] skinParticle;
+    private ParticleSystem Skill_1Instance, LevelInstance, AttackInstance, DieInstance, SkillInstance,BloodInstance,TeleInstance,HealInstance, ManaInstance;
     private ParticleSystem ChaseInstance, Boom1Instance;
 
     //player
-    
+
+    public void SpawnHeal(Vector3 callerPosition)
+    {
+        HealInstance = Instantiate(heal, callerPosition, Quaternion.identity);
+        Destroy(HealInstance.gameObject, HealInstance.main.duration);
+        HealInstance.transform.parent = PlayerController.instance.transform;
+    }
+    public void SpawnMana(Vector3 callerPosition)
+    {
+        ManaInstance = Instantiate(mana, callerPosition, Quaternion.identity);
+        Destroy(ManaInstance.gameObject, ManaInstance.main.duration);
+        ManaInstance.transform.parent = PlayerController.instance.transform;
+    }
     public void SpawnBlood(Vector3 callerPosition)
     {
         BloodInstance = Instantiate(blood, callerPosition, Quaternion.identity);
@@ -75,5 +89,28 @@ public class ParticleManager : MonoBehaviour
     {
         ChaseInstance = Instantiate(chase, callerPosition, Quaternion.identity);
         Destroy(ChaseInstance.gameObject, ChaseInstance.main.duration);
+    }
+    void HideAllSkinParticle()
+    {
+        for (int i = 0; i < skinParticle.Length; i++)
+        {
+            skinParticle[i].gameObject.SetActive(false);
+        }
+    }
+    public void SetSkinParticle(int level)
+    {
+        HideAllSkinParticle();
+        if (level<5)
+        {
+            skinParticle[0].gameObject.SetActive(true);
+        }
+        else if (level<10)
+        {
+            skinParticle[1].gameObject.SetActive(true);
+        }
+        else
+        {
+            skinParticle[2].gameObject.SetActive(true);
+        }
     }
 }

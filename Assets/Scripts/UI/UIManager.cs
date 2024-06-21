@@ -8,9 +8,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.Progress;
-//using UnityEngine.UIElements;
 public enum UITypes
 {
     Melee,Range
@@ -86,23 +83,23 @@ public class UIManager : MonoBehaviour
         }
         if (isRefillMana) // hồi mana
         {
-
+            PlayerController.instance.p_currentManaFloat += 0.005f * PlayerController.instance.p_MaxMana;
             if (PlayerController.instance.p_currentManaFloat >= PlayerController.instance.p_currentManaFade)
             {
                 PlayerController.instance.p_currentManaFloat = PlayerController.instance.p_currentManaFade;
                 isRefillMana = false;
             }
-            PlayerController.instance.p_currentManaFloat += 0.5f;
+            
         }
         if (isRefillHealth) //hồi máu
         {
-
+            PlayerController.instance.p_currentHealthFloat += 0.005f * PlayerController.instance.p_maxHealth;
             if (PlayerController.instance.p_currentHealthFloat >= PlayerController.instance.p_currentHealthFade)
             {
                 PlayerController.instance.p_currentHealthFloat = PlayerController.instance.p_currentHealthFade;
                 isRefillHealth = false;
             }
-            PlayerController.instance.p_currentHealthFloat += 0.5f;
+            
         }
         displayTimePlayerBeAttacked += Time.deltaTime;
         if (displayTimePlayerBeAttacked > 0.7) //0.7 là thời gian gài để tự biến mất
@@ -144,7 +141,7 @@ public class UIManager : MonoBehaviour
                     Transform imageTransform = slot.GetChild(0).GetChild(0);
                     UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
                     ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-                    if (itemDragHandler.Item != null&&itemDragHandler.Item.itemTypes==ItemTypes.ManaPotion)
+                    if (itemDragHandler.Item != null&&(itemDragHandler.Item.itemTypes==ItemTypes.ManaPotion|| itemDragHandler.Item.itemTypes == ItemTypes.LargeManaPotion))
                     {
                         Inventory.instance.UseItemClickInventory(itemDragHandler.Item);break;
                     }
@@ -180,7 +177,7 @@ public class UIManager : MonoBehaviour
                     Transform imageTransform = slot.GetChild(0).GetChild(0);
                     UnityEngine.UI.Image image = imageTransform.GetComponent<Image>();
                     ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
-                    if (itemDragHandler.Item!=null&&itemDragHandler.Item.itemTypes == ItemTypes.HealPotion)
+                    if (itemDragHandler.Item!=null&&(itemDragHandler.Item.itemTypes == ItemTypes.HealPotion|| itemDragHandler.Item.itemTypes == ItemTypes.LargeHealPotion))
                     {
                         Inventory.instance.UseItemClickInventory(itemDragHandler.Item);break;
                     }
@@ -334,12 +331,12 @@ public class UIManager : MonoBehaviour
                 ItemDragHandler itemDragHandler = imageTransform.GetComponent<ItemDragHandler>();
                 if (itemDragHandler.Item != null)
                 {
-                    if (itemDragHandler.Item.itemTypes == ItemTypes.HealPotion)
+                    if (itemDragHandler.Item.itemTypes == ItemTypes.HealPotion|| itemDragHandler.Item.itemTypes == ItemTypes.LargeHealPotion)
                     {
                         numberHealPotionInt += 1;
                       
                     }
-                    if (itemDragHandler.Item.itemTypes == ItemTypes.ManaPotion)
+                    if (itemDragHandler.Item.itemTypes == ItemTypes.ManaPotion||itemDragHandler.Item.itemTypes == ItemTypes.LargeManaPotion)
                     {
                         numberManaPotionInt += 1;
                         

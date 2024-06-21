@@ -7,6 +7,8 @@ public enum ItemTypes
 {
     HealPotion,
     ManaPotion,
+    LargeHealPotion,
+    LargeManaPotion,
     Key
 }
 public class InventoryItem : MonoBehaviour
