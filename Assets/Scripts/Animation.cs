@@ -75,35 +75,8 @@ public enum Skins
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
     State previousState; Skins previousSkin;
-    float chargedTime, skillTime, intervalTime;
-    public Transform attackPoint;
-    public Transform skill1Point;
-
-    [SerializeField] private ParticleSystem skill1;
-    [SerializeField] private ParticleSystem level;
-    [SerializeField] private ParticleSystem attack;
-    [SerializeField] private ParticleSystem die;
-    private ParticleSystem Skill1Instance, LevelInstance, AttackInstance, DieInstance;
-   
-
-    public void SpawnDie()
-    {
-        DieInstance = Instantiate(die, transform.position, Quaternion.identity);
-    }
-    public void SpawnAttack()
-    {
-        AttackInstance = Instantiate(attack, attackPoint.position, Quaternion.identity);
-    }
-
-    public void SpawnLevel()
-    {
-        LevelInstance = Instantiate(level, transform.position, Quaternion.identity);
-    }
-    public void SpawnSkill1()
-    {
-
-        Skill1Instance = Instantiate(skill1, skill1Point.position, Quaternion.identity);
-    }
+    float chargedTime, skillTime, intervalTime, spawnEffectTime;
+    
 
     private void Awake()
     {
@@ -197,7 +170,7 @@ public enum Skins
         {
             spineAnimationState.SetAnimation(0, dieAnimationName, false);
             AudioManager.instance.PlaySound(AudioManager.instance.die);
-            SpawnDie();
+            ParticleManager.instance.SpawnDie(PlayerController.instance.transform.position);
         }
         if (a == "Injured")
         {
@@ -211,12 +184,12 @@ public enum Skins
             spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
             AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
-            SpawnLevel();
+            ParticleManager.instance.SpawnLevel(transform.position);
         }
         if (a == "MainSkill")
         {
             spineAnimationState.SetAnimation(0, mainSkillAnimationName, false);
-            if(PlayerController.instance.characterType==CharacterType.Melee)
+            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.mainSkill_Melee, true);
             }
@@ -244,9 +217,10 @@ public enum Skins
            if (PlayerController.instance.characterType==CharacterType.Melee)
             {
                 AudioManager.instance.PlaySound(AudioManager.instance.attack_Melee);
+                
             }
            else { AudioManager.instance.PlaySound(AudioManager.instance.attack_Range); }
-            SpawnAttack();
+            ParticleManager.instance.SpawnAttack();
         }
         if (a == "Skill1")
         {
@@ -256,7 +230,7 @@ public enum Skins
                 AudioManager.instance.PlaySound(AudioManager.instance.skill1_Melee);
             }
             else { AudioManager.instance.PlaySound(AudioManager.instance.skill1_Range); }
-            SpawnSkill1();
+            ParticleManager.instance.SpawnSkill_1();
         }
 
     }
@@ -285,14 +259,21 @@ public enum Skins
             chargedTime += Time.deltaTime; 
             if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
             {
+                //kích hoạt effect liên tục
+                spawnEffectTime += Time.deltaTime;
+                if (spawnEffectTime>0.5f)
+                {
+                    ParticleManager.instance.SpawnSkill(ParticleManager.instance.mainSkillPoint.position);
+                    spawnEffectTime = 0;
+                }
                 if (state != State.MainSkill)
                 {
                     state = State.MainSkill;
                     if (PlayerController.instance.characterType == CharacterType.Melee)
                     {
-                        PlayerController.instance.skillMeleeGameObject.SetActive(true);
+                        PlayerController.instance.mainSkillGameObject.SetActive(true);
                     }
-                    else { PlayerController.instance.skillRangeGameObject.SetActive(true); }
+                    else { PlayerController.instance.mainSkillGameObject.SetActive(true); }
                 }
                 else
                 {
@@ -303,6 +284,7 @@ public enum Skins
                         if (intervalTime > 0.1f) 
                         {
                             PlayerController.instance.isIntervalSkill = true;
+                           
                             intervalTime = 0;
                         }
                     }
@@ -331,9 +313,9 @@ public enum Skins
         {
             if(PlayerController.instance.characterType==CharacterType.Melee)
             {
-                PlayerController.instance.skillMeleeGameObject.SetActive(false);
+                PlayerController.instance.mainSkillGameObject.SetActive(false);
             }
-            else { PlayerController.instance.skillRangeGameObject.SetActive(false); }
+            else { PlayerController.instance.mainSkillGameObject.SetActive(false); }
             chargedTime = 0; skillTime = 0;
         }
     }
@@ -349,5 +331,9 @@ public enum Skins
         }
         else { skin = Skins.Lv10; }
     }
+    public void VictoryAnimation()
+    {
+        spineAnimationState.SetAnimation(0, levelUpAnimationName, true);
 
+    }
 }

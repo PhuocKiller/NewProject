@@ -638,6 +638,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: uIManagers.Array.data[1]
+      value: 
+      objectReference: {fileID: 3119146787115452692, guid: 0b071d9924dc6444380861b758213782, type: 3}
+    - target: {fileID: 3180534692751074458, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
+      propertyPath: playerControllers.Array.data[1]
+      value: 
+      objectReference: {fileID: 3918937484666585800, guid: 4ad521b7cce0e8045830c28abc031734, type: 3}
     - target: {fileID: 7065525953004505212, guid: 3c4d405ba8d035146867b346cecc7517, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.220385
@@ -2333,6 +2341,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 2661117878367440903, guid: f171ea064255f464fb00e9c142243b95, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e6e77f30adaec34192edceada8e6901, type: 2}
     - target: {fileID: 2761714526776993366, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2371,12 +2383,12 @@ PrefabInstance:
       objectReference: {fileID: -334980598, guid: 156ec492e516ccb4099add479601d65e, type: 3}
     - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: initialSkinName
-      value: Lv2
+      value: Lv1
       objectReference: {fileID: 0}
     - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: skeletonDataAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 4744740ac113d4c4c95522fb9492ec5d, type: 2}
+      objectReference: {fileID: 11400000, guid: cdf900e83c5475e4d857059b386a0edd, type: 2}
     - target: {fileID: 6652321880330337991, guid: f171ea064255f464fb00e9c142243b95, type: 3}
       propertyPath: startingAnimation
       value: Idle

@@ -11,13 +11,13 @@ public class SkillBoss : MonoBehaviour
         mon = gameObject.transform.parent.gameObject.GetComponent<Monster>();
         skillBoss = GetComponent<BoxCollider2D>();
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,3,
                 MechanicDamage.instance.DecreaseDamageMonster()));
-
+            PlayerController.instance.beImmortal = false;
         }
     }
 }

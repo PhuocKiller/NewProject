@@ -114,5 +114,10 @@ public class MainMenu : MonoBehaviour
         settingPanel.SetActive(false);
         SavingFile.instance.level = 0;
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
+        meleeImage.color = new Color(meleeImage.color.r, 0.5f, meleeImage.color.b);
+        rangeImage.color = new Color(meleeImage.color.r, 0.5f, meleeImage.color.b);
+        Character0.color = new Color(Character0.color.r, Character0.color.g, 0);
+        Character1.color = new Color(Character0.color.r, Character0.color.g, 0);
+        Character2.color = new Color(Character0.color.r, Character0.color.g, 0);
     }
 }

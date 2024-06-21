@@ -7,6 +7,7 @@ public class AttackBossView : MonoBehaviour
     BoxCollider2D attackBoss;
     Monster mon;
     public GameObject attackBossGameObject;
+    Vector2 pos;
     private void Awake()
     {
         mon = gameObject.transform.parent.gameObject.GetComponent<Monster>();
@@ -25,9 +26,14 @@ public class AttackBossView : MonoBehaviour
     void DelayActiveAttackBossGameObject ()
     {
         attackBossGameObject.SetActive(true);
+        pos= attackBossGameObject.transform.position;
+
+        attackBossGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -30);
     }
     void DelayDeactiveAttackBossGameObject()
     {
         attackBossGameObject.SetActive(false);
+        attackBossGameObject.transform.position=pos;
+        attackBossGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

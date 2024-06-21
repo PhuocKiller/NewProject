@@ -989,6 +989,7 @@ MonoBehaviour:
   moveSpeed: 1
   rigid: {fileID: 0}
   animator: {fileID: 0}
+  m_level: 0
   m_currentHealth: 4
   m_maxHealth: 4
   m_attack: 2
@@ -1123,6 +1124,26 @@ PrefabInstance:
     - target: {fileID: 2903743077756827621, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Name
       value: CanvanMonster
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903743077756827621, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2997909199116853546, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6661608322946014563, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886026730262530560, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661550343897182600, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Pivot.x

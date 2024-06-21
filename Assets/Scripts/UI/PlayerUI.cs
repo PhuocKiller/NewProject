@@ -21,5 +21,6 @@ public class PlayerUI : MonoBehaviour
         {
             skeletonGraphic.Skeleton.SetSkin("Lv5");
         }
+       else { skeletonGraphic.Skeleton.SetSkin("Lv10"); }
     }
 }

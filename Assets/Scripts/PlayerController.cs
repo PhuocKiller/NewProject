@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     Rigidbody2D rigid;
     public static PlayerController instance;
-    public GameObject swordGameObject, skillMeleeGameObject,arrowGameObject, skillRangeGameObject, skill_1MeleeGameObject, skill_1RangeGameObject;
+    public GameObject attackGameObject, mainSkillGameObject, skill_1_GameObject;
     GameObject feet;
-    CapsuleCollider2D capSword, capSkillMelee, bodyPlayer, feetCapCollider; //collider các skill Range body Player
-    BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
+    CapsuleCollider2D capAttack, capMainSkill, bodyPlayer, feetCapCollider; //collider các skill Range body Player
+   // BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
@@ -61,16 +61,8 @@ public class PlayerController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         rigid = GetComponent<Rigidbody2D>();
-        if (characterType==CharacterType.Melee)
-        {
-            capSword = swordGameObject.GetComponent<CapsuleCollider2D>();
-            capSkillMelee = skillMeleeGameObject.GetComponent<CapsuleCollider2D>();
-        }
-        else
-        {
-            arrowBox= arrowGameObject.GetComponent<BoxCollider2D>();
-            skillRangeBox= skillRangeGameObject.GetComponent<BoxCollider2D>();
-        }
+        capAttack = attackGameObject.GetComponent<CapsuleCollider2D>();
+        capMainSkill = mainSkillGameObject.GetComponent<CapsuleCollider2D>();
         bodyPlayer = GetComponent<CapsuleCollider2D>();
         edgePlayer = GetComponent<EdgeCollider2D>();
         feet = GameObject.Find("Feet");
@@ -114,15 +106,16 @@ public class PlayerController : MonoBehaviour
         {
             if (PlayerController.instance.characterType == CharacterType.Melee)
             {
-                swordGameObject.SetActive(true);
+                attackGameObject.SetActive(true);
                 isAttackExactly = true;
                 Animation.instance.state = State.Attack;
+                Invoke("DelaySword", 0.2f);
                 doAttack = false;
                 Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
             }
             else
             {
-                arrowGameObject.SetActive(true);
+                attackGameObject.SetActive(true);
                 isAttackExactly = true;
                 Invoke("DelayArrow", 0.3f); //Arrow ko bay liền ra khi ấn button
                 Animation.instance.state = State.Attack;
@@ -140,15 +133,16 @@ public class PlayerController : MonoBehaviour
                 p_currentManaFade -= p_manaCostSkill_1; p_currentManaFloat -= p_manaCostSkill_1;
                 if (PlayerController.instance.characterType == CharacterType.Melee)
                 {
-                    skill_1MeleeGameObject.SetActive(true);
+                    skill_1_GameObject.SetActive(true);
                     isAttackExactly = true;
                     Animation.instance.state = State.Skill1;
+                    Invoke("DelaySword", 0.2f);
                     doAttack = false;
                     Invoke("SetIdleState", Animation.instance.GetTimeOfSkill_1_Animation());
                 }
                 else
                 {
-                    skill_1RangeGameObject.SetActive(true);
+                    skill_1_GameObject.SetActive(true);
                     isAttackExactly = true;
                     Invoke("DelayArrow", 0.75f); //Arrow ko bay liền ra khi ấn button
                     Animation.instance.state = State.Skill1;
@@ -164,12 +158,18 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    void DelaySword()
+    {
+        attackGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
+        skill_1_GameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -9);
+
+    }
     void DelayArrow()
     {
-        skill_1RangeGameObject.GetComponent<Rigidbody2D>().velocity =
-                new Vector2(-25f * skill_1RangeGameObject.transform.lossyScale.x, skill_1RangeGameObject.GetComponent<Rigidbody2D>().velocity.y);
-        arrowGameObject.GetComponent<Rigidbody2D>().velocity =
-                new Vector2(-20f * arrowGameObject.transform.lossyScale.x, arrowGameObject.GetComponent<Rigidbody2D>().velocity.y);
+        skill_1_GameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-25f * skill_1_GameObject.transform.lossyScale.x, skill_1_GameObject.GetComponent<Rigidbody2D>().velocity.y);
+        attackGameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-20f * attackGameObject.transform.lossyScale.x, attackGameObject.GetComponent<Rigidbody2D>().velocity.y);
         
     }
     void SetIdleState()
@@ -180,16 +180,18 @@ public class PlayerController : MonoBehaviour
             if (characterType == CharacterType.Melee)
             {
                 doAttack = true; doJump = true;
-                swordGameObject.SetActive(false);
-                skill_1MeleeGameObject.SetActive(false);
+                attackGameObject.SetActive(false);
+                attackGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                skill_1_GameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                skill_1_GameObject.SetActive(false);
             }
             else
             {
                 doAttack = true; doJump = true;
-                arrowGameObject.SetActive(false);
-                skill_1RangeGameObject.SetActive(false);
-                arrowGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-                skill_1RangeGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                attackGameObject.SetActive(false);
+                skill_1_GameObject.SetActive(false);
+                attackGameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                skill_1_GameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
             }
         }
     }
@@ -289,6 +291,14 @@ public class PlayerController : MonoBehaviour
         {
             p_CurrentXP = p_CurrentXP - p_MaxXP;
             p_Level++;
+            if (p_Level==5)
+            {
+                UIManager.instance.panelSkinLv5.SetActive(true);
+            }
+            if (p_Level == 10)
+            {
+                UIManager.instance.panelSkinLv10.SetActive(true);
+            }
             Animation.instance.state = State.LevelUp;
             UpdateLevelPlayer();
         }
@@ -313,8 +323,9 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerBeingAttacked(float damage) //Player bị tấn công
     {
-        if (beImmortal) { return; }
+        if (beImmortal ||isDie) { return; }
         beImmortal = true;
+        ParticleManager.instance.SpawnBlood(new Vector2(transform.position.x, transform.position.y+2f));
         p_currentHealthFloat = p_currentHealthFloat - damage;
         p_currentHealthFade = p_currentHealthFade - damage;
         UIManager.instance.ShowDamageDealByMonster((int)damage);
