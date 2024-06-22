@@ -15,12 +15,20 @@ public class AttackBossView : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Attack
-            && (mon.m_currentHealth / mon.m_maxHealth) >= 0.5f &&mon.isLive)
+       if (mon.monsType==MonsterType.Boss)
         {
-            BossAnimation.instance.bossState = BossState.Attack;
-            Invoke("DelayActiveAttackBossGameObject", 0.6f);
-            Invoke("DelayDeactiveAttackBossGameObject", BossAnimation.instance.GetTimeOfAttackBoss());
+            if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Attack
+           && (mon.m_currentHealth / mon.m_maxHealth) >= 0.5f && mon.isLive)
+            {
+                BossAnimation.instance.bossState = BossState.Attack;
+                Invoke("DelayActiveAttackBossGameObject", 0.2f);
+                Invoke("DelayDeactiveAttackBossGameObject", BossAnimation.instance.GetTimeOfAttackBoss());
+            }
+        }
+       else if (mon.monsType == MonsterType.Wizard && collision.gameObject.CompareTag("Player"))
+        {
+            Invoke("DelayActiveAttackBossGameObject", 0.2f);
+            Invoke("DelayDeactiveAttackBossGameObject", 3);
         }
     }
     void DelayActiveAttackBossGameObject ()

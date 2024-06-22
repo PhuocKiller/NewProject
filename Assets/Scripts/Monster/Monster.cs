@@ -7,7 +7,7 @@ using UnityEngine;
 
 
 public enum MonsterType 
-{fly0, fly1,fly2,fly3,fly4,fly5,fly6,fly7,fly8,Boss
+{fly0, fly1,fly2,fly3,fly4,fly5,fly6,fly7,fly8,Wizard,Boss
 }
 
     
@@ -54,8 +54,11 @@ public class Monster : MonoBehaviour
                 if (!isDetect)
                 {
                     rigid.velocity = new Vector2(-moveSpeed, 0);
+                    animator.SetBool("run", false);
                 }
-                else { rigid.velocity = new Vector2(-2*moveSpeed, 0); } //khi phát hiện thì tăng tốc
+                else { rigid.velocity = new Vector2(-2*moveSpeed, 0);  //khi phát hiện thì tăng tốc
+                    animator.SetBool("run", true);
+                } 
             }
             else
             {

@@ -21,6 +21,10 @@ public class ChangeFlyDirection : MonoBehaviour
             {
                 mon.transform.localScale = new Vector2(Mathf.Sign(mon.rigid.velocity.x),1f);
             }
+            else if (mon.monsType == MonsterType.Wizard)
+            {
+                mon.transform.localScale = new Vector2(-Mathf.Sign(mon.rigid.velocity.x), 1f);
+            }
             else { mon.transform.localScale = new Vector2(0.1f * Mathf.Sign(mon.rigid.velocity.x), 0.1f); }
         }
     }

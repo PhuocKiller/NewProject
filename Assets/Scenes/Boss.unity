@@ -975,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3780005381403295632, guid: b73f69568e142044b9a3f3bd00df23f0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4210812823006362212, guid: b73f69568e142044b9a3f3bd00df23f0, type: 3}
       propertyPath: m_IsActive
@@ -984,6 +984,10 @@ PrefabInstance:
     - target: {fileID: 4559308225375501783, guid: b73f69568e142044b9a3f3bd00df23f0, type: 3}
       propertyPath: m_defend
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559308225375501783, guid: b73f69568e142044b9a3f3bd00df23f0, type: 3}
+      propertyPath: monsType
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4559308225375501783, guid: b73f69568e142044b9a3f3bd00df23f0, type: 3}
       propertyPath: posBoss.Array.data[0]
