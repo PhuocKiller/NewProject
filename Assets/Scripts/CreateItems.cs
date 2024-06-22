@@ -7,6 +7,7 @@ public class CreateItems : MonoBehaviour
     public InventoryItemBase[] items;
     public Coins coins;
     public float[] chance;
+    public bool isPick;
    
     public void CreateItemsFromDeath()
     {
@@ -20,6 +21,7 @@ public class CreateItems : MonoBehaviour
         }
         Instantiate(coins,transform.position, Quaternion.identity);
     }
+    
     bool GetChance(float chance)
     {
         float r = Random.Range(1f, 100f);

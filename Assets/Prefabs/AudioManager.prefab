@@ -309,7 +309,7 @@ MonoBehaviour:
   chargeSkill: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
   die: {fileID: 8300000, guid: 548b087b598994d4e808569b8961bc1e, type: 3}
   idle: {fileID: 0}
-  injured: {fileID: 8300000, guid: 45233e473b84bc14c9032059582476fc, type: 3}
+  injured: {fileID: 8300000, guid: 42c002620c406a5488c4188eb3b8e101, type: 3}
   jump: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
   fall: {fileID: 0}
   levelUp: {fileID: 8300000, guid: 8e3c11bf68a148049a0a55dc27aa5922, type: 3}
@@ -324,6 +324,10 @@ MonoBehaviour:
   checkSound: {fileID: 8300000, guid: 51cb2e6f1429ea349a44bde86ca4723a, type: 3}
   pauseGame: {fileID: 8300000, guid: b83bf8726a7fac349a54389f0c57cda6, type: 3}
   unpauseGame: {fileID: 8300000, guid: e58d8bd078f188a4ba314e933b98528b, type: 3}
+  bossAttack: {fileID: 8300000, guid: 981ee12fd7cf2a74b9ba579a7da94656, type: 3}
+  bossTele: {fileID: 8300000, guid: 8720adc52889b734897831b2e985c71b, type: 3}
+  bossChase: {fileID: 8300000, guid: 8720adc52889b734897831b2e985c71b, type: 3}
+  bossSkill: {fileID: 8300000, guid: 981ee12fd7cf2a74b9ba579a7da94656, type: 3}
   theme:
   - {fileID: 8300000, guid: d0de22ce30929c34fa8838236eea71cf, type: 3}
   - {fileID: 8300000, guid: e4fd656a4f219a741b073cacc32f3e0d, type: 3}

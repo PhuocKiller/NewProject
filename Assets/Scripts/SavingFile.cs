@@ -60,11 +60,9 @@ public class SavingFile : MonoBehaviour
 
         }
         DontDestroyOnLoad(gameObject);
-    }
-    private void Start()
-    {
         LoadData();
     }
+    
     private void Update()
     {
     }

@@ -117,6 +117,8 @@ public class BossAI : Monster
                 posBossIndex = newPosBossIndex;
                 ParticleManager.instance.SpawnTele(transform.position);
                 transform.position = posBoss[posBossIndex].transform.position;
+                AudioManager.instance.PlaySound(AudioManager.instance.bossTele);
+
             }
         }
     }

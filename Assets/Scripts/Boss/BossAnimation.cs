@@ -110,10 +110,12 @@ using UnityEngine;
         {
             spineBossAnimationState.SetAnimation(0, attackBossAnimationName, false);
             ParticleManager.instance.SpawnBoom1(transform.position);
+            AudioManager.instance.PlaySound(AudioManager.instance.bossAttack);
         }
         if (a == "Skill")
         {
             spineBossAnimationState.SetAnimation(0, skillBossAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.bossSkill);
             
         }
         if (a == "Walk")
@@ -125,10 +127,13 @@ using UnityEngine;
         {
             spineBossAnimationState.SetAnimation(0, chaseBossAnimationName, true);
             ParticleManager.instance.SpawnChase(transform.position);
+            AudioManager.instance.PlaySound(AudioManager.instance.bossChase);
+
         }
         if (a == "Die")
         {
             spineBossAnimationState.SetAnimation(0, dieBossAnimationName, false);
+            AudioManager.instance.PlaySound(AudioManager.instance.bossDie);
         }
     }
     public float GetTimeOfAttackBoss()

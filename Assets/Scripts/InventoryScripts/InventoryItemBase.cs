@@ -16,15 +16,23 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem
             return _Image;
         }
     }
+    public void Start()
+    {
+        StartCoroutine(DestroyItemNoPick());
+    }
 
     public virtual ItemTypes itemTypes { get; set; }
+    public bool isPick;
 
     public virtual void OnPickUp()
     {
-        //gameObject.SetActive(false);
         Destroy(gameObject);
     }
-
+    public IEnumerator DestroyItemNoPick()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
+    }
     public virtual void OnDrop()
     {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
