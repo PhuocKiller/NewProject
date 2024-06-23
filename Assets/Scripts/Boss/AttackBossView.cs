@@ -18,7 +18,7 @@ public class AttackBossView : MonoBehaviour
        if (mon.monsType==MonsterType.Boss)
         {
             if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Attack
-           && (mon.m_currentHealth / mon.m_maxHealth) >= 0.5f && mon.isLive)
+           && ((float)mon.m_currentHealth / (float)mon.m_maxHealth) >= 0.5f && mon.isLive)
             {
                 BossAnimation.instance.bossState = BossState.Attack;
                 Invoke("DelayActiveAttackBossGameObject", 0.2f);

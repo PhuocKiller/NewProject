@@ -18,11 +18,13 @@ public class BossAI : Monster
     // Start is called before the first frame update
     void Start()
     {
+        posBossIndex = Random.Range(0, 4);
+        transform.position = posBoss[posBossIndex].transform.position;
         m_maxHealth = 50000; m_currentHealth = m_maxHealth;
-        m_attack = 900; m_defend = 150;
+        m_attack = 900; m_defend = 50;
         isLive = true;
-        moveSpeed = 2f;
-        InvokeRepeating("ChangePosition", 0, timeToChangePosition);
+        moveSpeed = -2f;
+        InvokeRepeating("ChangePosition", timeToChangePosition, timeToChangePosition);
     }
 
     // Update is called once per frame
@@ -47,13 +49,15 @@ public class BossAI : Monster
                     
                     if (!isDetect)
                     {
-                        rigid.velocity = new Vector2(-moveSpeed, rigid.velocity.y);
+                        rigid.velocity = new Vector2(moveSpeed, rigid.velocity.y);
+                        transform.localScale = new Vector2(-Mathf.Sign(rigid.velocity.x), 1f);
                         BossAnimation.instance.bossState = BossState.Walk;
                     }
                     else  //khi phát hiện thì tăng tốc
                     {
-                        rigid.velocity = new Vector2(-3 * moveSpeed, rigid.velocity.y);
+                        rigid.velocity = new Vector2(3 * moveSpeed, rigid.velocity.y);
                         BossAnimation.instance.bossState = BossState.Chase;
+                        transform.localScale = new Vector2(-Mathf.Sign(rigid.velocity.x), 1f);
                     } 
                 }
 
@@ -63,7 +67,7 @@ public class BossAI : Monster
             else
             {
                 timeStun += Time.deltaTime;
-                rigid.velocity = -rigid.velocity;
+                rigid.velocity = Vector2.zero;
                 BossAnimation.instance.bossState = BossState.Idle;
                 if (timeStun >= 2)
                 {

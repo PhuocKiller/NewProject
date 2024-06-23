@@ -12,8 +12,8 @@ public class Wizard : Monster
     }
     void Start()
     {
-        m_maxHealth = 5000; m_currentHealth = m_maxHealth;
-        m_attack = 300; m_defend = 100;
+        m_maxHealth = 50000; m_currentHealth = m_maxHealth;
+        m_attack = 300; m_defend = 150;
         isLive = true;
         moveSpeed = 2f;
     }

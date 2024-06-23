@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ParticleManager : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class ParticleManager : MonoBehaviour
     }
     public void SpawnAttack()
     {
-        AttackInstance = Instantiate(attack, attackPoint.position, Quaternion.identity);
+        AttackInstance = Instantiate(attack, attackPoint.GetChild(0).position, Quaternion.identity);
         Destroy(AttackInstance.gameObject, AttackInstance.main.duration);
 
     }
@@ -58,8 +59,7 @@ public class ParticleManager : MonoBehaviour
     public void SpawnSkill_1()
     {
 
-        Skill_1Instance = Instantiate(skill_1, skill1Point.position, Quaternion.identity);
-       // Skill_1Instance.transform.parent = skill1Point.transform;
+        Skill_1Instance = Instantiate(skill_1, skill1Point.GetChild(0).position, Quaternion.identity);
         Destroy(Skill_1Instance.gameObject, Skill_1Instance.main.duration);
     }
     public void SpawnSkill(Vector3 callerPosition)

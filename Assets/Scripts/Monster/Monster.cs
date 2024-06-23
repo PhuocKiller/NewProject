@@ -37,7 +37,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         m_level = PlayerController.instance.p_Level;
-        m_maxHealth = 50+ 50*m_level; m_currentHealth = m_maxHealth;
+        m_maxHealth = 50+ 100*m_level; m_currentHealth = m_maxHealth;
         m_attack =20+ 10*m_level;m_defend = 20+2* m_level;
         m_XP =100+100*m_level;
         isLive = true;
@@ -78,11 +78,11 @@ public class Monster : MonoBehaviour
        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
    
-    public void PlayerBeingAttacked(float damage)
+    public void PlayerBeingAttacked(float damage, bool isBossSkill=false)
     {
         if (isLive)
         {
-            PlayerController.instance.PlayerBeingAttacked(damage);
+            PlayerController.instance.PlayerBeingAttacked(damage, isBossSkill);
 
         }
     }

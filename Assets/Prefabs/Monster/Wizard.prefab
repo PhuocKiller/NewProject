@@ -154,9 +154,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9410fee68ec34af41b9a14841bedce8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
-  coins: {fileID: 0}
-  chance: []
+  items:
+  - {fileID: 1827589331788588025, guid: 341c9597653821c4fab4c4808ab64212, type: 3}
+  - {fileID: -5702003554691499069, guid: d640927d131c689489eb9b52ebec1f5f, type: 3}
+  - {fileID: -1720518119932857091, guid: 59009e63e5caa984db10b625e5def6c4, type: 3}
+  - {fileID: 7775233625313915441, guid: 942fb67eb67b07c4699c382be8889dce, type: 3}
+  - {fileID: -2622862995332784879, guid: 1267fc5ff9fd8934e9a2df8884e38c79, type: 3}
+  coins: {fileID: 6456858283649145805, guid: 21ccc371a3e3015488aa517ea4418677, type: 3}
+  chance:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  isPick: 0
 --- !u!114 &1382755849868601305
 MonoBehaviour:
   m_ObjectHideFlags: 0

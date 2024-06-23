@@ -23,8 +23,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        musicSource.volume = SavingFile.instance.gameProgress.musicVolume;
-        soundSource.volume = SavingFile.instance.gameProgress.soundVolume;
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
             if (i == SceneManager.GetActiveScene().buildIndex)
@@ -34,7 +32,8 @@ public class AudioManager : MonoBehaviour
                 musicSource.Play();
             }
         }
-
+        musicSource.volume = SavingFile.instance.gameProgress.musicVolume;
+        soundSource.volume = SavingFile.instance.gameProgress.soundVolume;
     }
     public void PlaySound(AudioClip clip, bool isLoop=false)
     {

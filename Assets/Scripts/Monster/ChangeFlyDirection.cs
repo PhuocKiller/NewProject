@@ -19,7 +19,7 @@ public class ChangeFlyDirection : MonoBehaviour
             mon.moveSpeed = -mon.moveSpeed;
             if (mon.monsType==MonsterType.Boss)
             {
-                mon.transform.localScale = new Vector2(Mathf.Sign(mon.rigid.velocity.x),1f);
+                
             }
             else if (mon.monsType == MonsterType.Wizard)
             {

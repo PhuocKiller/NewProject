@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class UIMonster : MonoBehaviour
 {
+    public TextMeshProUGUI damageOfPlayerTMPInstance;
     public TextMeshProUGUI damageOfPlayerTMP;
     float displayTime;
     RectTransform rectTransform;
+    Monster mon;
     private void Awake()
     {
         rectTransform=GetComponent<RectTransform>();
+        mon = gameObject.transform.parent.gameObject.GetComponent<Monster>();
+        damageOfPlayerTMPInstance.text = null;
     }
     // Start is called before the first frame update
     void Start()
@@ -22,17 +26,23 @@ public class UIMonster : MonoBehaviour
     void Update()
     {
         displayTime += Time.deltaTime;
+        if (damageOfPlayerTMPInstance.text != null)
+        {
+            damageOfPlayerTMPInstance.GetComponent<RectTransform>().transform.position  //thay đổi vị trí bị trừ máu
+            = new Vector2(damageOfPlayerTMPInstance.GetComponent<RectTransform>().transform.position.x ,
+            damageOfPlayerTMPInstance.GetComponent<RectTransform>().transform.position.y + 0.03f);
+        }
         if (displayTime>0.7) //0.7 là thời gian gài để tự biến mất
         {
-            damageOfPlayerTMP.text = null;
+            damageOfPlayerTMPInstance.text = null;
         }
     }
     public void ShowDamage( int damage)
     {
         displayTime = 0;
-        damageOfPlayerTMP.text="-"+ damage.ToString();
-        damageOfPlayerTMP.GetComponent<RectTransform>().transform.position  //thay đổi vị trí bị trừ máu
+        damageOfPlayerTMPInstance.text="-"+ damage.ToString();
+        damageOfPlayerTMPInstance.GetComponent<RectTransform>().transform.position 
             = new Vector2(GetComponent<RectTransform>().transform.position.x + Random.Range(-0.5f,0.5f),
-            GetComponent<RectTransform>().transform.position.y+ Random.Range(-0.5f, 0.5f));
+            GetComponent<RectTransform>().transform.position.y+Random.Range(-0.5f, 0.5f));
     }
 }

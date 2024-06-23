@@ -82,7 +82,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       // Debug.Log(isPressMove);
         if (!isDie)
         {
             if (Input.GetKey(KeyCode.Space)) { Jump(); }
@@ -215,10 +214,10 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (!isDie&&doJump&& feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (!isDie&&doJump&& feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))&&
+           ( Animation.instance.state == State.Idle|| Animation.instance.state == State.Run))
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
-           // rigid.AddForce(new Vector2(rigid.velocity.x, jumpSpeed));
                 Animation.instance.state = State.Jump;
                 doJump = false;
         }
@@ -316,17 +315,21 @@ public class PlayerController : MonoBehaviour
         p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
         p_manaCostSkill_1 = 10 + (p_Level - 1);
         p_MaxXP = 100 * p_Level*p_Level;
-        p_Attack = 50 + 20 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
+        p_Attack = 50 + 50 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
     }
     public void FullEngergy()
     {
         p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
     }
-    public void PlayerBeingAttacked(float damage) //Player bị tấn công
+    public void PlayerBeingAttacked(float damage, bool isBossSkill = false) //Player bị tấn công
     {
         if (beImmortal ||isDie) { return; }
-        beImmortal = true;
+        if (!isBossSkill)
+        {
+            beImmortal = true;
+            Invoke("DeactiveImmortal", 3);
+        }
         ParticleManager.instance.SpawnBlood(new Vector2(transform.position.x, transform.position.y+2f));
         p_currentHealthFloat = p_currentHealthFloat - damage;
         p_currentHealthFade = p_currentHealthFade - damage;
@@ -340,7 +343,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         }
-        Invoke("DeactiveImmortal", 3);
+        
         Animation.instance.state = State.Injured;
         
     }

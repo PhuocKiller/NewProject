@@ -18,19 +18,47 @@ public class InventoryItemBase : MonoBehaviour, IInventoryItem
     }
     public void Start()
     {
-        StartCoroutine(DestroyItemNoPick());
+        StartCoroutine(FadeItemNoPick());
+    }
+    public void FixedUpdate()
+    {
+        if (isDecreaseAlpha)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a - 0.1f);
+            if (GetComponent<SpriteRenderer>().color.a<0.2f)
+            {
+                isDecreaseAlpha = false;
+                isIncreaseAlpha = true;
+            }
+        }
+        if (isIncreaseAlpha)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a + 0.1f);
+            if (GetComponent<SpriteRenderer>().color.a > 1)
+            {
+                isDecreaseAlpha = true;
+                isIncreaseAlpha = false;
+            }
+        }
     }
 
     public virtual ItemTypes itemTypes { get; set; }
-    public bool isPick;
+    public bool isDecreaseAlpha, isIncreaseAlpha;
 
     public virtual void OnPickUp()
     {
         Destroy(gameObject);
     }
+    public IEnumerator FadeItemNoPick()
+    {
+        yield return new WaitForSeconds(2);
+        isDecreaseAlpha = true;
+        StartCoroutine(DestroyItemNoPick());
+    }
     public IEnumerator DestroyItemNoPick()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
+
         Destroy(gameObject);
     }
     public virtual void OnDrop()

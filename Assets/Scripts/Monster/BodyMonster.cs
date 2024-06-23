@@ -29,7 +29,7 @@ public class BodyMonster : MonoBehaviour
                 MechanicDamage.instance.IncreaseDamagePlayer(), 1));
             ParticleManager.instance.SpawnBlood(transform.position);
         }
-        if (collision.CompareTag("Player"))          //Player bị tấn công
+        if (collision.CompareTag("Player")&& !PlayerController.instance.beImmortal)          //Player bị tấn công
         {
             mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,1,
                 MechanicDamage.instance.DecreaseDamageMonster()) );
@@ -38,8 +38,8 @@ public class BodyMonster : MonoBehaviour
         if (collision.CompareTag("Skill") && PlayerController.instance.isIntervalSkill)
         {
             mon.isStun = true;
-            mon.MonsterBeingAttacked((int)(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,
-                MechanicDamage.instance.IncreaseDamagePlayer(), 1)));
+            mon.MonsterBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(PlayerController.instance.p_Attack, mon.m_defend,
+                MechanicDamage.instance.IncreaseDamagePlayer(), 1));
             PlayerController.instance.isIntervalSkill = false;
             ParticleManager.instance.SpawnBlood(transform.position);
         }

@@ -16,7 +16,7 @@ public class SkillBossView : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && BossAnimation.instance.bossState != BossState.Skill
-            &&(mon.m_currentHealth/mon.m_maxHealth)<0.5f&&mon.isLive)
+            &&(((float)mon.m_currentHealth/(float)mon.m_maxHealth)<0.5f)&&mon.isLive)
         {
             BossAnimation.instance.bossState = BossState.Skill;
             Invoke("DelayActiveSkillBossGameObject", 0.2f);
@@ -26,14 +26,15 @@ public class SkillBossView : MonoBehaviour
     void DelayActiveSkillBossGameObject()
     {
         skillBossGameObject.SetActive(true);
-        pos = skillBossGameObject.transform.position;
         skillBossGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 25);
         Invoke("DownSkillGameObject", 0.6f);
     }
     void DelayDeactiveSkillBossGameObject()
     {
         skillBossGameObject.SetActive(false);
-        skillBossGameObject.transform.position = pos;
+        skillBossGameObject.transform.position = mon.transform.position;
+        skillBossGameObject.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+        CancelInvoke();
     }
     void DownSkillGameObject()
     {
