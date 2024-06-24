@@ -39,7 +39,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         m_level = PlayerController.instance.p_Level;
-        m_maxHealth = 50+ 100*m_level; m_currentHealth = m_maxHealth;
+        m_maxHealth = 50+ 150*m_level; m_currentHealth = m_maxHealth;
         m_attack =20+ 10*m_level;m_defend = 20+2* m_level;
         m_XP =100+100*m_level;
         isLive = true;

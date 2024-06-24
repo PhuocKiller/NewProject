@@ -9,7 +9,7 @@ public class Spike : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-           PlayerController.instance.PlayerBeingAttacked(0.2f * PlayerController.instance.p_maxHealth + Random.Range(20, 50));
+           PlayerController.instance.PlayerBeingAttacked(0.5f * PlayerController.instance.p_maxHealth + Random.Range(20, 50));
         }
     }
 }

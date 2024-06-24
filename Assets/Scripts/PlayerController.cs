@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
         p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
         p_manaCostSkill_1 = 10 + (p_Level - 1);
         p_MaxXP = 100 * p_Level*p_Level;
-        p_Attack = 50 + 50 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
+        p_Attack = 100 + 100 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
     }
     public void FullEngergy()
     {

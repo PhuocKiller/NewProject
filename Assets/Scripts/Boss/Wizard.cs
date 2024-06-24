@@ -18,8 +18,8 @@ public class Wizard : Monster
     }
     void Start()
     {
-        m_maxHealth = 50000; m_currentHealth = m_maxHealth;
-        m_attack = 300; m_defend = 150;
+        m_maxHealth = 5000; m_currentHealth = m_maxHealth;
+        m_attack = 300; m_defend = 50;
         isLive = true;
         moveSpeed = 2f;
         shootSpeed = 10f;
@@ -93,7 +93,9 @@ public class Wizard : Monster
         animator.SetTrigger("attack");
         snowBallInstance = Instantiate(snowBall, transform.position, Quaternion.identity);
         snowBallInstance.GetComponent<Rigidbody2D>().velocity= new Vector2(transform.localScale.x*shootSpeed, 0);
+        snowBallInstance.GetComponent<SpriteRenderer>().color = new Color(1, Random.Range(0, 1f), Random.Range(0, 1f), 1);
         isShooting = false;timeShoot = 0;
         snowBallInstance.transform.parent = transform;
+        snowBallInstance.mon = this;
     }
 }

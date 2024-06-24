@@ -21,7 +21,7 @@ public class BossAI : Monster
         posBossIndex = Random.Range(0, 4);
         transform.position = posBoss[posBossIndex].transform.position;
         m_maxHealth = 50000; m_currentHealth = m_maxHealth;
-        m_attack = 900; m_defend = 50;
+        m_attack = 1000; m_defend = 150;
         isLive = true;
         moveSpeed = -2f;
         InvokeRepeating("ChangePosition", timeToChangePosition, timeToChangePosition);

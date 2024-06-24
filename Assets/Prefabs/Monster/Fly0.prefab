@@ -12,30 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvanMonster
       objectReference: {fileID: 0}
-    - target: {fileID: 2903743077756827621, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2997909199116853546, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661608322946014563, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6886026730262530560, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7648872937072938380, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7661550343897182600, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -67,14 +43,6 @@ PrefabInstance:
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_SizeDelta.y
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_LocalPosition.x
@@ -123,14 +91,6 @@ PrefabInstance:
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8804834597765838952, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1274,6 +1234,7 @@ MonoBehaviour:
   isDetect: 0
   UIMonster: {fileID: 7498671002728744333}
   timeStun: 0
+  canShoot: 0
 --- !u!114 &691511583491962613
 MonoBehaviour:
   m_ObjectHideFlags: 0

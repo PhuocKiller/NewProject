@@ -200,8 +200,8 @@ public class UIManager : MonoBehaviour
     public void ShowDamageDealByMonster(int damage)
     {
        damageDealByMonsterInstance =Instantiate(damageDealByMonster, transform.position, Quaternion.identity);
-        
-        damageDealByMonsterInstance.transform.parent = transform;
+
+        damageDealByMonsterInstance.GetComponent<RectTransform>().transform.SetParent(transform);
         damageDealByMonsterInstance.transform.localScale = new Vector3(1.9f, 1.9f, 1.9f);
         damageDealByMonsterInstance.transform.position = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
         damageDealByMonsterInstance.text = "-" + damage;

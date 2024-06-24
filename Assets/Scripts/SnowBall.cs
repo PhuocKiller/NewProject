@@ -6,15 +6,16 @@ public class SnowBall : MonoBehaviour
 {
     public Rigidbody2D rigidBall;
     CircleCollider2D circleBall;
-    Monster mon;
+    public Monster mon;
     private void Awake()
     {
         rigidBall=GetComponent<Rigidbody2D>();
         circleBall=GetComponent<CircleCollider2D>();
+       // mon = transform.parent.gameObject.GetComponent<Wizard>();
     }
     private void Start()
     {
-        mon = gameObject.transform.parent.gameObject.GetComponent<Wizard>();
+        
         Destroy(gameObject,2);
      }
     private void FixedUpdate()
