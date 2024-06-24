@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Wizard : Monster
 {
+    public AnimationState anim;
+    public SnowBall snowBall;
+    SnowBall snowBallInstance;
+    public float shootSpeed;
+    bool isShooting;
+    float timeShoot;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -16,6 +22,8 @@ public class Wizard : Monster
         m_attack = 300; m_defend = 150;
         isLive = true;
         moveSpeed = 2f;
+        shootSpeed = 10f;
+        isShooting = true;
     }
     private void FixedUpdate()
     {
@@ -24,23 +32,49 @@ public class Wizard : Monster
 
             if (!isStun)
             {
-                if (!isDetect)
+               if (!canShoot)
                 {
-                    rigid.velocity = new Vector2(moveSpeed, 0);
-                    animator.SetBool("run", false);
+                    animator.SetBool("attack", false);
+                    CancelInvoke();
+                    if (!isDetect)
+                    {
+                        rigid.velocity = new Vector2(moveSpeed, 0);
+                        animator.SetBool("run", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("run", true);
+                        rigid.velocity = new Vector2(3 * moveSpeed, 0); //khi phát hiện thì tăng tốc
+                    } 
                 }
-                else { animator.SetBool("run", true); 
-                    rigid.velocity = new Vector2(3 * moveSpeed, 0); } //khi phát hiện thì tăng tốc
+               else //đang bắn
+                {
+                    rigid.velocity = Vector2.zero;
+                    animator.SetBool("run", false);
+                    if (!isShooting)
+                    {
+                        timeShoot += Time.deltaTime;
+                        if (timeShoot >0.667/5f)
+                        {
+                            isShooting = true;
+                        }
+                    }
+                    else
+                    {
+                        CreateSnowBall();
+                    }
+                }
             }
             else
             {
                 timeStun += Time.deltaTime;
-                rigid.velocity = -rigid.velocity;
-                if (timeStun >= 2)
+                rigid.velocity = Vector2.zero;
+                if (timeStun >= 0.2)
                 {
                     timeStun = 0; isStun = false;
                 }
             }
+            bool playerHasHorizontalSpeed = Mathf.Abs(rigid.velocity.x) > Mathf.Epsilon;
         }
         else
         {
@@ -48,5 +82,18 @@ public class Wizard : Monster
         }
         healthBarMonster.UpdateBar(m_currentHealth, m_maxHealth);
         UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(transform.localScale.x, 1);
+       
+    }
+    void Shooting()
+    {
+
+    }
+    void CreateSnowBall()
+    {
+        animator.SetTrigger("attack");
+        snowBallInstance = Instantiate(snowBall, transform.position, Quaternion.identity);
+        snowBallInstance.GetComponent<Rigidbody2D>().velocity= new Vector2(transform.localScale.x*shootSpeed, 0);
+        isShooting = false;timeShoot = 0;
+        snowBallInstance.transform.parent = transform;
     }
 }

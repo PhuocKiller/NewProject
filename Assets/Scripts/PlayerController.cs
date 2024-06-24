@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
                 timeJump += Time.deltaTime;
             }
             else { timeJump=0; }
-            if (Animation.instance.state!=State.Injured)
+            if (PlayerAnimation.instance.state!=State.Injured)
             {
                 Run();
             }
@@ -102,31 +102,31 @@ public class PlayerController : MonoBehaviour
     public void PlayerAttack()
     {
         
-            if (!isDie&& Animation.instance.state==State.Idle &&doAttack)
+            if (!isDie&& PlayerAnimation.instance.state==State.Idle &&doAttack)
         {
             if (PlayerController.instance.characterType == CharacterType.Melee)
             {
                 attackGameObject.SetActive(true);
                 isAttackExactly = true;
-                Animation.instance.state = State.Attack;
+                PlayerAnimation.instance.state = State.Attack;
                 Invoke("DelaySword", 0.2f);
                 doAttack = false;
-                Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
+                Invoke("SetIdleState", PlayerAnimation.instance.GetTimeOfAttackAnimation());
             }
             else
             {
                 attackGameObject.SetActive(true);
                 isAttackExactly = true;
                 Invoke("DelayArrow", 0.3f); //Arrow ko bay liền ra khi ấn button
-                Animation.instance.state = State.Attack;
+                PlayerAnimation.instance.state = State.Attack;
                 doAttack = false;
-                Invoke("SetIdleState", Animation.instance.GetTimeOfAttackAnimation());
+                Invoke("SetIdleState", PlayerAnimation.instance.GetTimeOfAttackAnimation());
             }
         }
     }
     public void PlayerSkill_1()
     {
-        if (!isDie && Animation.instance.state == State.Idle && doAttack  )
+        if (!isDie && PlayerAnimation.instance.state == State.Idle && doAttack  )
         {
             if (p_currentManaFloat >= p_manaCostSkill_1)
             {
@@ -135,19 +135,19 @@ public class PlayerController : MonoBehaviour
                 {
                     skill_1_GameObject.SetActive(true);
                     isAttackExactly = true;
-                    Animation.instance.state = State.Skill1;
+                    PlayerAnimation.instance.state = State.Skill1;
                     Invoke("DelaySword", 0.2f);
                     doAttack = false;
-                    Invoke("SetIdleState", Animation.instance.GetTimeOfSkill_1_Animation());
+                    Invoke("SetIdleState", PlayerAnimation.instance.GetTimeOfSkill_1_Animation());
                 }
                 else
                 {
                     skill_1_GameObject.SetActive(true);
                     isAttackExactly = true;
                     Invoke("DelayArrow", 0.75f); //Arrow ko bay liền ra khi ấn button
-                    Animation.instance.state = State.Skill1;
+                    PlayerAnimation.instance.state = State.Skill1;
                     doAttack = false;
-                    Invoke("SetIdleState", Animation.instance.GetTimeOfSkill_1_Animation());
+                    Invoke("SetIdleState", PlayerAnimation.instance.GetTimeOfSkill_1_Animation());
                 }
             }
             else
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDie)
         {
-            Animation.instance.state = State.Idle;
+            PlayerAnimation.instance.state = State.Idle;
             if (characterType == CharacterType.Melee)
             {
                 doAttack = true; doJump = true;
@@ -197,11 +197,11 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerSkill()
     {
-        if (!isDie  && Animation.instance.state == State.Idle)
+        if (!isDie  && PlayerAnimation.instance.state == State.Idle)
         {
             if (p_currentManaFloat > p_manaCostMainSkill)
             {
-                Animation.instance.state = State.ChargeSkill;
+                PlayerAnimation.instance.state = State.ChargeSkill;
 
             }
             else
@@ -215,16 +215,16 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (!isDie&&doJump&& feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))&&
-           ( Animation.instance.state == State.Idle|| Animation.instance.state == State.Run))
+           ( PlayerAnimation.instance.state == State.Idle|| PlayerAnimation.instance.state == State.Run))
         {
             rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed); 
-                Animation.instance.state = State.Jump;
+                PlayerAnimation.instance.state = State.Jump;
                 doJump = false;
         }
     }
     void Run()
     {
-        if (!isDie && !(Animation.instance.state == State.Attack))
+        if (!isDie && !(PlayerAnimation.instance.state == State.Attack))
         {
             moveInput = new Vector2(Input.GetAxis("Horizontal"), rigid.velocity.y);
         }
@@ -236,11 +236,11 @@ public class PlayerController : MonoBehaviour
         
            if(feetCapCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
-                if (playerHasHorizontalSpeed && !(Animation.instance.state == State.Attack))
+                if (playerHasHorizontalSpeed && !(PlayerAnimation.instance.state == State.Attack))
                 {
                     if (timeJump>0.2f ||timeJump==0) //khi jump đủ time hoặc khi ko jump thì Run
                         {
-                            Animation.instance.state = State.Run;
+                            PlayerAnimation.instance.state = State.Run;
                     if (!Input.GetKey(KeyCode.Space))
                     {
                         doJump = true;
@@ -251,14 +251,14 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    if (!(Animation.instance.state == State.Attack) 
+                    if (!(PlayerAnimation.instance.state == State.Attack) 
                && !Input.GetMouseButton(0)
-               && !(Animation.instance.state == State.LevelUp)
-               && !(Animation.instance.state == State.Injured) && !(Animation.instance.state == State.Skill1))
+               && !(PlayerAnimation.instance.state == State.LevelUp)
+               && !(PlayerAnimation.instance.state == State.Injured) && !(PlayerAnimation.instance.state == State.Skill1))
                 {
                     if (timeJump > 0.2f || timeJump == 0) //khi jump đủ time hoặc khi ko jump thì Idle
                     {
-                        Animation.instance.state = State.Idle;
+                        PlayerAnimation.instance.state = State.Idle;
                         if (!Input.GetKey(KeyCode.Space))
                         {
                             doJump = true;
@@ -271,10 +271,10 @@ public class PlayerController : MonoBehaviour
            else
             {
                 rigid.velocity = new Vector2(moveInput.x * runSpeed * 0.4f, rigid.velocity.y); //0.3 là độ delay di chuyển horizontal
-                if(!(Animation.instance.state == State.Jump) && !(Animation.instance.state == State.Injured)
-                &&!(Animation.instance.state == State.Die))
+                if(!(PlayerAnimation.instance.state == State.Jump) && !(PlayerAnimation.instance.state == State.Injured)
+                &&!(PlayerAnimation.instance.state == State.Die))
                 {
-                Animation.instance.state = State.Fall;
+                PlayerAnimation.instance.state = State.Fall;
                 }
             }
         if (playerHasHorizontalSpeed)
@@ -300,11 +300,11 @@ public class PlayerController : MonoBehaviour
             {
                 UIManager.instance.panelSkinLv10.SetActive(true);
             }
-            Animation.instance.state = State.LevelUp;
+            PlayerAnimation.instance.state = State.LevelUp;
             UpdateLevelPlayer();
         }
         
-        Animation.instance.SetupSkins(p_Level);
+        PlayerAnimation.instance.SetupSkins(p_Level);
         UIManager.instance.levelPlayerTMP.text = p_Level.ToString();
     }
     void UpdateLevelPlayer()
@@ -337,14 +337,14 @@ public class PlayerController : MonoBehaviour
         if (p_currentHealthFloat < 0)
         {
             p_currentHealthFloat = 0; p_currentHealthFade = 0;
-            Animation.instance.state = State.Die;
+            PlayerAnimation.instance.state = State.Die;
             isDie = true;
             Invoke("PlayAgain",3);
             return;
 
         }
         
-        Animation.instance.state = State.Injured;
+        PlayerAnimation.instance.state = State.Injured;
         
     }
     void DeactiveImmortal()
@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.panelPlayAgain.SetActive(true);
     }
 
-    void FadeImmortal()
+    void FadeImmortal() //chớp nháy khi ở trạng thái bất tử
     {
         if (beImmortal)
         {
@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour
         {
             meshRenderer.material.color = new Color(1, 1, 1, 1);
         }
-    }//chớp nháy khi ở trạng thái bất tử
+    }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
       

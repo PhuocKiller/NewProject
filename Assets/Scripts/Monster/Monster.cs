@@ -26,7 +26,9 @@ public class Monster : MonoBehaviour
     public bool isLive, isStun,isDetect;
     public UIMonster UIMonster;
     public float timeStun;
-    
+    public bool canShoot; // Wizard shoot
+
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();

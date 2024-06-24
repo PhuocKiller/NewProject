@@ -899,6 +899,7 @@ MonoBehaviour:
   - 0.2
   - 0.2
   - 0.1
+  isPick: 0
 --- !u!1001 &2635436711401185840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -926,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 6886026730262530560, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7648872937072938380, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7661550343897182600, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Layer

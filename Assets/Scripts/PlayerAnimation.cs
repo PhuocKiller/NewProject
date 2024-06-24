@@ -25,7 +25,7 @@ public enum Skins
 {
     Lv1,Lv5,Lv10
 }
-    public class Animation : MonoBehaviour
+    public class PlayerAnimation : MonoBehaviour
 {
     #region Inspector
     // [SpineAnimation] attribute allows an Inspector dropdown of Spine animation names coming form SkeletonAnimation.
@@ -66,7 +66,7 @@ public enum Skins
     #endregion
 
     public SkeletonAnimation skeletonAnimation;
-    public static Animation instance;
+    public static PlayerAnimation instance;
     public State state; public Skins skin;
     public string stateString;
     
@@ -236,7 +236,10 @@ public enum Skins
     }
     void DelaySetStateIdle()
     {
-        state=State.Idle;
+        if (!PlayerController.instance.isDie)
+        {
+            state = State.Idle;
+        }
     }
     public float GetTimeOfAttackAnimation()
     {

@@ -22,26 +22,26 @@ public class MechanicDamage : MonoBehaviour
     {
         float a; float b;
         //Player's skin affect power
-        if (Animation.instance.skin == Skins.Lv1)
+        if (PlayerAnimation.instance.skin == Skins.Lv1)
         {
             a = 1;
         }
-        else if (Animation.instance.skin == Skins.Lv5)
+        else if (PlayerAnimation.instance.skin == Skins.Lv5)
         {
             a = 2;
         }
         else { a = 5; }
 
         //Player's Skill affect power
-        if (Animation.instance.state == State.Attack)
+        if (PlayerAnimation.instance.state == State.Attack)
         {
             b = 1;
         }
-        else if (Animation.instance.state == State.Skill1)
+        else if (PlayerAnimation.instance.state == State.Skill1)
         {
             b = 3;
         }
-        else if (Animation.instance.state == State.MainSkill)
+        else if (PlayerAnimation.instance.state == State.MainSkill)
         {
             b = 0.5f;
         }
@@ -52,11 +52,11 @@ public class MechanicDamage : MonoBehaviour
     {
         float a;
         //Player's skin affect armor
-        if (Animation.instance.skin == Skins.Lv1)
+        if (PlayerAnimation.instance.skin == Skins.Lv1)
         {
             a = 1;
         }
-        else if (Animation.instance.skin == Skins.Lv5)
+        else if (PlayerAnimation.instance.skin == Skins.Lv5)
         {
             a = 0.8f;
         }

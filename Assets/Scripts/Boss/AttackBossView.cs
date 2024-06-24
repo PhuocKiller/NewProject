@@ -25,10 +25,20 @@ public class AttackBossView : MonoBehaviour
                 Invoke("DelayDeactiveAttackBossGameObject", BossAnimation.instance.GetTimeOfAttackBoss());
             }
         }
-       else if (mon.monsType == MonsterType.Wizard && collision.gameObject.CompareTag("Player"))
+      
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+       if (mon.monsType == MonsterType.Wizard && collision.gameObject.CompareTag("Player"))
         {
-            Invoke("DelayActiveAttackBossGameObject", 0.2f);
-            Invoke("DelayDeactiveAttackBossGameObject", 3);
+            mon.canShoot = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (mon.monsType == MonsterType.Wizard && collision.gameObject.CompareTag("Player"))
+        {
+            mon.canShoot = false;
         }
     }
     void DelayActiveAttackBossGameObject ()

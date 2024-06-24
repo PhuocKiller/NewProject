@@ -17,11 +17,13 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     public Bars healthBar, manaBar, XPBar;
     public TextMeshProUGUI levelPlayerTMP, damageDealByMonster;
+    TextMeshProUGUI damageDealByMonsterInstance;
     public bool isRefillMana, isRefillHealth;
     public bool isHaveKey; //có chìa khóa trong inventory hay ko
     float timeRefillMana, timeRefillHealth;
     public GameObject panelMonsterInfo, panelPlayerInfo, panelInventory, panelSetting,unpauseButton, 
-        panelPlayAgain, panelHelp, panelLoadNewScene,panelPlayerBeAttacked, panelVictory,panelSkinLv5, panelSkinLv10;
+        panelPlayAgain, panelHelp, panelLoadNewScene, panelVictory,panelSkinLv5, panelSkinLv10;
+    
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
         healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
         numberHealPotionTMP,numberManaPotionTMP,
@@ -101,11 +103,7 @@ public class UIManager : MonoBehaviour
             }
             
         }
-        displayTimePlayerBeAttacked += Time.deltaTime;
-        if (displayTimePlayerBeAttacked > 0.7) //0.7 là thời gian gài để tự biến mất
-        {
-            panelPlayerBeAttacked.SetActive(false);
-        }
+        
         UpdateHealButton();
         UpdateManaButton();
         if (isClosingScene)
@@ -201,10 +199,14 @@ public class UIManager : MonoBehaviour
     }
     public void ShowDamageDealByMonster(int damage)
     {
-        panelPlayerBeAttacked.SetActive(true);
-        displayTimePlayerBeAttacked = 0;
-        damageDealByMonster.text = "-" + damage;
-   
+       damageDealByMonsterInstance =Instantiate(damageDealByMonster, transform.position, Quaternion.identity);
+        
+        damageDealByMonsterInstance.transform.parent = transform;
+        damageDealByMonsterInstance.transform.localScale = new Vector3(1.9f, 1.9f, 1.9f);
+        damageDealByMonsterInstance.transform.position = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+        damageDealByMonsterInstance.text = "-" + damage;
+        damageDealByMonsterInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
+        Destroy(damageDealByMonsterInstance.gameObject, 0.5f);
     }
     public void ShowInfoMonster(Monster monster)
     {
@@ -445,7 +447,7 @@ public class UIManager : MonoBehaviour
         PlayerController.instance.isDie = false;
         PlayerController.instance.beImmortal=false;
         PlayerController.instance.posIndex = 0;
-        Animation.instance.state = State.Idle;
+        PlayerAnimation.instance.state = State.Idle;
         panelPlayAgain.SetActive(false);
         SceneManager.LoadScene(0);
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;

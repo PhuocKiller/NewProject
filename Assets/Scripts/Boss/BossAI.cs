@@ -104,7 +104,7 @@ public class BossAI : Monster
     void Victory()
     {
         UIManager.instance.panelVictory.SetActive(true);
-        Animation.instance.VictoryAnimation();
+        PlayerAnimation.instance.VictoryAnimation();
         AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
     }
     void ChangePosition()
