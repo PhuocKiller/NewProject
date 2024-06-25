@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     public event EventHandler<InventoryEventArgs> ItemRemoved;
     public event EventHandler<InventoryEventArgs> InventoryUpdate;
     public static Inventory instance;
-    public InventoryItemBase[] inventoryItems;
+    public InventoryItemBase[] inventoryItems, inventory_9_Items;
     InventoryItemBase item;
     private void Awake()
     {
@@ -212,15 +212,15 @@ public class Inventory : MonoBehaviour
                 {
                     if (mItems.Count < SLOTS)
                     {
-                        
-                            mItems.Add(inventoryItems[j]);
+                        inventory_9_Items[i] = inventoryItems[j];
+                            mItems.Add(inventory_9_Items[i]);
                             if (ItemAdded != null)
                             {
-                                ItemAdded(this, new InventoryEventArgs(inventoryItems[j]));
+                                ItemAdded(this, new InventoryEventArgs(inventory_9_Items[i]));
                             }
                             if (InventoryUpdate != null)
                             {
-                                InventoryUpdate(this, new InventoryEventArgs(inventoryItems[j]));
+                                InventoryUpdate(this, new InventoryEventArgs(inventory_9_Items[i]));
                             }
                         
                     }

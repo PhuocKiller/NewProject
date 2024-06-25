@@ -10,13 +10,14 @@ public class ItemDragHandler : MonoBehaviour,IDragHandler,IEndDragHandler
     public IInventoryItem Item { get; set; }
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        transform.position = Input.mousePosition;Debug.Log("ondrag");
+        Debug.Log(transform.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.localPosition = Vector3.zero;
- 
+        transform.localPosition = Vector3.zero; Debug.Log("onenddrag");
+
     }
 
 }

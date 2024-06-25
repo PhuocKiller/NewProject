@@ -2758,6 +2758,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!20 &763516837 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8700845404856473243, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+  m_PrefabInstance: {fileID: 1384394772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &776773948
 GameObject:
   m_ObjectHideFlags: 0
@@ -4721,6 +4726,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 721924689290800936, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 908322616902284242, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4744,6 +4753,10 @@ PrefabInstance:
     - target: {fileID: 908322616902284242, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043743395952712589, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1220278215425285613, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4873,6 +4886,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2948964273088068242, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 763516837}
     - target: {fileID: 2979836586535786156, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -9,7 +9,6 @@ public class SettingPanel : MonoBehaviour
     public GameObject musicOnButton, musicOffButton, soundOnButton, soundOffButton;
     private void Awake()
     {
-        Debug.Log("awake");
         Setup();
     }
     void Setup()

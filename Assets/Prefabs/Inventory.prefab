@@ -47,4 +47,16 @@ MonoBehaviour:
   inventoryItems:
   - {fileID: 1827589331788588025, guid: 341c9597653821c4fab4c4808ab64212, type: 3}
   - {fileID: -5702003554691499069, guid: d640927d131c689489eb9b52ebec1f5f, type: 3}
+  - {fileID: -1720518119932857091, guid: 59009e63e5caa984db10b625e5def6c4, type: 3}
+  - {fileID: 7775233625313915441, guid: 942fb67eb67b07c4699c382be8889dce, type: 3}
   - {fileID: -2622862995332784879, guid: 1267fc5ff9fd8934e9a2df8884e38c79, type: 3}
+  inventory_9_Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
