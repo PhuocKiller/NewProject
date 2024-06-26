@@ -112,7 +112,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &287126797839190150
 BoxCollider2D:
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Image: {fileID: 21300000, guid: c277289475ce757408692c848493b29e, type: 3}
+  isDecreaseAlpha: 0
+  isIncreaseAlpha: 0

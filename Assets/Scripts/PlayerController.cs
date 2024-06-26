@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     public GameObject attackGameObject, mainSkillGameObject, skill_1_GameObject;
     GameObject feet;
-    CapsuleCollider2D capAttack, capMainSkill, bodyPlayer, feetCapCollider; //collider các skill Range body Player
-   // BoxCollider2D arrowBox, skillRangeBox; //collider các skill Range
+    CapsuleCollider2D capAttack, capMainSkill, bodyPlayer, feetCapCollider; //collider các skillMelee Range body Player
     EdgeCollider2D edgePlayer;
     MeshRenderer meshRenderer;
     public float runSpeed = 10f;
@@ -33,17 +32,16 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_MaxMana,p_MaxRage, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaCostMainSkill, p_manaCostSkill_1;
+    public int p_maxHealth, p_MaxMana,p_MaxRage, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_RageAttack, p_Defend,p_RageDefend,
+        p_manaCostMainSkill, p_manaCostSkill_1;
     public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade,p_currentRageFloat;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
     public int numberIndexCharacter, coins; public CharacterType characterType; //thông tin khi save
     public int posIndex; //vị trí Player khi chuyển scene
-    bool isPressMove;
+    public bool isRage;
     float timeJump;
-    public float deltaDamage;
-
-
-
+    public float deltaDamage, deltaRage;
+    public float p_CritChance, p_RageCritChance, p_CritDamage, p_RageCritDamage;
     void Awake()
     {
         if (instance == null)
@@ -76,7 +74,7 @@ public class PlayerController : MonoBehaviour
         if(p_Level==0) { p_Level = 1; }
         p_MaxRage = 100;p_currentRageFloat = 0;
         UpdateLevelPlayer();
-        deltaDamage = 0.06f;
+        deltaDamage = 0.06f; deltaRage = 0.2f;
         ParticleManager.instance.SetSkinParticle(p_Level);
     }
 
@@ -96,6 +94,7 @@ public class PlayerController : MonoBehaviour
                 Run();
             }
             FadeImmortal();
+            RageSetup();
         }
         
     }
@@ -254,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (!(PlayerAnimation.instance.state == State.Attack) 
                && !Input.GetMouseButton(0)
-               && !(PlayerAnimation.instance.state == State.LevelUp)
+               && !(PlayerAnimation.instance.state == State.LevelUp) && !(PlayerAnimation.instance.state == State.Rage)
                && !(PlayerAnimation.instance.state == State.Injured) && !(PlayerAnimation.instance.state == State.Skill1))
                 {
                     if (timeJump > 0.2f || timeJump == 0) //khi jump đủ time hoặc khi ko jump thì Idle
@@ -317,23 +316,22 @@ public class PlayerController : MonoBehaviour
         p_manaCostSkill_1 = 10 + (p_Level - 1);
         p_MaxXP = 100 * p_Level*p_Level;
         p_Attack = 100 + 100 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);
+        p_CritChance=0.1f+0.01f*(p_Level - 1); p_CritDamage = 1.5f + 0.1f * (p_Level - 1);
     }
     public void FullEngergy()
     {
         p_currentHealthFloat = p_maxHealth; p_currentHealthFade = p_maxHealth;
         p_currentManaFloat = p_MaxMana; p_currentManaFade = p_MaxMana;
     }
-    public void PlayerBeingAttacked(float damage, bool isBossSkill = false) //Player bị tấn công
+    public void PlayerBeingAttacked(float damage, float delayImmortalTime=0) //Player bị tấn công
     {
         if (beImmortal ||isDie) { return; }
-        if (!isBossSkill)
-        {
-            beImmortal = true;
-            Invoke("DeactiveImmortal", 3);
-        }
+        beImmortal = true;
+        StartCoroutine(DeactiveImmortal(delayImmortalTime));
         ParticleManager.instance.SpawnBlood(new Vector2(transform.position.x, transform.position.y+2f));
         p_currentHealthFloat = p_currentHealthFloat - damage;
         p_currentHealthFade = p_currentHealthFade - damage;
+        IncreaseRageFloat(5 + deltaRage * damage / p_maxHealth,false);
         UIManager.instance.ShowDamageDealByMonster((int)damage);
         if (p_currentHealthFloat < 0)
         {
@@ -348,9 +346,90 @@ public class PlayerController : MonoBehaviour
         PlayerAnimation.instance.state = State.Injured;
         
     }
-    void DeactiveImmortal()
+    IEnumerator DeactiveImmortal(float delayImmortalTime)
     {
+        yield return new WaitForSeconds(delayImmortalTime);
         beImmortal = false;
+    }
+    public void IncreaseRageFloat(float valueRage, bool isCrit)
+    {
+        if (UIManager.instance.rageBar.isFullBar)
+        {
+            return;
+        }
+        if (isCrit)
+        {
+            p_currentRageFloat += 3*valueRage;
+        }
+        else { p_currentRageFloat += valueRage; }
+
+        if (p_currentRageFloat>=p_MaxRage)
+        {
+            p_currentRageFloat = p_MaxRage;
+        }
+        UIManager.instance.rageBar.isUpgradeFill = true;
+    }
+    public void RageSetup()
+    {
+        if (isRage)
+        {
+            ParticleManager.instance.rage.gameObject.SetActive(true);
+            p_currentRageFloat -= 10 * Time.deltaTime;
+            p_RageCritChance = p_CritChance + 0.2f;
+            p_RageCritDamage = p_CritDamage + 1.5f;
+            p_RageAttack =(int) (1.2f * p_Attack);
+            p_RageDefend =(int) (1.2f * p_Defend);
+            if (p_currentRageFloat < 0)
+            {
+                p_currentRageFloat = 0;
+                isRage = false;
+                ParticleManager.instance.rage.gameObject.SetActive(false);
+            }
+        }
+    }
+    public float GetCritChance()
+    {
+        if (isRage)
+        {
+            return p_RageCritChance;
+        }
+        else
+        {
+            return p_CritChance;
+        }
+    }
+    public float GetCritDamage()
+    {
+        if (isRage)
+        {
+            return p_RageCritDamage;
+        }
+        else
+        {
+            return p_CritDamage;
+        }
+    }
+    public int GetAttack()
+    {
+        if (isRage)
+        {
+            return p_RageAttack;
+        }
+        else
+        {
+            return p_Attack;
+        }
+    }
+    public int GetDefend()
+    {
+        if (isRage)
+        {
+            return p_RageDefend;
+        }
+        else
+        {
+            return p_Defend;
+        }
     }
     void PlayAgain()
     {

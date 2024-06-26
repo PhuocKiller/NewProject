@@ -80,20 +80,19 @@ public class Monster : MonoBehaviour
        UIMonster.GetComponent<RectTransform>().transform.localScale = new Vector2(10*transform.localScale.x, 1);
     }
    
-    public void PlayerBeingAttacked(float damage, bool isBossSkill=false)
+    public void PlayerBeingAttacked(float damage, float delayImmortalTime=0)
     {
         if (isLive)
         {
-            PlayerController.instance.PlayerBeingAttacked(damage, isBossSkill);
-
+            PlayerController.instance.PlayerBeingAttacked(damage, delayImmortalTime);
         }
     }
-    public virtual void MonsterBeingAttacked(int damage)
+    public virtual void MonsterBeingAttacked(int damage, bool isCrit)
     {
         if (isLive)
         {
             animator.SetTrigger("hit");
-            UIMonster.ShowDamage(damage);
+            UIMonster.ShowDamage(damage, isCrit);
             m_currentHealth = m_currentHealth - damage;
             if (m_currentHealth <= 0)
             {

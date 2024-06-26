@@ -16,7 +16,7 @@ public class SkillBoss : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,3,
-                MechanicDamage.instance.DecreaseDamageMonster()),true);
+                MechanicDamage.instance.DecreaseDamageMonster()));
             PlayerController.instance.beImmortal = false;
         }
     }

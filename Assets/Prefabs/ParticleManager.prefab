@@ -47,6 +47,8 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   skill1Point: {fileID: 0}
   mainSkillPoint: {fileID: 0}
+  rage: {fileID: 0}
+  b_Die: {fileID: 3802225512499316718, guid: 5be45fa4bc2c73b4fb16148622696647, type: 3}
   chase: {fileID: 4593184484909914550, guid: 5530efa4ab61b80488a9dfa6dda454be, type: 3}
   boom1: {fileID: 2433282508523890284, guid: b2f5b6c06e868a64299983ec09677cd6, type: 3}
   skill_1: {fileID: 3424209798209665582, guid: 61f60e927fb00e04a81572767f5b37f6, type: 3}

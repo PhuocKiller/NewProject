@@ -188,6 +188,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3802225512499316718, guid: 5be45fa4bc2c73b4fb16148622696647, type: 3}
     - target: {fileID: 7985416620592186502, guid: ef50eb70ede5f4b4db37003b42ef1e75, type: 3}
+      propertyPath: blood
+      value: 
+      objectReference: {fileID: 2404300119338076564, guid: 483c825cd38d6624e8a9395616d2bac2, type: 3}
+    - target: {fileID: 7985416620592186502, guid: ef50eb70ede5f4b4db37003b42ef1e75, type: 3}
+      propertyPath: skillMelee
+      value: 
+      objectReference: {fileID: 1384847655082071330, guid: aa3ee4aca8704674eb18cf3e1068bd02, type: 3}
+    - target: {fileID: 7985416620592186502, guid: ef50eb70ede5f4b4db37003b42ef1e75, type: 3}
+      propertyPath: skillRange
+      value: 
+      objectReference: {fileID: 1384847655082071330, guid: b92434a86f6455947beff5fa91f0f2e3, type: 3}
+    - target: {fileID: 7985416620592186502, guid: ef50eb70ede5f4b4db37003b42ef1e75, type: 3}
       propertyPath: attackPoint
       value: 
       objectReference: {fileID: 1247369327}

@@ -847,6 +847,7 @@ MonoBehaviour:
   isDetect: 0
   UIMonster: {fileID: 5022075459365010036}
   timeStun: 0
+  canShoot: 0
 --- !u!50 &6799264759593350085
 Rigidbody2D:
   serializedVersion: 4
@@ -894,10 +895,10 @@ MonoBehaviour:
   - {fileID: -2622862995332784879, guid: 1267fc5ff9fd8934e9a2df8884e38c79, type: 3}
   coins: {fileID: 6456858283649145805, guid: 21ccc371a3e3015488aa517ea4418677, type: 3}
   chance:
-  - 0.5
-  - 0.5
-  - 0.2
-  - 0.2
+  - 0.3
+  - 0.3
+  - 0.15
+  - 0.15
   - 0.1
   isPick: 0
 --- !u!1001 &2635436711401185840

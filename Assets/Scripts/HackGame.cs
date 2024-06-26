@@ -45,5 +45,9 @@ public class HackGame : MonoBehaviour
         {
             PlayerController.instance.p_Attack+=500;
         }
+        if (Input.GetKeyDown(KeyCode.R) && PlayerController.instance != null)
+        {
+            PlayerController.instance.p_currentRageFloat = PlayerController.instance.p_MaxRage;
+        }
     }
 }

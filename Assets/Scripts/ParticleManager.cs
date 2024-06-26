@@ -15,57 +15,66 @@ public class ParticleManager : MonoBehaviour
         }
     }
     public Transform attackPoint, skill1Point,mainSkillPoint;
-    public  ParticleSystem b_Die,chase, boom1, skill_1, skill, die, attack, level, blood, tele, heal, mana;
+    public  ParticleSystem rage,b_Die,chase, boom1, skill_1, skillMelee,skillRange, die, attack, level, blood, tele, heal, mana;
     public ParticleSystem[] skinParticle;
-    private ParticleSystem Skill_1Instance, LevelInstance, AttackInstance, DieInstance, SkillInstance,BloodInstance,TeleInstance,HealInstance, ManaInstance;
+    private ParticleSystem skill_1Instance, levelInstance, attackInstance, dieInstance, 
+        skillMelee_Instance, skillRange_Instance,bloodInstance, teleInstance,healInstance, manaInstance;
     private ParticleSystem ChaseInstance, Boom1Instance;
 
-    //player
+   
 
     public void SpawnHeal(Vector3 callerPosition)
     {
-        HealInstance = Instantiate(heal, callerPosition, Quaternion.identity);
-        Destroy(HealInstance.gameObject, HealInstance.main.duration);
-        HealInstance.transform.parent = PlayerController.instance.transform;
+        healInstance = Instantiate(heal, callerPosition, Quaternion.identity);
+        Destroy(healInstance.gameObject, healInstance.main.duration);
+        healInstance.transform.parent = PlayerController.instance.transform;
     }
     public void SpawnMana(Vector3 callerPosition)
     {
-        ManaInstance = Instantiate(mana, callerPosition, Quaternion.identity);
-        Destroy(ManaInstance.gameObject, ManaInstance.main.duration);
-        ManaInstance.transform.parent = PlayerController.instance.transform;
+        manaInstance = Instantiate(mana, callerPosition, Quaternion.identity);
+        Destroy(manaInstance.gameObject, manaInstance.main.duration);
+        manaInstance.transform.parent = PlayerController.instance.transform;
     }
     public void SpawnBlood(Vector3 callerPosition)
     {
-        BloodInstance = Instantiate(blood, callerPosition, Quaternion.identity);
-        Destroy(BloodInstance.gameObject, BloodInstance.main.duration);
+        bloodInstance = Instantiate(blood, callerPosition, Quaternion.identity);
+        Destroy(bloodInstance.gameObject, bloodInstance.main.duration);
     }
     public void SpawnDie(Vector3 callerPosition)
     {
-        DieInstance = Instantiate(die, callerPosition, Quaternion.identity);
-        Destroy(DieInstance.gameObject, die.main.duration);
+        dieInstance = Instantiate(die, callerPosition, Quaternion.identity);
+        Destroy(dieInstance.gameObject, die.main.duration);
     }
     public void SpawnAttack()
     {
-        AttackInstance = Instantiate(attack, attackPoint.GetChild(0).position, Quaternion.identity);
-        Destroy(AttackInstance.gameObject, AttackInstance.main.duration);
+        attackInstance = Instantiate(attack, attackPoint.GetChild(0).position, Quaternion.identity);
+        Destroy(attackInstance.gameObject, attackInstance.main.duration);
 
     }
 
     public void SpawnLevel(Vector3 callerPosition)
     {
-        LevelInstance = Instantiate(level, callerPosition, Quaternion.identity);
-        Destroy(LevelInstance.gameObject, LevelInstance.main.duration);
+        levelInstance = Instantiate(level, callerPosition, Quaternion.identity);
+        Destroy(levelInstance.gameObject, levelInstance.main.duration);
     }
     public void SpawnSkill_1()
     {
 
-        Skill_1Instance = Instantiate(skill_1, skill1Point.GetChild(0).position, Quaternion.identity);
-        Destroy(Skill_1Instance.gameObject, Skill_1Instance.main.duration);
+        skill_1Instance = Instantiate(skill_1, skill1Point.GetChild(0).position, Quaternion.identity);
+        Destroy(skill_1Instance.gameObject, skill_1Instance.main.duration);
     }
     public void SpawnSkill(Vector3 callerPosition)
     {
-        SkillInstance = Instantiate(skill, callerPosition, Quaternion.identity);
-        Destroy(SkillInstance.gameObject, SkillInstance.main.duration);
+        if (PlayerController.instance.characterType==CharacterType.Melee)
+        {
+            skillMelee_Instance = Instantiate(skillMelee, callerPosition, Quaternion.identity);
+            Destroy(skillMelee_Instance.gameObject, skillMelee_Instance.main.duration);
+        }
+        else
+        {
+            skillRange_Instance = Instantiate(skillRange, callerPosition, Quaternion.identity);
+            Destroy(skillRange_Instance.gameObject, skillRange_Instance.main.duration);
+        }
     }
     public void SpwanSkillRepeat()
     {
@@ -76,8 +85,8 @@ public class ParticleManager : MonoBehaviour
     //boss
     public void SpawnTele(Vector3 callerPosition)
     {
-        TeleInstance = Instantiate(tele, callerPosition, Quaternion.identity);
-        Destroy(TeleInstance.gameObject, TeleInstance.main.duration);
+        teleInstance = Instantiate(tele, callerPosition, Quaternion.identity);
+        Destroy(teleInstance.gameObject, teleInstance.main.duration);
     }
     public void SpawnBoom1(Vector3 callerPosition)
     {

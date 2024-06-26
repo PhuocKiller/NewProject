@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.73}
-  m_SizeDelta: {x: 20, y: 5}
+  m_SizeDelta: {x: 36.081, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1841499633538545695
 CanvasRenderer:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278848240
-  m_fontColor: {r: 0.93962264, g: 0.040775973, b: 0.040775973, a: 1}
+  m_fontColor: {r: 1, g: 0.040775973, b: 0.040775973, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7
-  m_fontSizeBase: 7
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

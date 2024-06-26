@@ -81,11 +81,11 @@ public class BossAI : Monster
         }
         
     }
-    public override void MonsterBeingAttacked(int damage)
+    public override void MonsterBeingAttacked(int damage, bool isCrit)
     {
         if (isLive)
         {
-            UIMonster.ShowDamage(damage);
+            UIMonster.ShowDamage(damage, isCrit);
             m_currentHealth = m_currentHealth - damage;
             if (m_currentHealth <= 0)
             {
