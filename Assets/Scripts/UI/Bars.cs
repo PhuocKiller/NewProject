@@ -8,8 +8,9 @@ public class Bars : MonoBehaviour
 {
     public Image fillBar, fadeFillBar;
     public TextMeshProUGUI valueText;
-   
-    public void UpdateBar(float currentValue, float maxValue)
+    
+    
+    public virtual void UpdateBar(float currentValue, float maxValue)
     {
         fillBar.fillAmount=currentValue / maxValue;
         valueText.text= ((int)currentValue).ToString() + "/" + ((int)maxValue).ToString();

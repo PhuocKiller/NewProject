@@ -19,7 +19,8 @@ public enum State
     LevelUp,
     MainSkill,
     Run,
-    Walk
+    Walk,
+    Rage
 }
 public enum Skins
 {
@@ -76,9 +77,6 @@ public enum Skins
     public Spine.Skeleton skeleton;
     State previousState; Skins previousSkin;
     float chargedTime, skillTime, intervalTime, spawnEffectTime;
-    public float mustChargeTime;
-
-
 
     private void Awake()
     {
@@ -96,7 +94,7 @@ public enum Skins
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
-        mustChargeTime = skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration;
+        
     }
 
     // Update is called once per frame
@@ -138,6 +136,7 @@ public enum Skins
         else if (state == State.Walk) { return "Walk"; }
         else if (state == State.Run) { return "Run"; }
         else if (state == State.Skill1) { return "Skill1"; }
+        else if (state == State.Rage) { return "Rage"; }
         else  { return "Attack"; }
 
     }
@@ -188,6 +187,12 @@ public enum Skins
             Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
             AudioManager.instance.PlaySound(AudioManager.instance.levelUp);
             ParticleManager.instance.SpawnLevel(transform.position);
+        }
+        if (a == "Rage")
+        {
+            spineAnimationState.SetAnimation(0, levelUpAnimationName, false);
+            Invoke("DelaySetStateIdle", skeleton.Data.FindAnimation(levelUpAnimationName).Duration);
+            AudioManager.instance.PlaySound(AudioManager.instance.rage);
         }
         if (a == "MainSkill")
         {
@@ -263,7 +268,7 @@ public enum Skins
         {
            
             chargedTime += Time.deltaTime; 
-            if (chargedTime > mustChargeTime)
+            if (chargedTime > ChargeTimeInRage(PlayerController.instance.isRage))
             {
                 //kích hoạt effect liên tục
                 spawnEffectTime += Time.deltaTime;
@@ -341,5 +346,16 @@ public enum Skins
     {
         spineAnimationState.SetAnimation(0, levelUpAnimationName, true);
 
+    }
+    public float ChargeTimeInRage(bool isRage)
+    {
+        if (isRage)
+        {
+           return 0.6f*skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration;
+        }
+        else
+        {
+            return skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration;
+        }
     }
 }

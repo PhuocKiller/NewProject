@@ -64,7 +64,10 @@ public class Shopkeeper : MonoBehaviour
             talkPanel.SetActive(false);
             shopPanel.SetActive(false);
             transform.localScale =localScaleShop;
-            UIManager.instance.panelInventory.SetActive(false);
+            if (UIManager.instance.panelInventory.activeInHierarchy)
+            {
+                UIManager.instance.panelInventory.SetActive(false);
+            }
         }
     }
     public void BuySlot_0 ()

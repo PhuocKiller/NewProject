@@ -15,7 +15,8 @@ public enum UITypes
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    public Bars healthBar, manaBar, XPBar, rageBar;
+    public Bars healthBar, manaBar, XPBar;
+    public RageBar rageBar;
     public TextMeshProUGUI levelPlayerTMP, damageDealByMonster;
     TextMeshProUGUI damageDealByMonsterInstance;
     public bool isRefillMana, isRefillHealth;
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour
         panelPlayAgain, panelHelp, panelLoadNewScene, panelVictory,panelSkinLv5, panelSkinLv10;
     
     public TMP_Text nameMonsterTMP, healthMonsterTMP, attackMonsterTMP, defMonsterTMP, xpMonsterHaveTMP,
-        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP,
+        healthPlayerTMP, manaPlayerTMP, xpPlayerTMP, attackPlayerTMP, defPlayerTMP, critChanceTMP, critDamageTMP,
         numberHealPotionTMP,numberManaPotionTMP,
         manaCostSkill_1TMP, manaCostMainSkillTMP;
     int numberHealPotionInt,numberManaPotionInt;
@@ -125,6 +126,7 @@ public class UIManager : MonoBehaviour
                 panelLoadNewScene.SetActive(false);
             }
         }
+        UpdateInfoPlayer();
     }
     
     public void ManaPotionClick()
@@ -228,12 +230,17 @@ public class UIManager : MonoBehaviour
             panelPlayerInfo.SetActive(true);
         }
     else { panelPlayerInfo.SetActive(false); }
+    }
+    void UpdateInfoPlayer()
+    {
         healthPlayerTMP.text = "Health: " + (int)PlayerController.instance.p_currentHealthFloat + "/" + PlayerController.instance.p_maxHealth;
         manaPlayerTMP.text = "Mana: " + (int)PlayerController.instance.p_currentManaFloat + "/" + PlayerController.instance.p_MaxMana;
-        attackPlayerTMP.text = "Attack: " + PlayerController.instance.p_Attack;
-        defPlayerTMP.text = "Defend: " + PlayerController.instance.p_Defend;
+        attackPlayerTMP.text = "Attack: " + PlayerController.instance.GetAttack();
+        defPlayerTMP.text = "Defend: " + PlayerController.instance.GetDefend();
         xpPlayerTMP.text = "XP: " + PlayerController.instance.p_CurrentXP + "/" + PlayerController.instance.p_MaxXP;
-     }
+        critChanceTMP.text = "Crit Chance: " + PlayerController.instance.GetCritChance() * 100 + "%";
+        critDamageTMP.text = "Crit Damage: " + PlayerController.instance.GetCritDamage() * 100 + "%";
+    }
    
     public void AttackButton()
     {

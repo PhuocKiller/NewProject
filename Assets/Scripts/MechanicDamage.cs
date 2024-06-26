@@ -12,55 +12,76 @@ public class MechanicDamage : MonoBehaviour
             instance = this;
         }
     }
-    public int GetDamageOfTwoObject(int a, int b, float damageIncrease, float damageReduce)
+    public int GetDamageOfTwoObject(int attack, int defend, float damageIncrease, float damageReduce)
     {
-        return (int)(a * UnityEngine.Random.Range(0.9f, 1.1f) *
-            (1 - (PlayerController.instance.deltaDamage * b / (1 + PlayerController.instance.deltaDamage * b)))
+        return (int)(attack * UnityEngine.Random.Range(0.95f, 1.05f) *
+            (1 - (PlayerController.instance.deltaDamage * defend / (1 + PlayerController.instance.deltaDamage * defend)))
            * damageIncrease * damageReduce);
     }
-    public float IncreaseDamagePlayer()
+    public float IncreaseDamagePlayer(bool isCrit)
     {
-        float a; float b;
+        float damageFromSkin, damageFromSkill, damageFromRage;
         //Player's skin affect power
         if (PlayerAnimation.instance.skin == Skins.Lv1)
         {
-            a = 1;
+            damageFromSkin = 1;
         }
         else if (PlayerAnimation.instance.skin == Skins.Lv5)
         {
-            a = 2;
+            damageFromSkin = 2;
         }
-        else { a = 5; }
+        else { damageFromSkin = 5; }
 
         //Player's Skill affect power
         if (PlayerAnimation.instance.state == State.Attack)
         {
-            b = 1;
+            damageFromSkill = 1;
         }
         else if (PlayerAnimation.instance.state == State.Skill1)
         {
-            b = 3;
+            damageFromSkill = 3;
         }
         else if (PlayerAnimation.instance.state == State.MainSkill)
         {
-            b = 0.5f;
+            damageFromSkill = 0.5f;
         }
-        else b = 1;
-        return (a * b);
+        else damageFromSkill = 1;
+        if (isCrit)
+        {
+            if (PlayerController.instance.isRage)
+            {
+                damageFromRage = PlayerController.instance.p_RageCritDamage;
+            }
+            else
+            {
+                damageFromRage = PlayerController.instance.p_CritDamage;
+            }
+        }
+        else { damageFromRage = 1f; }
+        return (damageFromSkin * damageFromSkill* damageFromRage);
     }
     public float DecreaseDamageMonster()
     {
-        float a;
+        float defendFromSkin;
         //Player's skin affect armor
         if (PlayerAnimation.instance.skin == Skins.Lv1)
         {
-            a = 1;
+            defendFromSkin = 1;
         }
         else if (PlayerAnimation.instance.skin == Skins.Lv5)
         {
-            a = 0.8f;
+            defendFromSkin = 0.8f;
         }
-        else { a = 0.3f; }
-        return a;
+        else { defendFromSkin = 0.3f; }
+        return defendFromSkin;
+    }
+    public bool GetChance(float chance)
+    {
+        float r = Random.Range(1f, 100f);
+        if (r / 100 < chance)
+        {
+            return true;
+        }
+        else return false;
     }
 }

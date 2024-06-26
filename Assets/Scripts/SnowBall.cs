@@ -27,7 +27,7 @@ public class SnowBall : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             mon.PlayerBeingAttacked(MechanicDamage.instance.GetDamageOfTwoObject(mon.m_attack, PlayerController.instance.p_Defend,
-                0.5f, MechanicDamage.instance.DecreaseDamageMonster()),true);
+                0.5f, MechanicDamage.instance.DecreaseDamageMonster()));
         }
     }
 }

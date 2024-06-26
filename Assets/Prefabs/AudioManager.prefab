@@ -441,6 +441,7 @@ MonoBehaviour:
   injured: {fileID: 8300000, guid: 42c002620c406a5488c4188eb3b8e101, type: 3}
   jump: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
   fall: {fileID: 0}
+  rage: {fileID: 8300000, guid: dd9073ef0d2d30c4b958e01d9b54e00c, type: 3}
   levelUp: {fileID: 8300000, guid: 8e3c11bf68a148049a0a55dc27aa5922, type: 3}
   mainSkill_Melee: {fileID: 8300000, guid: f11b60e63695cdc41aa9a8a745ab9ca0, type: 3}
   mainSkill_Range: {fileID: 8300000, guid: c0b34d1c3a3bd8544a993e93935bd6aa, type: 3}

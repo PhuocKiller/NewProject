@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvanMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 7648872937072938380, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7886790566953493266, guid: 347fa50f566ced744ba177dcdb7dc825, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1255,7 +1259,7 @@ MonoBehaviour:
   - {fileID: -2622862995332784879, guid: 1267fc5ff9fd8934e9a2df8884e38c79, type: 3}
   coins: {fileID: 6456858283649145805, guid: 21ccc371a3e3015488aa517ea4418677, type: 3}
   chance:
-  - 1
+  - 0.3
   - 0.3
   - 0.15
   - 0.15

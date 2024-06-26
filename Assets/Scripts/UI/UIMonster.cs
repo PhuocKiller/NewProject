@@ -18,34 +18,10 @@ public class UIMonster : MonoBehaviour
         damageOfPlayerTMP.text = null;
         
     }
-    // Start is called before the first frame update
-    void Start()
+   
+    public void ShowDamage( int damage,bool isCrit)
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*displayTime += Time.deltaTime;
-        if (damageOfPlayerTMP.text != null)
-        {
-            damageOfPlayerTMP.GetComponent<RectTransform>().transform.position  //thay đổi vị trí bị trừ máu
-            = new Vector2(damageOfPlayerTMP.GetComponent<RectTransform>().transform.position.x ,
-            damageOfPlayerTMP.GetComponent<RectTransform>().transform.position.y + 0.03f);
-        }
-        if (displayTime>0.7) //0.7 là thời gian gài để tự biến mất
-        {
-            damageOfPlayerTMP.text = null;
-        }*/
-    }
-    public void ShowDamage( int damage)
-    {
-        /*  displayTime = 0;
-          damageOfPlayerTMP.text="-"+ damage.ToString();
-          damageOfPlayerTMP.GetComponent<RectTransform>().transform.position 
-              = new Vector2(GetComponent<RectTransform>().transform.position.x + Random.Range(-0.5f,0.5f),
-              GetComponent<RectTransform>().transform.position.y+Random.Range(-0.5f, 0.5f));*/
         damageOfPlayerTMPInstance = Instantiate(damageOfPlayerTMP, transform.position, Quaternion.identity);
 
         damageOfPlayerTMPInstance.GetComponent<RectTransform>().transform.SetParent(transform);
@@ -67,11 +43,87 @@ public class UIMonster : MonoBehaviour
            
         }
         damageOfPlayerTMPInstance.text = "-" + damage;
+        damageOfPlayerTMPInstance.fontSize= ChangeFontSizeCritDamage(mon.monsType, isCrit);
+        damageOfPlayerTMPInstance.color = ChangeColorCritDamage(mon.monsType, isCrit, damageOfPlayerTMPInstance.color);
         damageOfPlayerTMPInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
         Destroy(damageOfPlayerTMPInstance.gameObject, 0.5f);
     }
     Vector2 UIMonsterPos()
     {
         return GetComponent<RectTransform>().transform.position;
+    }
+    float ChangeFontSizeCritDamage(MonsterType monsType, bool isCrit)
+    {
+        if (monsType == MonsterType.Boss)
+        {
+            if (isCrit)
+            {
+                return 14;
+            }
+            else
+            {
+                return 6;
+            }
+        }
+        else if (monsType == MonsterType.Wizard)
+        {
+            if (isCrit)
+            {
+                return 14;
+            }
+            else
+            {
+                return 6;
+            }
+        }
+        else
+        {
+            if (isCrit)
+            {
+                return 75;
+            }
+            else
+            {
+                return 50;
+            }
+        }
+
+    }
+    Color ChangeColorCritDamage(MonsterType monsType, bool isCrit, Color color)
+    {
+        if (monsType == MonsterType.Boss)
+        {
+            if (isCrit)
+            {
+                return color;
+            }
+            else
+            {
+                return new Color(color.r*0.9f, color.g, color.b, color.a*0.9f);
+            }
+        }
+        else if (monsType == MonsterType.Wizard)
+        {
+            if (isCrit)
+            {
+                return color;
+            }
+            else
+            {
+                return new Color(color.r * 0.9f, color.g, color.b, color.a * 0.9f);
+            }
+        }
+        else
+        {
+            if (isCrit)
+            {
+                return color;
+            }
+            else
+            {
+                return new Color(color.r * 0.9f, color.g, color.b, color.a * 0.9f);
+            }
+        }
+
     }
 }
