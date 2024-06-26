@@ -5050,10 +5050,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8700845404856473243, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      propertyPath: m_ClearFlags
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 449063527380449355, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2042243992}
   m_SourcePrefab: {fileID: 100100000, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
 --- !u!1 &1405164146
 GameObject:
@@ -9496,6 +9503,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59009e63e5caa984db10b625e5def6c4, type: 3}
+--- !u!1 &2042243987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 449063527380449355, guid: b9afa96ee9f0a07458ff7a6168cb145b, type: 3}
+  m_PrefabInstance: {fileID: 1384394772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &2042243992
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042243987}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2047202240
 GameObject:
   m_ObjectHideFlags: 0

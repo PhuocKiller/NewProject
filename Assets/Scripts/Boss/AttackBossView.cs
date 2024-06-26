@@ -44,14 +44,12 @@ public class AttackBossView : MonoBehaviour
     void DelayActiveAttackBossGameObject ()
     {
         attackBossGameObject.SetActive(true);
-        pos= attackBossGameObject.transform.position;
-
         attackBossGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -30);
     }
     void DelayDeactiveAttackBossGameObject()
     {
         attackBossGameObject.SetActive(false);
-        attackBossGameObject.transform.position=pos;
+        attackBossGameObject.transform.position= mon.transform.position;
         attackBossGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

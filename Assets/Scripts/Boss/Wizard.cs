@@ -97,5 +97,6 @@ public class Wizard : Monster
         isShooting = false;timeShoot = 0;
         snowBallInstance.transform.parent = transform;
         snowBallInstance.mon = this;
+        AudioManager.instance.PlayMonsterSound(AudioManager.instance.wizardAttack);
     }
 }

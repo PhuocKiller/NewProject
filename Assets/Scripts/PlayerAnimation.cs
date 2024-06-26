@@ -76,7 +76,9 @@ public enum Skins
     public Spine.Skeleton skeleton;
     State previousState; Skins previousSkin;
     float chargedTime, skillTime, intervalTime, spawnEffectTime;
-    
+    public float mustChargeTime;
+
+
 
     private void Awake()
     {
@@ -94,6 +96,7 @@ public enum Skins
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
+        mustChargeTime = skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration;
     }
 
     // Update is called once per frame
@@ -260,7 +263,7 @@ public enum Skins
         {
            
             chargedTime += Time.deltaTime; 
-            if (chargedTime > skeleton.Data.FindAnimation(chargeSkillAnimationName).Duration)
+            if (chargedTime > mustChargeTime)
             {
                 //kích hoạt effect liên tục
                 spawnEffectTime += Time.deltaTime;

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public static MainMenu instance;
     public Image Character0, Character1, Character2, meleeImage, rangeImage;
     public CreatePlayerUI[] createPlayerUI;
-    public GameObject newGamePanel, loadGamePanel,loginPanel, settingPanel;
+    public GameObject newGamePanel, loadGamePanel, settingPanel;
     private void Awake()
     {
         if (instance == null)
@@ -23,14 +23,12 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(true);
         loadGamePanel.SetActive(false);
-        loginPanel.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void LoadGame()
     {
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(true);
-        loginPanel.SetActive(false);
         AudioManager.instance.PlaySound(AudioManager.instance.clickButton);
     }
     public void Setting()
@@ -44,7 +42,6 @@ public class MainMenu : MonoBehaviour
     {
         newGamePanel.SetActive(false);
         loadGamePanel.SetActive(false);
-        loginPanel.SetActive(false);
     }
     public void QuitGame()
     {

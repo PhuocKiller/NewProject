@@ -15,7 +15,7 @@ public enum UITypes
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    public Bars healthBar, manaBar, XPBar;
+    public Bars healthBar, manaBar, XPBar, rageBar;
     public TextMeshProUGUI levelPlayerTMP, damageDealByMonster;
     TextMeshProUGUI damageDealByMonsterInstance;
     public bool isRefillMana, isRefillHealth;
@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
             manaBar.UpdateFadeBar(PlayerController.instance.p_currentManaFade, PlayerController.instance.p_MaxMana);
             PlayerController.instance.GetLevel();
             XPBar.UpdateBar(PlayerController.instance.p_CurrentXP, PlayerController.instance.p_MaxXP);
+            rageBar.UpdateBar(PlayerController.instance.p_currentRageFloat, PlayerController.instance.p_MaxRage);
         }
         if (isRefillMana) // hồi mana
         {

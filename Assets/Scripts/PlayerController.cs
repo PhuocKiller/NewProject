@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttackExactly; //Player đánh trúng monster?
     public bool beImmortal, beFadeIncrease; //Player có bất tử ko?
     public bool isDie; //Player die chưa?
-    public int p_maxHealth, p_MaxMana, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaCostMainSkill, p_manaCostSkill_1;
-    public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade;
+    public int p_maxHealth, p_MaxMana,p_MaxRage, p_CurrentXP, p_MaxXP, p_Level, p_Attack, p_Defend, p_manaCostMainSkill, p_manaCostSkill_1;
+    public float p_currentManaFloat, p_currentManaFade, p_currentHealthFloat, p_currentHealthFade,p_currentRageFloat;
     public bool isIntervalSkill; //SKill đang dc thực hiện gây damage liên tục
     public int numberIndexCharacter, coins; public CharacterType characterType; //thông tin khi save
     public int posIndex; //vị trí Player khi chuyển scene
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         doAttack = true;
         if(p_Level==0) { p_Level = 1; }
+        p_MaxRage = 100;p_currentRageFloat = 0;
         UpdateLevelPlayer();
         deltaDamage = 0.06f;
         ParticleManager.instance.SetSkinParticle(p_Level);
@@ -310,9 +311,9 @@ public class PlayerController : MonoBehaviour
     void UpdateLevelPlayer()
     {
         p_maxHealth = 100 * p_Level;
-        p_MaxMana = 100 + 50 * (p_Level - 1);
+        p_MaxMana = 100 + 25 * (p_Level - 1);
         FullEngergy();
-        p_manaCostMainSkill = 40 + 2 * (p_Level - 1);
+        p_manaCostMainSkill = 50 + 10 * (p_Level - 1);
         p_manaCostSkill_1 = 10 + (p_Level - 1);
         p_MaxXP = 100 * p_Level*p_Level;
         p_Attack = 100 + 100 * (p_Level - 1); p_Defend = 15 + 5 * (p_Level - 1);

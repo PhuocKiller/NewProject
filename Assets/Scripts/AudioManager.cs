@@ -9,9 +9,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     public AudioClip attack_Melee,attack_Range,skill1_Melee,skill1_Range, chargeSkill, die, idle, injured, jump, fall,
         levelUp, mainSkill_Melee,mainSkill_Range, run,error,reFillPotion,goldDrop, buyItem, clickButton,checkSound, pauseGame,unpauseGame;
-    public AudioClip bossAttack, bossTele, bossChase, bossSkill,bossDie;
+    public AudioClip bossAttack, bossTele, bossChase, bossSkill,bossDie, wizardAttack;
     public AudioClip[] theme;
-    public AudioSource  musicSource, soundSource;
+    public AudioSource  musicSource, soundSource, monsterSource;
     public float musicVolume, soundVolume;
     private void Awake()
     {
@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
         }
         musicSource.volume = SavingFile.instance.gameProgress.musicVolume;
         soundSource.volume = SavingFile.instance.gameProgress.soundVolume;
+        monsterSource.volume = SavingFile.instance.gameProgress.soundVolume;
     }
     public void PlaySound(AudioClip clip, bool isLoop=false)
     {
@@ -41,7 +42,14 @@ public class AudioManager : MonoBehaviour
         soundSource.loop = isLoop; 
         soundSource.Play();
     }
- 
+    public void PlayMonsterSound(AudioClip clip, bool isLoop = false)
+    {
+        monsterSource.clip = clip;
+        monsterSource.loop = isLoop;
+        monsterSource.Play();
+    }
+
+
     public void StopSound()
     {
         soundSource.Stop();
