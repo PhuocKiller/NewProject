@@ -208,6 +208,10 @@ public class SavingFile : MonoBehaviour
                         PlayerController.instance.p_Level = 1;
                         PlayerController.instance.coins = 0;
                         UIManager.instance.uiTypes = uiTypes;
+                        for (int j=0; j<9; j++)
+                        {
+                            slot[j] = -1;
+                        }
                         SceneManager.LoadScene(1);
                         return;
                     }
