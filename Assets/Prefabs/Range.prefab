@@ -757,6 +757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: lv1
       objectReference: {fileID: 0}
+    - target: {fileID: 1817498074745717293, guid: d5a0a0aab216fc5449e51269ed026450, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1075,6 +1079,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: lv5
       objectReference: {fileID: 0}
+    - target: {fileID: 7903186721109102364, guid: e6ef98ef85b508f4ea1d45c9e2057a4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1141,6 +1149,10 @@ PrefabInstance:
     - target: {fileID: 1817498074745717293, guid: 6ab03608dca39a8419e688f7f449bb5f, type: 3}
       propertyPath: m_Name
       value: lv10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817498074745717293, guid: 6ab03608dca39a8419e688f7f449bb5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
